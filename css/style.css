@@ -1,52 +1,50 @@
-/* Global Styles */
+/* Basic Styles */
 body {
-    margin: 0;
     font-family: 'Poppins', sans-serif;
     color: #333;
-    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f4f4f4;
 }
 
-header {
+/* Navigation */
+nav {
     background-color: #333;
-    color: blue;
-    padding: 10px 0;
+    padding: 1em;
     text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo a {
-    color: blue;
-    text-decoration: none;
-    font-size: 24px;
-}
-
-.nav-links {
+nav ul {
     list-style: none;
-    display: flex;
-    gap: 20px;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-links li a {
-    color: white;
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
+    transition: color 0.3s ease;
 }
 
-.nav-links li a:hover {
+nav ul li a:hover {
     color: #f39c12;
 }
 
-.hero {
-    background: url('images/hero-bg.jpg') no-repeat center center/cover;
+/* Header Section */
+header {
     height: 100vh;
+    background: linear-gradient(to right, #3498db, #8e44ad);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,61 +52,106 @@ header {
     text-align: center;
 }
 
-.hero h1 {
-    font-size: 48px;
-    margin: 0;
+.header-content h1 {
+    font-size: 50px;
+    margin-bottom: 10px;
+    animation: slide-in 1s ease-in-out;
 }
 
-.hero p {
-    font-size: 20px;
-    margin: 10px 0;
+.header-content .highlight {
+    color: #f39c12;
+}
+
+.header-content p {
+    font-size: 24px;
+    margin-bottom: 20px;
+    animation: fade-in 2s ease-in-out;
 }
 
 .btn {
-    padding: 10px 20px;
     background-color: #f39c12;
     color: white;
-    border: none;
-    cursor: pointer;
+    padding: 10px 20px;
     text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .btn:hover {
     background-color: #e67e22;
 }
 
-.about-section, .skills-section, .projects-section, .contact-section {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-h2 {
+/* Section Styles */
+section {
+    padding: 50px;
     text-align: center;
-    font-size: 32px;
+    background-color: #fff;
+    margin-top: 100px;
 }
 
-.skills-grid, .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+section h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #333;
 }
 
-.skill-item, .project-card {
-    background-color: white;
+section p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.project-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.project-card {
+    width: 30%;
+    background: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card h3 {
-    margin-top: 0;
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
-.contact-links {
-    text-align: center;
+.project-btn {
+    background-color: #3498db;
 }
 
+.project-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Contact Section */
+.social-links {
+    list-style: none;
+    padding: 0;
+}
+
+.social-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.social-links a {
+    color: #3498db;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #2980b9;
+}
+
+/* Footer */
 footer {
     background-color: #333;
     color: white;
@@ -119,3 +162,25 @@ footer {
 footer p {
     margin: 0;
 }
+
+/* Animations */
+@keyframes slide-in {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+}
+}
+
