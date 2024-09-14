@@ -9,66 +9,83 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <ul>
+    <!-- Stylish Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">Jinish</a>
+        </div>
+        <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="menu-toggle"></div>
     </nav>
 
-    <!-- Parallax Header Section -->
-    <header id="home" class="parallax">
+    <!-- Animated Header Section -->
+    <header id="home" class="parallax-header">
         <div class="header-content">
             <h1 class="animate-slide-in">Hi, I'm <span class="highlight">Jinish Kathiriya</span></h1>
-            <p class="animate-slide-in">AI & ML Developer | Cybersecurity Enthusiast | Video Editor</p>
+            <p class="animate-slide-in">AI & ML Developer | Cybersecurity Enthusiast | Python Developer</p>
             <a id="download-cv" href="#" class="btn animate-fade-in">Download CV</a>
+            <a href="#projects" class="btn secondary-btn animate-fade-in">View Projects</a>
         </div>
     </header>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="about-section">
         <h2>About Me</h2>
-        <p>
-            I'm passionate about the intersection of Artificial Intelligence (AI), Machine Learning (ML), and Cybersecurity. 
-            My journey in these fields has been a thrilling exploration of how cutting-edge technologies can revolutionize security practices.
-        </p>
+        <div class="about-content">
+            <p>
+                I'm passionate about AI, Machine Learning, and Cybersecurity. My journey is about exploring these technologies and making impactful solutions.
+            </p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Using AI to create impactful systems and tools.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Cybersecurity</h3>
+                    <p>Improving digital safety with advanced technologies.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Building sleek web applications with modern tools.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
+    <section id="projects" class="projects-section">
         <h2>My Projects</h2>
-        <div class="project-container">
+        <div class="project-grid">
             <div class="project-card">
                 <h3>Chess Bot</h3>
-                <p>A simple AI-powered chess engine developed in Python, designed to provide an enjoyable chess-playing experience.</p>
+                <p>An AI-powered chess engine built in Python for an immersive playing experience.</p>
                 <a href="https://github.com/Jinish2170/CHESS-BOT-.git" class="btn project-btn">View Project</a>
             </div>
             <div class="project-card">
                 <h3>Cyber Security AI File Scanner</h3>
-                <p>An AI-driven tool for scanning files to detect security threats, trained on a dataset of cybersecurity newsletters.</p>
+                <p>AI-driven file scanning tool to detect threats in real-time.</p>
                 <a href="https://github.com/Jinish2170/Cyber-Security-AI-file-scanner.git" class="btn project-btn">View Project</a>
             </div>
             <div class="project-card">
                 <h3>Web Assistant AI</h3>
-                <p>A speech recognition-based assistant integrated with web search capabilities to streamline workflows.</p>
+                <p>A voice-enabled assistant for web searches, built to enhance productivity.</p>
                 <a href="https://github.com/Jinish2170/Web-Assistant-AI.git" class="btn project-btn">View Project</a>
             </div>
         </div>
     </section>
 
-    <!-- Parallax Section for Additional Effect -->
-    <section class="parallax">
-        <h2>Innovative Solutions in AI & Cybersecurity</h2>
-        <p>Building the future, one line of code at a time.</p>
-    </section>
-
     <!-- Contact Section -->
-    <section id="contact">
+    <section id="contact" class="contact-section">
         <h2>Contact Me</h2>
-        <p>Feel free to reach out for collaboration or just a friendly chat!</p>
+        <p>Feel free to reach out for collaboration or a friendly chat!</p>
         <ul class="social-links">
             <li><a href="https://www.linkedin.com/in/jinish-kathiriya" target="_blank">LinkedIn</a></li>
             <li><a href="https://github.com/Jinish2170" target="_blank">GitHub</a></li>
