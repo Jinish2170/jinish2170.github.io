@@ -1,182 +1,280 @@
-/* Basic Styles */
-body {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
+/* General Styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: #f4f4f4;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background-color: #0f172a;
+    line-height: 1.6;
 }
 
 /* Navigation */
-.navbar {
+nav {
+    background-color: rgba(15, 23, 42, 0.9);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    justify-content: center;
+    padding: 15px;
 }
-
 
 nav ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
-    
+    display: flex;
 }
 
-.nav-links li a {
-    color: blue;
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
     text-decoration: none;
+    color: #fff;
+    font-weight: bold;
     font-size: 18px;
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: #f39c12;
+    color: #38bdf8;
 }
 
 /* Header Section */
 header {
     height: 100vh;
-    background: linear-gradient(to right, #3498db, #8e44ad);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.header-content {
+    z-index: 1;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.highlight {
+    color: #38bdf8;
+}
+
+/* Parallax Effect */
+.parallax {
+    background-image: url('images/background.jpg');
+    height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
-.header-content h1 {
-    font-size: 50px;
-    margin-bottom: 10px;
-    animation: slide-in 1s ease-in-out;
+.parallax h2 {
+    font-size: 3rem;
+    color: #fff;
 }
 
-.header-content .highlight {
-    color: #f39c12;
+.parallax p {
+    font-size: 1.2rem;
+    color: #cbd5e1;
 }
 
-.header-content p {
-    font-size: 24px;
-    margin-bottom: 20px;
-    animation: fade-in 2s ease-in-out;
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 1s ease-out;
+}
+
+.animate-fade-in {
+    animation: fadeIn 2s ease-in;
+}
+
+/* Buttons */
 .btn {
-    background-color: #f39c12;
-    color: white;
-    padding: 10px 20px;
+    display: inline-block;
+    padding: 10px 30px;
+    color: #fff;
+    background-color: #38bdf8;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
     text-decoration: none;
-    border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #e67e22;
+    background-color: #0284c7;
 }
 
-/* Section Styles */
-section {
-    padding: 50px;
+/* About Section */
+#about {
+    padding: 100px 20px;
+    background-color: #1e293b;
     text-align: center;
-    background-color: #fff;
-    margin-top: 100px;
 }
 
-section h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
-    color: #333;
+#about h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
 }
 
-section p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #666;
+#about p {
+    font-size: 1.2rem;
+    color: #94a3b8;
+}
+
+/* Projects Section */
+#projects {
+    padding: 100px 20px;
+    background-color: #0f172a;
+    text-align: center;
+}
+
+#projects h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 40px;
 }
 
 .project-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 30px;
 }
 
 .project-card {
-    width: 30%;
-    background: #fff;
+    background-color: #1e293b;
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 10px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 300px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: left;
 }
 
-.project-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+.project-card h3 {
+    font-size: 1.5rem;
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin-bottom: 15px;
 }
 
 .project-btn {
-    background-color: #3498db;
+    display: inline-block;
+    color: #fff;
+    background-color: #38bdf8;
+    padding: 8px 16px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 .project-btn:hover {
-    background-color: #2980b9;
+    background-color: #0284c7;
 }
 
 /* Contact Section */
+#contact {
+    padding: 100px 20px;
+    background-color: #1e293b;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+#contact p {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
 .social-links {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .social-links li {
-    display: inline;
-    margin: 0 10px;
+    display: inline-block;
 }
 
 .social-links a {
-    color: #3498db;
-    font-size: 20px;
     text-decoration: none;
+    color: #38bdf8;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
 }
 
 .social-links a:hover {
-    color: #2980b9;
+    color: #0284c7;
 }
 
 /* Footer */
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #0f172a;
+    padding: 20px;
     text-align: center;
-    padding: 20px 0;
 }
 
 footer p {
-    margin: 0;
+    color: #94a3b8;
 }
 
-/* Animations */
-@keyframes slide-in {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
+/* Media Queries */
+@media (max-width: 768px) {
+    .project-container {
+        flex-direction: column;
+        align-items: center;
     }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
+
+    .parallax h2 {
+        font-size: 2.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
     }
 }
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
