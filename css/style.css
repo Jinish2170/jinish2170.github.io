@@ -3,12 +3,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    color: #fff;
     background-color: #0f172a;
+    color: #fff;
     line-height: 1.6;
 }
 
@@ -22,6 +23,8 @@ nav {
     display: flex;
     justify-content: center;
     padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
 }
 
 nav ul {
@@ -51,10 +54,9 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    background: url('../images/background.jpg') no-repeat center center/cover;
     text-align: center;
-    background-size: cover;
-    background-position: center;
+    position: relative;
 }
 
 .header-content {
@@ -66,13 +68,9 @@ header {
     color: #38bdf8;
 }
 
-/* Parallax Effect */
 .parallax {
-    background-image: url('images/background.jpg');
-    height: 100vh;
     background-attachment: fixed;
     background-size: cover;
-    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,11 +80,14 @@ header {
 .parallax h2 {
     font-size: 3rem;
     color: #fff;
+    padding: 50px 0;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .parallax p {
     font-size: 1.2rem;
     color: #cbd5e1;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* Animations */
@@ -120,7 +121,6 @@ header {
 
 /* Buttons */
 .btn {
-    display: inline-block;
     padding: 10px 30px;
     color: #fff;
     background-color: #38bdf8;
@@ -128,7 +128,6 @@ header {
     border-radius: 30px;
     font-size: 16px;
     cursor: pointer;
-    text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
@@ -145,8 +144,8 @@ header {
 
 #about h2 {
     font-size: 2.5rem;
-    color: #fff;
     margin-bottom: 20px;
+    color: #fff;
 }
 
 #about p {
@@ -180,7 +179,12 @@ header {
     border-radius: 10px;
     max-width: 300px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
     text-align: left;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
 }
 
 .project-card h3 {
@@ -196,7 +200,6 @@ header {
 }
 
 .project-btn {
-    display: inline-block;
     color: #fff;
     background-color: #38bdf8;
     padding: 8px 16px;
@@ -269,12 +272,12 @@ footer p {
         align-items: center;
     }
 
-    .parallax h2 {
-        font-size: 2.5rem;
-    }
-
     nav ul {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .parallax h2 {
+        font-size: 2.5rem;
     }
 }
