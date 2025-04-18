@@ -1,0 +1,394 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+    --tech-blue: 210 100% 50%;
+    --tech-purple: 270 100% 60%;
+    --tech-green: 140 100% 45%;
+    --font-inter: "Inter", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --tech-blue: 210 100% 50%;
+    --tech-purple: 270 100% 60%;
+    --tech-green: 140 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-poppins);
+    @apply font-bold tracking-tight;
+  }
+
+  p,
+  span,
+  div,
+  a,
+  button,
+  input,
+  textarea {
+    font-family: var(--font-inter);
+  }
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(var(--tech-blue), 0.7), 0 0 20px rgba(var(--tech-blue), 0.5), 0 0 30px
+    rgba(var(--tech-blue), 0.3);
+}
+
+.tech-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--tech-blue)) 0%,
+    hsl(var(--tech-purple)) 50%,
+    hsl(var(--tech-green)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.skill-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, hsl(var(--tech-blue)), hsl(var(--tech-purple)));
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* 3D Card Effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Skill Chart Styles */
+.skill-chart {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.skill-point {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: hsl(var(--tech-blue));
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.skill-point:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+  box-shadow: 0 0 15px hsl(var(--tech-blue));
+}
+
+.skill-label {
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Timeline Styles */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, hsl(var(--tech-blue)), hsl(var(--tech-purple)));
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: hsl(var(--tech-purple));
+  border: 2px solid black;
+}
+
+/* Floating Tech Icons */
+.floating-tech {
+  position: absolute;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glowing Border */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, hsl(var(--tech-blue)), hsl(var(--tech-purple)), hsl(var(--tech-green)));
+  border-radius: calc(var(--radius) + 2px);
+  z-index: -1;
+  animation: border-glow 3s linear infinite;
+}
+
+@keyframes border-glow {
+  0% {
+    filter: blur(3px);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(3px);
+  }
+}
+
+/* Hexagon Grid */
+.hexagon {
+  position: relative;
+  width: 100px;
+  height: 57.74px; /* width * 0.5774 */
+  background-color: rgba(30, 30, 30, 0.7);
+  margin: 28.87px 0; /* width * 0.2887 */
+  transition: all 0.3s ease;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 28.87px solid rgba(30, 30, 30, 0.7); /* width * 0.2887 */
+}
+
+.hexagon:after {
+  top: 100%;
+  border-top: 28.87px solid rgba(30, 30, 30, 0.7); /* width * 0.2887 */
+}
+
+.hexagon:hover {
+  background-color: hsl(var(--tech-blue));
+}
+
+.hexagon:hover:before {
+  border-bottom-color: hsl(var(--tech-blue));
+}
+
+.hexagon:hover:after {
+  border-top-color: hsl(var(--tech-blue));
+}
+
+/* Page transition animations */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Focus styles for better accessibility */
+:focus-visible {
+  outline: 2px solid hsl(var(--tech-blue));
+  outline-offset: 2px;
+}
+
+/* Skip to content link for accessibility */
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-to-content:focus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background-color: hsl(var(--tech-blue));
+  color: white;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+/* Cursor animation for typing effect */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: currentColor;
+  margin-left: 0.1em;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
