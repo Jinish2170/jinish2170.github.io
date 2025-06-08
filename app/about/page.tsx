@@ -270,16 +270,7 @@ const About = () => {
                   </div>
 
                   <div className="relative px-6 pb-6">
-                    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
-                      <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-900 glow-border">
-                        <Image
-                          src="/placeholder.svg?height=600&width=600"
-                          alt="Jinish Kathiriya"
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
+                    
 
                     <div className="mt-20 text-center">
                       <h3 className="text-2xl font-bold mb-1">Jinish Kathiriya</h3>
