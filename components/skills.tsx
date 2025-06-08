@@ -31,58 +31,21 @@ const Skills = () => {
       skills: [
         {
           name: "Neural Networks",
-          level: 95,
+          level: 65,
           description:
             "Expert in designing and implementing various neural network architectures including CNNs, RNNs, and Transformers.",
         },
         {
           name: "Deep Learning",
-          level: 90,
+          level: 70,
           description:
             "Proficient in frameworks like TensorFlow and PyTorch, with experience in training complex models for various applications.",
         },
         {
-          name: "AI Security Solutions",
-          level: 85,
-          description:
-            "Specialized in developing AI-powered security systems that can detect and respond to threats in real-time.",
-        },
-        {
           name: "Threat Intelligence",
-          level: 88,
+          level: 68,
           description:
             "Experience in building systems that gather, analyze, and utilize threat intelligence data to enhance security posture.",
-        },
-      ],
-    },
-    {
-      name: "Cybersecurity",
-      icon: <ShieldAlert className="h-6 w-6 text-techPurple" />,
-      color: "techPurple",
-      skills: [
-        {
-          name: "Zero-day Vulnerability Detection",
-          level: 92,
-          description:
-            "Expertise in identifying previously unknown vulnerabilities in software and systems before they can be exploited.",
-        },
-        {
-          name: "Penetration Testing",
-          level: 88,
-          description:
-            "Skilled in conducting thorough penetration tests to identify security weaknesses in systems and networks.",
-        },
-        {
-          name: "Quantum-resistant Cryptography",
-          level: 85,
-          description:
-            "Research and implementation experience in cryptographic algorithms designed to withstand quantum computing attacks.",
-        },
-        {
-          name: "Security Auditing",
-          level: 90,
-          description:
-            "Comprehensive security assessment capabilities, including code reviews, configuration analysis, and compliance checks.",
         },
       ],
     },
@@ -124,13 +87,13 @@ const Skills = () => {
       skills: [
         {
           name: "Docker",
-          level: 85,
+          level: 75,
           description:
             "Skilled in containerization with Docker, including multi-stage builds and optimization techniques.",
         },
         {
           name: "Kubernetes",
-          level: 80,
+          level: 60,
           description:
             "Experience in orchestrating containerized applications with Kubernetes, including deployment strategies and scaling.",
         },
@@ -161,22 +124,16 @@ const Skills = () => {
         },
         {
           name: "MongoDB",
-          level: 92,
+          level: 50,
           description:
             "Expert in designing and implementing MongoDB databases, including aggregation pipelines and sharding.",
         },
-        {
-          name: "PostgreSQL",
-          level: 88,
-          description:
-            "Proficient in PostgreSQL, with experience in advanced features like JSON storage, full-text search, and extensions.",
-        },
-        {
-          name: "Redis",
-          level: 85,
-          description:
-            "Experience using Redis for caching, session storage, pub/sub messaging, and as a primary database for specific use cases.",
-        },
+        //{
+          //name: "PostgreSQL",
+          //level: 88,
+          //description:
+            //"Proficient in PostgreSQL, with experience in advanced features like JSON storage, full-text search, and extensions.",
+        //},
       ],
     },
     {
@@ -198,7 +155,7 @@ const Skills = () => {
         },
         {
           name: "C++",
-          level: 85,
+          level: 75,
           description: "Strong foundation in C++ programming, including memory management, templates, and STL.",
         },
         {
@@ -216,19 +173,19 @@ const Skills = () => {
       skills: [
         {
           name: "Kali Linux",
-          level: 90,
+          level: 80,
           description:
             "Expert in using Kali Linux for security assessments, penetration testing, and vulnerability analysis.",
         },
         {
           name: "Windows",
-          level: 85,
+          level: 90,
           description:
             "Proficient in Windows administration, including PowerShell scripting and security configuration.",
         },
         {
           name: "macOS",
-          level: 88,
+          level: 70,
           description:
             "Experienced in macOS development and administration, including shell scripting and security hardening.",
         },
@@ -241,18 +198,18 @@ const Skills = () => {
       skills: [
         {
           name: "Figma",
-          level: 85,
+          level: 75,
           description: "Skilled in using Figma for UI/UX design, prototyping, and collaboration with design teams.",
         },
         {
           name: "Canva",
-          level: 88,
+          level: 68,
           description:
             "Proficient in creating visual content with Canva for presentations, social media, and marketing materials.",
         },
         {
           name: "Notion",
-          level: 90,
+          level: 70,
           description: "Expert in using Notion for project management, documentation, and team collaboration.",
         },
         {
@@ -459,105 +416,15 @@ const Skills = () => {
         >
           <Card className="bg-gray-900/30 border border-gray-800 overflow-hidden">
             <CardContent className="p-0">
-              <div className="p-6 border-b border-gray-800 bg-gradient-to-r from-gray-900 to-gray-900/50">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                  <div>
-                    <h3 className="text-2xl font-bold">Core Expertise</h3>
-                    <p className="text-gray-400 mt-1">Areas where I've achieved exceptional proficiency</p>
-                  </div>
-                  <div className="mt-4 md:mt-0 flex items-center gap-2 text-sm">
-                    <span className="flex items-center gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                      Expert (95-100%)
-                    </span>
-                    <span className="flex items-center gap-1.5 ml-4">
-                      <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                      Advanced (90-94%)
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6">
-                {/* Group skills by category */}
-                {skillCategories
-                  .filter((category) => category.skills.some((skill) => skill.level >= 90))
-                  .map((category, categoryIndex) => {
-                    const topSkills = category.skills.filter((skill) => skill.level >= 90)
-                    if (topSkills.length === 0) return null
-
-                    return (
-                      <div key={categoryIndex} className="mb-8 last:mb-0">
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className={`p-1.5 rounded-md bg-gray-800`}>{category.icon}</div>
-                          <h4 className="text-lg font-semibold">{category.name}</h4>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {topSkills.map((skill, skillIndex) => {
-                            // Determine skill level category
-                            const isExpert = skill.level >= 95
-                            const levelColor = isExpert ? "green" : "blue"
-
-                            return (
-                              <motion.div
-                                key={skillIndex}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: skillIndex * 0.1 }}
-                                className="relative group"
-                                onMouseEnter={() => setHoveredSkill(skill)}
-                                onMouseLeave={() => setHoveredSkill(null)}
-                              >
-                                <div
-                                  className={`bg-gray-800/50 border border-gray-700 group-hover:border-${levelColor}-500/50 rounded-lg p-4 transition-all duration-300 cursor-help`}
-                                >
-                                  <div className="flex items-center justify-between mb-2">
-                                    <h5 className="font-medium">{skill.name}</h5>
-                                    <span
-                                      className={`text-xs px-2 py-0.5 rounded-full bg-${levelColor}-500/20 text-${levelColor}-400`}
-                                    >
-                                      {skill.level}%
-                                    </span>
-                                  </div>
-
-                                  <div className="w-full bg-gray-700/50 rounded-full h-1.5 mt-2">
-                                    <div
-                                      className={`rounded-full h-1.5 bg-${levelColor}-500`}
-                                      style={{ width: `${skill.level}%` }}
-                                    ></div>
-                                  </div>
-
-                                  <div className="mt-3 text-xs text-gray-400 line-clamp-2">
-                                    {skill.description.split(".")[0]}.
-                                  </div>
-                                </div>
-
-                                {/* Decorative corner accent */}
-                                <div
-                                  className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-${levelColor}-500/70 rounded-tr-md opacity-0 group-hover:opacity-100 transition-opacity`}
-                                ></div>
-                                <div
-                                  className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-${levelColor}-500/70 rounded-bl-md opacity-0 group-hover:opacity-100 transition-opacity`}
-                                ></div>
-                              </motion.div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                    )
-                  })}
-              </div>
-
               {/* Certifications and Experience Indicators */}
               <div className="border-t border-gray-800 p-6 bg-gray-900/50">
                 <h4 className="text-lg font-semibold mb-4">Professional Achievements</h4>
                 <div className="flex flex-wrap gap-3">
                   {[
-                    { name: "5+ Years Experience", icon: "⏱️", color: "bg-blue-900/30 border-blue-700/50" },
-                    { name: "AWS Certified", icon: "☁️", color: "bg-orange-900/30 border-orange-700/50" },
-                    { name: "TensorFlow Certified", icon: "🧠", color: "bg-green-900/30 border-green-700/50" },
-                    { name: "Security+", icon: "🔒", color: "bg-purple-900/30 border-purple-700/50" },
+                    { name: "Technical Head at Google Developer Group (GDG), CKPCET", icon: "🚀", color: "bg-blue-900/30 border-blue-700/50" },
+                    { name: "Foundations of Cybersecurity", icon: "☁️", color: "bg-orange-900/30 border-orange-700/50" },
+                    { name: "Certified in Advanced AI and Data Skills", icon: "🧠", color: "bg-green-900/30 border-green-700/50" },
+                    { name: "Head of Cybersecurity Domain – GDG CKPCET", icon: "🔒", color: "bg-purple-900/30 border-purple-700/50" },
                     { name: "Full Stack Expert", icon: "💻", color: "bg-teal-900/30 border-teal-700/50" },
                   ].map((cert, idx) => (
                     <div

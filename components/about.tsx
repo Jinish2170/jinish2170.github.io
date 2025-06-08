@@ -112,36 +112,9 @@ const About = () => {
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 gap-8 mb-16">
           <motion.div
-            className="lg:col-span-1"
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="sticky top-24">
-              <div className="relative w-full aspect-square mb-6 rounded-xl overflow-hidden border-2 border-techBlue/30 shadow-lg shadow-techBlue/20 glow-border">
-                <Image
-                  src="/placeholder.svg?height=600&width=600"
-                  alt="Jinish Kathiriya"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-2">Jinish Kathiriya</h3>
-                <p className="text-gray-400">Computer Engineering Student | GDG Technical & Cybersecurity Head</p>
-                <div className="flex justify-center space-x-2 mt-4">
-                  <span className="px-3 py-1 bg-techBlue/20 text-techBlue rounded-full text-sm">
-                    Expected Graduation: May 2026
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="lg:col-span-2"
+            className="max-w-4xl mx-auto w-full"
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.6 }}
@@ -245,7 +218,7 @@ const About = () => {
                     <p className="mt-4 text-sm text-gray-300">
                       For more certificates, please check my{" "}
                       <a
-                        href="https://linkedin.com/in/yourprofile"
+                        href="https://www.linkedin.com/in/jinish-kathiriya"
                         className="text-techBlue hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -304,6 +277,21 @@ const About = () => {
                     <p className="text-gray-300">
                       Leading technical initiatives and cybersecurity workshops, organizing events, and mentoring new
                       developers in the community.
+                    </p>
+                  </div>
+                  <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-700 mb-4">
+                    <h4 className="font-bold text-lg mb-2">TechFest Event Co-ordinator </h4>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <span className="px-3 py-1 bg-techBlue/20 text-techBlue rounded-full text-sm">
+                        IPL Auction
+                      </span>
+                      <span className="px-3 py-1 bg-techPurple/20 text-techPurple rounded-full text-sm">
+                        Wallstreet Wizards
+                      </span>
+                    </div>
+                    <p className="text-gray-300">
+                      Leading technical initiatives, organizing events and mentoring
+                      volunteers in the college campus.
                     </p>
                   </div>
                   <blockquote className="text-lg italic text-gray-300">

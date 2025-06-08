@@ -13,6 +13,7 @@ const Hero = () => {
   const [charIndex, setCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
   const [typingSpeed, setTypingSpeed] = useState(150)
+  const [isDownloading, setIsDownloading] = useState(false)
 
   const canvasRef = useRef(null)
 
@@ -160,9 +161,32 @@ const Hero = () => {
             </Link>
           </Button>
 
-          <Button size="lg" variant="outline" className="border-techBlue text-techBlue hover:bg-techBlue/10" asChild>
-            <Link href="/resume/jinish-kathiriya-resume.pdf" download="Jinish_Kathiriya_Resume.pdf">
-              <Download className="mr-2 h-4 w-4" /> Download Resume
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="border-techBlue text-techBlue hover:bg-techBlue/10" 
+            asChild
+          >
+            <Link 
+              href="/resume/JinishKathiriya_fullstack.pdf"
+              download="JinishKathiriya_fullstack.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center"
+              onClick={() => setIsDownloading(true)}
+              onLoad={() => setIsDownloading(false)}
+            >
+              {isDownloading ? (
+                <>
+                  <span className="animate-spin mr-2">⌛</span>
+                  Downloading...
+                </>
+              ) : (
+                <>
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Resume
+                </>
+              )}
             </Link>
           </Button>
         </motion.div>

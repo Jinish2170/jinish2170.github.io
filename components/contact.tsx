@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
@@ -10,6 +9,12 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Github, Linkedin, Twitter, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
+import emailjs from '@emailjs/browser'
+
+// Initialize EmailJS with public key
+emailjs.init({
+  publicKey: 'O7WKNqFq1uxb5D1N0',
+})
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -18,33 +23,88 @@ const Contact = () => {
   })
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    from_name: "",
+    reply_to: "",
     subject: "",
     message: "",
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [error, setError] = useState("")
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const form = e.target as HTMLFormElement
+    
+    // Basic validation
+    const emailInput = form.querySelector('input[name="reply_to"]') as HTMLInputElement
+    const nameInput = form.querySelector('input[name="from_name"]') as HTMLInputElement
+    const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement
+
+    if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      setError("Please enter a valid email address.")
+      return
+    }
+
+    if (nameInput.value.length < 2) {
+      setError("Name must be at least 2 characters long.")
+      return
+    }
+
+    if (messageInput.value.length < 10) {
+      setError("Message must be at least 10 characters long.")
+      return
+    }
+
+    setError("")
+    setIsSubmitting(true)
+
+    try {
+      // Send email directly with template parameters
+      const result = await emailjs.send(
+        'service_h9or1zr',
+        'template_knu6jft',
+        {
+          to_email: 'jinishkathiriya@gmail.com',
+          from_name: formData.from_name,
+          reply_to: formData.reply_to,
+          subject: formData.subject,
+          message: formData.message
+        },
+        'O7WKNqFq1uxb5D1N0'
+      )
+
+      if (result.status === 200) {
+        setSubmitSuccess(true)
+        setFormData({
+          from_name: "",
+          reply_to: "",
+          subject: "",
+          message: "",
+        })
+        setError("")
+      } else {
+        throw new Error('Failed to send message')
+      }
+    } catch (err) {
+      setError("Failed to send message. Please try emailing directly.")
+      console.error('EmailJS Error:', err)
+    } finally {
+      setIsSubmitting(false)
+      
+      // Reset success message after 5 seconds
+      if (submitSuccess) {
+        setTimeout(() => {
+          setSubmitSuccess(false)
+        }, 5000)
+      }
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: "", email: "", subject: "", message: "" })
-
-    // Reset success message after 3 seconds
-    setTimeout(() => setSubmitSuccess(false), 3000)
   }
 
   const contactInfo = [
@@ -155,34 +215,58 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+              {error && (
+                <div className="p-3 rounded bg-red-500/10 border border-red-500/50 text-red-500">
+                  {error}
+                  <div className="mt-2">
+                    You can also email me directly at{" "}
+                    <a
+                      href="mailto:jinishkathiriya@gmail.com"
+                      className="underline hover:text-red-400"
+                    >
+                      jinishkathiriya@gmail.com
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {submitSuccess && (
+                <div className="p-3 rounded bg-green-500/10 border border-green-500/50 text-green-500">
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm text-gray-400">
+                  <label htmlFor="from_name" className="text-sm text-gray-400">
                     Your Name
                   </label>
                   <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    id="from_name"
+                    name="from_name"
                     placeholder="John Doe"
                     required
+                    value={formData.from_name}
+                    onChange={handleChange}
                     className="bg-gray-800/50 border-gray-700 focus:border-techBlue"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm text-gray-400">
+                  <label htmlFor="reply_to" className="text-sm text-gray-400">
                     Your Email
                   </label>
                   <Input
-                    id="email"
-                    name="email"
+                    id="reply_to"
+                    name="reply_to"
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     placeholder="john@example.com"
                     required
+                    value={formData.reply_to}
+                    onChange={handleChange}
                     className="bg-gray-800/50 border-gray-700 focus:border-techBlue"
                   />
                 </div>
@@ -195,10 +279,10 @@ const Contact = () => {
                 <Input
                   id="subject"
                   name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
                   placeholder="Project Inquiry"
                   required
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="bg-gray-800/50 border-gray-700 focus:border-techBlue"
                 />
               </div>
@@ -210,11 +294,11 @@ const Contact = () => {
                 <Textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   placeholder="Your message here..."
                   rows={5}
                   required
+                  value={formData.message}
+                  onChange={handleChange}
                   className="bg-gray-800/50 border-gray-700 focus:border-techBlue resize-none"
                 />
               </div>
@@ -222,14 +306,17 @@ const Contact = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-techBlue to-techPurple hover:opacity-90"
+                className="w-full bg-gradient-to-r from-techBlue to-techPurple hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? (
+                  <>
+                    <span className="animate-pulse mr-2">Sending...</span>
+                    <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  </>
+                ) : (
+                  "Send Message"
+                )}
               </Button>
-
-              {submitSuccess && (
-                <p className="text-green-400 text-center mt-2">Your message has been sent successfully!</p>
-              )}
             </form>
           </motion.div>
         </div>

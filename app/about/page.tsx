@@ -19,6 +19,7 @@ import {
   Phone,
   Github,
   Linkedin,
+  Download,
   Twitter,
 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -385,7 +386,14 @@ const About = () => {
                       className="w-full border-techBlue text-techBlue hover:bg-techBlue/10"
                       asChild
                     >
-                      <Link href="/resume/jinish-kathiriya-resume.pdf" download>
+                      <Link 
+                        href="/resume/JinishKathiriya_fullstack.pdf" 
+                        download="JinishKathiriya_fullstack.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        <Download className="mr-2 h-4 w-4" />
                         Download Resume
                       </Link>
                     </Button>

@@ -48,13 +48,20 @@ const Footer = () => {
   ]
 
   const resourceLinks = [
-    { name: "Resume", path: "/resume/jinish-kathiriya-resume.pdf", icon: <Download className="h-4 w-4 ml-1" /> },
+    { 
+      name: "Resume",
+      path: "/resume/JinishKathiriya_fullstack.pdf",
+      download: "JinishKathiriya_fullstack.pdf",
+      target: "_blank",
+      rel: "noopener noreferrer",
+      icon: <Download className="h-4 w-4 ml-1" />,
+      className: "flex items-center hover:text-techBlue transition-colors"
+    },
     {
       name: "Certificates",
-      path: "https://linkedin.com/in/jinish-kathiriya",
+      path: "https://drive.google.com/drive/folders/1D9jfqQjSJOml3BCKD-D6V79hVUFlVZXG?usp=sharing",
       icon: <ExternalLink className="h-4 w-4 ml-1" />,
     },
-    { name: "Blog", path: "#", icon: <ExternalLink className="h-4 w-4 ml-1" /> },
   ]
 
   return (
