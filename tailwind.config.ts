@@ -55,6 +55,19 @@ const config: Config = {
         techBlue: "hsl(var(--tech-blue))",
         techPurple: "hsl(var(--tech-purple))",
         techGreen: "hsl(var(--tech-green))",
+        // Theme-aware text colors
+        textPrimary: "hsl(var(--text-primary))",
+        textSecondary: "hsl(var(--text-secondary))",
+        textMuted: "hsl(var(--text-muted))",
+        // Theme-aware background colors
+        bgPrimary: "hsl(var(--bg-primary))",
+        bgSecondary: "hsl(var(--bg-secondary))",
+        bgCard: "hsl(var(--bg-card))",
+        navbarBg: "hsl(var(--navbar-bg))",
+        cardBorder: "hsl(var(--card-border))",
+        // Glass morphism colors
+        glassBg: "hsl(var(--glass-bg))",
+        glassBorder: "hsl(var(--glass-border))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -98,7 +98,7 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="py-20 relative" ref={ref}>
+    <section id="about" className="py-20 relative bg-bgPrimary" ref={ref}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
@@ -106,7 +106,7 @@ const About = () => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-textPrimary">
             About <span className="tech-gradient">Me</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
@@ -120,7 +120,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <Tabs defaultValue="bio" className="w-full">
-              <TabsList className="grid grid-cols-3 mb-8">
+              <TabsList className="grid grid-cols-3 mb-8 glass-card">
                 <TabsTrigger value="bio">Biography</TabsTrigger>
                 <TabsTrigger value="journey">Journey</TabsTrigger>
                 <TabsTrigger value="achievements">Achievements</TabsTrigger>
@@ -128,19 +128,19 @@ const About = () => {
 
               <TabsContent value="bio" className="space-y-6">
                 <div className="prose prose-invert max-w-none">
-                  <p className="text-lg text-gray-300 leading-relaxed">
+                  <p className="text-lg text-textSecondary leading-relaxed">
                     As a Computer Engineering student at C.K. Pithawala College of Engineering & Technology, I'm
                     passionate about exploring the frontiers of technology. My focus on AI and cybersecurity has led me
                     to take on leadership roles and develop innovative solutions that address complex security
                     challenges.
                   </p>
-                  <p className="text-lg text-gray-300 leading-relaxed">
+                  <p className="text-lg text-textSecondary leading-relaxed">
                     Currently serving as the Technical Head and Cybersecurity Head for the Google Developers Group, I
                     organize workshops, lead security initiatives, and mentor new developers. My approach combines
                     cutting-edge research with practical implementation, ensuring that theoretical advances translate
                     into real-world solutions.
                   </p>
-                  <p className="text-lg text-gray-300 leading-relaxed">
+                  <p className="text-lg text-textSecondary leading-relaxed">
                     I believe in the power of ethical technology to transform our world, and I'm committed to creating
                     solutions that are both innovative and responsible. My work is guided by a deep commitment to
                     privacy, security, and the responsible use of AI.
@@ -151,12 +151,12 @@ const About = () => {
                   {specialties.map((specialty, index) => (
                     <Card
                       key={index}
-                      className="bg-gray-900/50 border border-gray-800 hover:border-gray-700 card-hover h-full"
+                      className="glass-card card-hover h-full"
                     >
                       <CardContent className="p-6 flex flex-col items-center text-center">
-                        <div className="mb-4 p-3 rounded-full bg-gray-800/50">{specialty.icon}</div>
-                        <h3 className="text-xl font-bold mb-3">{specialty.title}</h3>
-                        <p className="text-gray-400">{specialty.description}</p>
+                        <div className="mb-4 p-3 rounded-full bg-bgSecondary">{specialty.icon}</div>
+                        <h3 className="text-xl font-bold mb-3 text-textPrimary">{specialty.title}</h3>
+                        <p className="text-textMuted">{specialty.description}</p>
                       </CardContent>
                     </Card>
                   ))}
@@ -173,15 +173,15 @@ const About = () => {
                       animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                     >
-                      <div className="absolute -left-10 p-2 rounded-full bg-gray-900 border border-gray-800">
+                      <div className="absolute -left-10 p-2 rounded-full bg-bgCard border border-cardBorder">
                         {item.icon}
                       </div>
-                      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-5">
+                      <div className="glass-card rounded-lg p-5">
                         <div className="flex justify-between items-center mb-2">
-                          <h3 className="text-xl font-bold">{item.title}</h3>
-                          <span className="text-sm px-2 py-1 bg-gray-800 rounded-full">{item.year}</span>
+                          <h3 className="text-xl font-bold text-textPrimary">{item.title}</h3>
+                          <span className="text-sm px-2 py-1 bg-bgSecondary rounded-full text-textSecondary">{item.year}</span>
                         </div>
-                        <p className="text-gray-400">{item.description}</p>
+                        <p className="text-textMuted">{item.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -190,8 +190,8 @@ const About = () => {
 
               <TabsContent value="achievements">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4 flex items-center">
+                  <div className="glass-card rounded-lg p-6">
+                    <h3 className="text-xl font-bold mb-4 flex items-center text-textPrimary">
                       <Award className="h-5 w-5 mr-2 text-techPurple" /> Certifications
                     </h3>
                     <ul className="space-y-4">

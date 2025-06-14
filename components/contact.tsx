@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Github, Linkedin, Twitter, Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
 import emailjs from '@emailjs/browser'
+import { componentStyles } from "@/lib/theme-utils"
 
 // Initialize EmailJS with public key
 emailjs.init({
@@ -150,19 +151,19 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="py-20 relative" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className={componentStyles.section} ref={ref}>
+      <div className={componentStyles.container}>
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className={componentStyles.heading}>
             Get In <span className="tech-gradient">Touch</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className={componentStyles.subheading}>
             Have a project in mind or want to discuss collaboration opportunities? Feel free to reach out to me through
             any of the channels below.
           </p>
@@ -174,15 +175,15 @@ const Contact = () => {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+            <h3 className="text-2xl font-bold mb-6 text-textPrimary">Contact Information</h3>
 
             <div className="space-y-6 mb-8">
               {contactInfo.map((item, index) => (
                 <div key={index} className="flex items-center">
-                  <div className="p-3 rounded-full bg-gray-800/50 mr-4">{item.icon}</div>
+                  <div className="p-3 rounded-full glass-card mr-4 text-techBlue">{item.icon}</div>
                   <div>
-                    <p className="text-gray-400 text-sm">{item.label}</p>
-                    <Link href={item.link} className="text-white hover:text-techBlue transition-colors">
+                    <p className="text-textMuted text-sm">{item.label}</p>
+                    <Link href={item.link} className="text-textPrimary hover:text-techBlue transition-colors">
                       {item.value}
                     </Link>
                   </div>
@@ -190,7 +191,7 @@ const Contact = () => {
               ))}
             </div>
 
-            <h3 className="text-2xl font-bold mb-6">Follow Me</h3>
+            <h3 className="text-2xl font-bold mb-6 text-textPrimary">Follow Me</h3>
 
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -199,7 +200,7 @@ const Contact = () => {
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-3 rounded-full bg-gray-800/50 text-white transition-colors ${social.color}`}
+                  className={`p-3 rounded-full glass-card text-textPrimary hover:text-techBlue transition-colors ${social.color}`}
                   aria-label={social.label}
                 >
                   {social.icon}
@@ -213,7 +214,7 @@ const Contact = () => {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
+            <h3 className="text-2xl font-bold mb-6 text-textPrimary">Send Me a Message</h3>
 
             <form
               onSubmit={handleSubmit}
@@ -242,7 +243,7 @@ const Contact = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="from_name" className="text-sm text-gray-400">
+                  <label htmlFor="from_name" className="text-sm text-textMuted">
                     Your Name
                   </label>
                   <Input
@@ -252,11 +253,11 @@ const Contact = () => {
                     required
                     value={formData.from_name}
                     onChange={handleChange}
-                    className="bg-gray-800/50 border-gray-700 focus:border-techBlue"
+                    className="glass-card border-glassBorder focus:border-techBlue text-textPrimary placeholder:text-textMuted"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="reply_to" className="text-sm text-gray-400">
+                  <label htmlFor="reply_to" className="text-sm text-textMuted">
                     Your Email
                   </label>
                   <Input
@@ -267,13 +268,13 @@ const Contact = () => {
                     required
                     value={formData.reply_to}
                     onChange={handleChange}
-                    className="bg-gray-800/50 border-gray-700 focus:border-techBlue"
+                    className="glass-card border-glassBorder focus:border-techBlue text-textPrimary placeholder:text-textMuted"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm text-gray-400">
+                <label htmlFor="subject" className="text-sm text-textMuted">
                   Subject
                 </label>
                 <Input
@@ -283,12 +284,12 @@ const Contact = () => {
                   required
                   value={formData.subject}
                   onChange={handleChange}
-                  className="bg-gray-800/50 border-gray-700 focus:border-techBlue"
+                  className="glass-card border-glassBorder focus:border-techBlue text-textPrimary placeholder:text-textMuted"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm text-gray-400">
+                <label htmlFor="message" className="text-sm text-textMuted">
                   Message
                 </label>
                 <Textarea
@@ -299,14 +300,14 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="bg-gray-800/50 border-gray-700 focus:border-techBlue resize-none"
+                  className="glass-card border-glassBorder focus:border-techBlue resize-none text-textPrimary placeholder:text-textMuted"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-techBlue to-techPurple hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`w-full ${componentStyles.button.primary} disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {isSubmitting ? (
                   <>

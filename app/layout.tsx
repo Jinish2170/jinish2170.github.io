@@ -38,7 +38,13 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="dark" 
+          enableSystem={true} 
+          disableTransitionOnChange={false}
+          themes={['light', 'dark', 'system']}
+        >
           <SkipToContent />
           <KeyboardNavigation />
           <Navbar />

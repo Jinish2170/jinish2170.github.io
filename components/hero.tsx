@@ -15,7 +15,7 @@ const Hero = () => {
   const [typingSpeed, setTypingSpeed] = useState(150)
   const [isDownloading, setIsDownloading] = useState(false)
 
-  const canvasRef = useRef(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -58,6 +58,8 @@ const Hero = () => {
     if (!canvas) return
 
     const ctx = canvas.getContext("2d")
+    if (!ctx) return
+    
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
@@ -117,7 +119,7 @@ const Hero = () => {
       <div className="text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4">
-            <span className="block">Hi, I&apos;m</span>
+            <span className="block text-textPrimary">Hi, I&apos;m</span>
             <span className="tech-gradient text-5xl sm:text-6xl md:text-7xl block mt-2 glow-text">
               Jinish Kathiriya
             </span>
@@ -125,7 +127,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.3 }}>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-300 h-10 sm:h-12 md:h-14 flex justify-center items-center">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-textSecondary h-10 sm:h-12 md:h-14 flex justify-center items-center">
             <span className="mr-2">I&apos;m a</span>
             <span className="text-techBlue">{typedText}</span>
             <span className="typing-cursor"></span>
@@ -133,7 +135,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.p
-          className="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto"
+          className="mt-6 text-lg sm:text-xl text-textMuted max-w-2xl mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}

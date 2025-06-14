@@ -3,16 +3,15 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Github, Linkedin, Twitter, Moon, Sun } from "lucide-react"
+import { Menu, X, Github, Linkedin, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { motion } from "framer-motion"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,21 +47,17 @@ const Navbar = () => {
     },
   ]
 
-  const isActive = (href) => {
+  const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/"
     }
     return pathname.startsWith(href)
   }
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
-
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/80 backdrop-blur-md shadow-md" : "bg-transparent"
+        scrolled ? "glass-navbar" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,8 +77,8 @@ const Navbar = () => {
                   href={link.href}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive(link.href)
-                      ? "text-white bg-gray-800/50"
-                      : "text-gray-300 hover:text-white hover:bg-gray-800/30"
+                      ? "text-textPrimary bg-secondary"
+                      : "text-textSecondary hover:text-textPrimary hover:bg-secondary/50"
                   }`}
                 >
                   {link.name}
@@ -93,23 +88,15 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="text-gray-300 hover:text-white hover:bg-gray-800"
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
-
+            <ThemeToggle />
+            
             {socialLinks.map((link) => (
               <Button
                 key={link.name}
                 variant="ghost"
                 size="icon"
                 asChild
-                className="text-gray-300 hover:text-white hover:bg-gray-800"
+                className="text-textSecondary hover:text-textPrimary hover:bg-secondary"
               >
                 <Link href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
                   {link.icon}
@@ -120,17 +107,9 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="text-gray-300 hover:text-white hover:bg-gray-800"
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
-
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="text-gray-300">
+            <ThemeToggle />
+            
+            <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="text-textSecondary">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
@@ -140,7 +119,7 @@ const Navbar = () => {
       {/* Mobile menu */}
       {isOpen && (
         <motion.div
-          className="md:hidden bg-black/95 backdrop-blur-md"
+          className="md:hidden glass-card border-t border-cardBorder"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -153,8 +132,8 @@ const Navbar = () => {
                 href={link.href}
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
                   isActive(link.href)
-                    ? "text-white bg-gray-800/50"
-                    : "text-gray-300 hover:text-white hover:bg-gray-800/30"
+                    ? "text-textPrimary bg-secondary"
+                    : "text-textSecondary hover:text-textPrimary hover:bg-secondary/50"
                 }`}
                 onClick={() => setIsOpen(false)}
               >
@@ -168,7 +147,7 @@ const Navbar = () => {
                   variant="ghost"
                   size="icon"
                   asChild
-                  className="text-gray-300 hover:text-white hover:bg-gray-800"
+                  className="text-textSecondary hover:text-textPrimary hover:bg-secondary"
                 >
                   <Link href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
                     {link.icon}
