@@ -9,9 +9,14 @@ import ParticleBackground from "@/components/particle-background"
 import ProjectShowcase from "@/components/project-showcase"
 
 export const metadata: Metadata = {
-  title: "Projects | Jinish Kathiriya",
-  description:
-    "Explore the projects and work of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
+  title: "Projects | Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
+  description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer. Explore innovative projects and solutions.",
+  keywords: "Jinish Kathiriya projects, AI Engineer projects, Machine Learning projects, Cybersecurity solutions, Full-Stack Developer projects, Portfolio projects, GitHub repositories",
+  openGraph: {
+    title: "Projects | Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
+    description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer.",
+    url: "https://jinish2170.github.io/projects",
+  }
 }
 
 export default function ProjectsPage() {

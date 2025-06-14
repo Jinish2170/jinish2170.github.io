@@ -72,7 +72,7 @@ const Research = () => {
             Research <span className="tech-gradient">Areas</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-textSecondary max-w-3xl mx-auto">
             My current research focuses on advancing the frontiers of AI and cybersecurity, with an emphasis on
             developing innovative solutions to complex problems.
           </p>

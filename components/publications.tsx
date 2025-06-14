@@ -103,7 +103,7 @@ const Publications = () => {
             Publications & <span className="tech-gradient">Research</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-textSecondary max-w-3xl mx-auto">
             My contributions to academic research and industry publications in AI, cybersecurity, and related fields.
           </p>
         </motion.div>
@@ -116,7 +116,7 @@ const Publications = () => {
         >
           {publications.map((publication, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <Card className="bg-gray-900/50 border border-gray-800 hover:border-gray-700 transition-colors">
+              <Card className="bg-surfaceGlass border border-borderSecondary hover:border-borderPrimary transition-colors">
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-start gap-6">
                     <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 bg-gray-800/50 rounded-lg">
@@ -135,20 +135,20 @@ const Publications = () => {
                       </div>
 
                       <div className="flex flex-wrap gap-x-6 gap-y-2 mb-4 text-sm">
-                        <div className="flex items-center text-gray-400">
+                        <div className="flex items-center text-textTertiary">
                           <Calendar className="h-4 w-4 mr-1" /> {publication.date}
                         </div>
-                        <div className="flex items-center text-gray-400">
+                        <div className="flex items-center text-textTertiary">
                           <Users className="h-4 w-4 mr-1" /> {publication.authors.join(", ")}
                         </div>
                         <div className="flex items-center text-techBlue">Citations: {publication.citations}</div>
                       </div>
 
-                      <p className="text-gray-300 mb-4">{publication.abstract}</p>
+                      <p className="text-textSecondary mb-4">{publication.abstract}</p>
 
                       <div className="flex flex-wrap gap-2 mb-4">
                         {publication.keywords.map((keyword, keyIndex) => (
-                          <span key={keyIndex} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md">
+                          <span key={keyIndex} className="text-xs bg-surfaceHover text-textSecondary px-2 py-1 rounded-md">
                             {keyword}
                           </span>
                         ))}

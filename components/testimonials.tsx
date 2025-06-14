@@ -121,13 +121,13 @@ const Testimonials = () => {
             Client <span className="tech-gradient">Testimonials</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-textSecondary max-w-3xl mx-auto">
             Feedback from clients and collaborators about their experiences working with me on various projects.
           </p>
         </motion.div>
 
         <div className="relative">
-          <Card className="bg-gray-900/30 border border-gray-800 overflow-hidden">
+          <Card className="bg-surfaceGlass border border-borderSecondary overflow-hidden">
             <CardContent className="p-8">
               <div className="absolute top-6 left-6 text-techPurple opacity-20">
                 <Quote className="h-20 w-20" />
@@ -154,28 +154,28 @@ const Testimonials = () => {
                       </div>
 
                       <div className="text-center md:text-left">
-                        <h3 className="text-xl font-bold">{testimonials[currentIndex].author}</h3>
-                        <p className="text-gray-400">{testimonials[currentIndex].title}</p>
+                        <h3 className="text-xl font-bold text-textPrimary">{testimonials[currentIndex].author}</h3>
+                        <p className="text-textTertiary">{testimonials[currentIndex].title}</p>
 
                         <div className="mt-4 space-y-1">
                           <div className="flex items-center text-sm">
-                            <span className="text-gray-500 mr-2">Company:</span>
-                            <span className="text-gray-300">{testimonials[currentIndex].company}</span>
+                            <span className="text-textTertiary mr-2">Company:</span>
+                            <span className="text-textSecondary">{testimonials[currentIndex].company}</span>
                           </div>
                           <div className="flex items-center text-sm">
-                            <span className="text-gray-500 mr-2">Relationship:</span>
-                            <span className="text-gray-300">{testimonials[currentIndex].relationship}</span>
+                            <span className="text-textTertiary mr-2">Relationship:</span>
+                            <span className="text-textSecondary">{testimonials[currentIndex].relationship}</span>
                           </div>
                           <div className="flex items-center text-sm">
-                            <span className="text-gray-500 mr-2">Project:</span>
-                            <span className="text-gray-300">{testimonials[currentIndex].project}</span>
+                            <span className="text-textTertiary mr-2">Project:</span>
+                            <span className="text-textSecondary">{testimonials[currentIndex].project}</span>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="md:col-span-2">
-                      <p className="text-lg text-gray-300 italic relative">
+                      <p className="text-lg text-textSecondary italic relative">
                         <span className="text-4xl text-techPurple absolute -left-4 -top-2">"</span>
                         {testimonials[currentIndex].quote}
                         <span className="text-4xl text-techPurple absolute -right-4 -bottom-2">"</span>
@@ -192,7 +192,7 @@ const Testimonials = () => {
               variant="outline"
               size="icon"
               onClick={prevTestimonial}
-              className="border-gray-700 text-gray-400 hover:text-white hover:bg-gray-800"
+              className="border-borderSecondary text-textTertiary hover:text-textPrimary hover:bg-surfaceHover"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -215,7 +215,7 @@ const Testimonials = () => {
               variant="outline"
               size="icon"
               onClick={nextTestimonial}
-              className="border-gray-700 text-gray-400 hover:text-white hover:bg-gray-800"
+              className="border-borderSecondary text-textTertiary hover:text-textPrimary hover:bg-surfaceHover"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />
@@ -227,7 +227,7 @@ const Testimonials = () => {
               variant="ghost"
               size="sm"
               onClick={() => setAutoplay(!autoplay)}
-              className="text-sm text-gray-400 hover:text-white"
+              className="text-sm text-textTertiary hover:text-textPrimary"
             >
               {autoplay ? "Pause Autoplay" : "Enable Autoplay"}
             </Button>

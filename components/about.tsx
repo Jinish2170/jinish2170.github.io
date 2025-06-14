@@ -200,7 +200,7 @@ const About = () => {
                           <div className="h-2 w-2 rounded-full bg-techPurple mt-2 mr-2"></div>
                           <div>
                             <p className="font-medium">{achievement.title}</p>
-                            <p className="text-sm text-gray-400">
+                            <p className="text-sm text-textTertiary">
                               {achievement.year} -{" "}
                               <a
                                 href={achievement.link}
@@ -215,7 +215,7 @@ const About = () => {
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-4 text-sm text-gray-300">
+                    <p className="mt-4 text-sm text-textSecondary">
                       For more certificates, please check my{" "}
                       <a
                         href="https://www.linkedin.com/in/jinish-kathiriya"
@@ -229,9 +229,9 @@ const About = () => {
                     </p>
                   </div>
 
-                  <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4">My Approach</h3>
-                    <ul className="space-y-3 text-gray-300">
+                  <div className="bg-surfaceGlass border border-borderSecondary rounded-lg p-6">
+                    <h3 className="text-xl font-bold mb-4 text-textPrimary">My Approach</h3>
+                    <ul className="space-y-3 text-textSecondary">
                       <li className="flex items-start">
                         <div className="h-6 w-6 rounded-full bg-techBlue/20 flex items-center justify-center mr-3 mt-1">
                           <span className="text-techBlue text-sm">01</span>
@@ -260,12 +260,12 @@ const About = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 bg-gray-900/30 border border-gray-800 rounded-lg p-6">
-                  <h3 className="text-xl font-bold mb-4 flex items-center">
+                <div className="mt-6 bg-surfaceGlass border border-borderSecondary rounded-lg p-6">
+                  <h3 className="text-xl font-bold mb-4 flex items-center text-textPrimary">
                     <Briefcase className="h-5 w-5 mr-2 text-techGreen" /> Extracurricular Leadership
                   </h3>
-                  <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-700 mb-4">
-                    <h4 className="font-bold text-lg mb-2">Google Developers Group</h4>
+                  <div className="p-4 bg-surfaceHover rounded-lg border border-borderSecondary mb-4">
+                    <h4 className="font-bold text-lg mb-2 text-textPrimary">Google Developers Group</h4>
                     <div className="flex flex-wrap gap-2 mb-3">
                       <span className="px-3 py-1 bg-techBlue/20 text-techBlue rounded-full text-sm">
                         Technical Head
@@ -274,13 +274,13 @@ const About = () => {
                         Cybersecurity Head
                       </span>
                     </div>
-                    <p className="text-gray-300">
+                    <p className="text-textSecondary">
                       Leading technical initiatives and cybersecurity workshops, organizing events, and mentoring new
                       developers in the community.
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-700 mb-4">
-                    <h4 className="font-bold text-lg mb-2">TechFest Event Co-ordinator </h4>
+                  <div className="p-4 bg-surfaceHover rounded-lg border border-borderSecondary mb-4">
+                    <h4 className="font-bold text-lg mb-2 text-textPrimary">TechFest Event Co-ordinator </h4>
                     <div className="flex flex-wrap gap-2 mb-3">
                       <span className="px-3 py-1 bg-techBlue/20 text-techBlue rounded-full text-sm">
                         IPL Auction
@@ -289,12 +289,12 @@ const About = () => {
                         Wallstreet Wizards
                       </span>
                     </div>
-                    <p className="text-gray-300">
+                    <p className="text-textSecondary">
                       Leading technical initiatives, organizing events and mentoring
                       volunteers in the college campus.
                     </p>
                   </div>
-                  <blockquote className="text-lg italic text-gray-300">
+                  <blockquote className="text-lg italic text-textSecondary">
                     "My goal is to create technology that not only solves complex problems but does so in a way that
                     respects privacy, enhances security, and contributes positively to society."
                   </blockquote>

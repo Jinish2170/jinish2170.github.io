@@ -19,7 +19,7 @@ const Skills = () => {
   const [viewMode, setViewMode] = useState("bars")
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [hoveredSkill, setHoveredSkill] = useState(null)
+  const [hoveredSkill, setHoveredSkill] = useState<{name: string; description: string; level: number} | null>(null)
   const tooltipRef = useRef(null)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
 
@@ -284,7 +284,7 @@ const Skills = () => {
             My <span className="tech-gradient">Skills</span>
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-textSecondary max-w-3xl mx-auto">
             I&apos;ve developed expertise in a wide range of technologies and methodologies, with a focus on AI,
             cybersecurity, and full-stack development.
           </p>
@@ -296,7 +296,7 @@ const Skills = () => {
               variant={selectedCategory === "all" ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedCategory("all")}
-              className={selectedCategory === "all" ? "bg-techBlue hover:bg-techBlue/90" : ""}
+              className={selectedCategory === "all" ? "bg-techBlue hover:bg-techBlue/90 text-white border-techBlue" : "border-borderSecondary text-textSecondary hover:text-textPrimary hover:bg-surfaceHover"}
             >
               All Categories
             </Button>
@@ -307,7 +307,9 @@ const Skills = () => {
                 size="sm"
                 onClick={() => setSelectedCategory(category.name)}
                 className={
-                  selectedCategory === category.name ? `bg-${category.color} hover:bg-${category.color}/90` : ""
+                  selectedCategory === category.name 
+                    ? `bg-${category.color} hover:bg-${category.color}/90 text-white border-${category.color}` 
+                    : "border-borderSecondary text-textSecondary hover:text-textPrimary hover:bg-surfaceHover"
                 }
               >
                 {category.icon}
@@ -317,13 +319,13 @@ const Skills = () => {
           </div>
 
           <div className="relative w-full md:w-64 mt-4 md:mt-0">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-textTertiary" />
             <input
               type="text"
               placeholder="Search skills..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-techBlue focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 bg-surfaceGlass border border-borderSecondary rounded-md focus:outline-none focus:ring-2 focus:ring-techBlue focus:border-transparent placeholder-textTertiary text-textPrimary"
             />
           </div>
         </div>
@@ -350,11 +352,11 @@ const Skills = () => {
                 <motion.div
                   key={categoryIndex}
                   variants={itemVariants}
-                  className="bg-gray-900/50 border border-gray-800 rounded-lg p-6 card-hover"
+                  className="bg-surfaceGlass border border-borderSecondary rounded-lg p-6 card-hover"
                 >
                   <div className="flex items-center mb-6">
-                    <div className="p-2 rounded-md bg-gray-800/50 mr-4">{category.icon}</div>
-                    <h3 className="text-xl font-bold">{category.name}</h3>
+                    <div className="p-2 rounded-md bg-surfaceHover mr-4">{category.icon}</div>
+                    <h3 className="text-xl font-bold text-textPrimary">{category.name}</h3>
                   </div>
                   <div className="space-y-4">
                     {category.skills.map((skill, skillIndex) => (
@@ -365,10 +367,10 @@ const Skills = () => {
                         className="cursor-help"
                       >
                         <div className="flex justify-between mb-1">
-                          <span className="text-gray-300">{skill.name}</span>
-                          <span className="text-gray-400">{skill.level}%</span>
+                          <span className="text-textSecondary font-medium">{skill.name}</span>
+                          <span className="text-textTertiary">{skill.level}%</span>
                         </div>
-                        <div className="w-full bg-gray-800 rounded-full h-2">
+                        <div className="w-full bg-surfaceHover rounded-full h-2">
                           <div
                             className="skill-bar"
                             style={{
@@ -414,11 +416,11 @@ const Skills = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16"
         >
-          <Card className="bg-gray-900/30 border border-gray-800 overflow-hidden">
+          <Card className="bg-surfaceGlass border border-borderSecondary overflow-hidden">
             <CardContent className="p-0">
               {/* Certifications and Experience Indicators */}
-              <div className="border-t border-gray-800 p-6 bg-gray-900/50">
-                <h4 className="text-lg font-semibold mb-4">Professional Achievements</h4>
+              <div className="border-t border-borderSecondary p-6 bg-surfaceHover">
+                <h4 className="text-lg font-semibold mb-4 text-textPrimary">Professional Achievements</h4>
                 <div className="flex flex-wrap gap-3">
                   {[
                     { name: "Technical Head at Google Developer Group (GDG), CKPCET", icon: "🚀", color: "bg-blue-900/30 border-blue-700/50" },
@@ -429,7 +431,7 @@ const Skills = () => {
                   ].map((cert, idx) => (
                     <div
                       key={idx}
-                      className={`px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5 ${cert.color} border`}
+                      className={`px-3 py-1.5 rounded-full text-sm flex items-center gap-1.5 ${cert.color} border text-textSecondary`}
                     >
                       <span>{cert.icon}</span>
                       <span>{cert.name}</span>
@@ -446,15 +448,15 @@ const Skills = () => {
       {hoveredSkill && (
         <div
           ref={tooltipRef}
-          className="fixed bg-gray-900 border border-gray-700 rounded-md p-3 shadow-lg z-50 max-w-xs"
+          className="fixed bg-surfaceGlass border border-borderSecondary rounded-md p-3 shadow-lg z-50 max-w-xs backdrop-blur-sm"
           style={{
             left: `${tooltipPosition.x}px`,
             top: `${tooltipPosition.y}px`,
             transform: "translate(0, -50%)",
           }}
         >
-          <h4 className="font-bold mb-1">{hoveredSkill.name}</h4>
-          <p className="text-sm text-gray-300">{hoveredSkill.description}</p>
+          <h4 className="font-bold mb-1 text-textPrimary">{hoveredSkill.name}</h4>
+          <p className="text-sm text-textSecondary">{hoveredSkill.description}</p>
         </div>
       )}
     </section>

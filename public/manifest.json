@@ -1,0 +1,25 @@
+{
+  "name": "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
+  "short_name": "Jinish Kathiriya",
+  "description": "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4299E1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "keywords": ["Jinish", "Jinish Kathiriya", "AI Engineer", "Machine Learning", "Cybersecurity Specialist", "Full-Stack Developer", "Portfolio"],
+  "categories": ["education", "productivity", "business"],
+  "lang": "en-US"
+}

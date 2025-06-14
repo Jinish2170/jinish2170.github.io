@@ -12,6 +12,24 @@ import SkipToContent from "@/components/skip-to-content"
 export const metadata: Metadata = {
   title: "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
   description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
+  keywords: "Jinish, Jinish Kathiriya, AI Engineer, Machine Learning, Cybersecurity Specialist, Full-Stack Developer, GTU CSE Student, Google Developer Group, GDG CKPCET, Technical Head, Portfolio, Surat Gujarat, Computer Engineering",
+  openGraph: {
+    title: "Jinish Kathiriya - AI & ML Engineer Portfolio",
+    description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer from Surat, Gujarat.",
+    url: "https://jinish2170.github.io",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Jinish Kathiriya Portfolio"
+      }
+    ]
+  },
+  alternates: {
+    canonical: "https://jinish2170.github.io"
+  }
 }
 
 export default function Home() {
