@@ -203,6 +203,9 @@ export const metadata = {
   generator: 'Next.js',
   applicationName: 'Jinish Kathiriya Portfolio',
   referrer: 'origin-when-cross-origin',
+};
+
+export const viewport = {
   colorScheme: 'dark light',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
