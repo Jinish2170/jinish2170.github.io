@@ -1,13 +1,30 @@
 import type { Metadata } from "next"
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
+
+// Import Hero component directly as it should be loaded immediately
 import Hero from "@/components/hero"
-import About from "@/components/about"
-import Skills from "@/components/skills"
-import Projects from "@/components/projects"
-import Research from "@/components/research"
-import Contact from "@/components/contact"
-import ParticleBackground from "@/components/particle-background"
-import FloatingTech from "@/components/floating-tech"
-import SkipToContent from "@/components/skip-to-content"
+
+// Lazy load all other components
+const About = dynamic(() => import("@/components/about"), { 
+  loading: () => <div className="section-padding"><Skeleton className="h-96 w-full" /></div>
+})
+const ProfessionalSkills = dynamic(() => import("@/components/professional-skills"), { 
+  loading: () => <div className="section-padding"><Skeleton className="h-96 w-full" /></div>
+})
+const Projects = dynamic(() => import("@/components/projects"), { 
+  loading: () => <div className="section-padding"><Skeleton className="h-96 w-full" /></div>
+})
+const Research = dynamic(() => import("@/components/research"), { 
+  loading: () => <div className="section-padding"><Skeleton className="h-80 w-full" /></div>
+})
+const Publications = dynamic(() => import("@/components/publications"), { 
+  loading: () => <div className="section-padding"><Skeleton className="h-80 w-full" /></div>
+})
+const Contact = dynamic(() => import("@/components/contact"), { 
+  loading: () => <div className="section-padding"><Skeleton className="h-64 w-full" /></div>
+})
 
 export const metadata: Metadata = {
   title: "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
@@ -34,21 +51,28 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main
-      id="main-content"
-      className="relative min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden"
-    >
-      <SkipToContent />
-      <ParticleBackground />
-      <FloatingTech />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <main className="relative bg-transparent" id="main-content">
+      <section id="home">
         <Hero />
+      </section>
+      <section id="about">
         <About />
-        <Skills />
+      </section>
+      <section id="skills">
+        <ProfessionalSkills />
+      </section>
+      <section id="projects">
         <Projects />
+      </section>
+      <section id="research">
         <Research />
+      </section>
+      <section id="publications">
+        <Publications />
+      </section>
+      <section id="contact">
         <Contact />
-      </div>
+      </section>
     </main>
   )
 }

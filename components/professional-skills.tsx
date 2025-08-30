@@ -5,11 +5,16 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import {
   BrainCircuit,
+  Database,
+  Globe,
+  Shield,
+  Palette,
   Search,
   Code,
+  Server,
   Cloud,
-  Shield,
   Layers,
+  LineChart,
   FileCode,
 } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -31,21 +36,19 @@ interface SkillCategory {
   skills: Skill[]
 }
 
-const Skills = () => {
+const ProfessionalSkills = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null)
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
+  const [activeSkill, setActiveSkill] = useState<string | null>(null)
   const ref = useRef(null)
-  const tooltipRef = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
-  // Updated skill categories with professional color schemes
+  // Sophisticated skill categories with elegant color schemes
   const skillCategories: SkillCategory[] = [
     {
       name: "AI/ML & Data Science",
       icon: BrainCircuit,
-      color: "from-slate-700 to-slate-900",
+      color: "from-gray-800 to-gray-900",
       skills: [
         {
           name: "Machine Learning",
@@ -82,7 +85,7 @@ const Skills = () => {
     {
       name: "Full-Stack Development",
       icon: Code,
-      color: "from-gray-700 to-gray-900",
+      color: "from-zinc-800 to-zinc-900",
       skills: [
         {
           name: "React & Next.js",
@@ -119,7 +122,7 @@ const Skills = () => {
     {
       name: "Database & Cloud",
       icon: Cloud,
-      color: "from-zinc-700 to-zinc-900",
+      color: "from-slate-800 to-slate-900",
       skills: [
         {
           name: "MongoDB",
@@ -156,7 +159,7 @@ const Skills = () => {
     {
       name: "DevOps & Security",
       icon: Shield,
-      color: "from-stone-700 to-stone-900",
+      color: "from-neutral-800 to-neutral-900",
       skills: [
         {
           name: "Cybersecurity Fundamentals",
@@ -193,7 +196,7 @@ const Skills = () => {
     {
       name: "Design & Tools",
       icon: Layers,
-      color: "from-neutral-700 to-neutral-900",
+      color: "from-stone-800 to-stone-900",
       skills: [
         {
           name: "UI/UX Design",
@@ -229,21 +232,6 @@ const Skills = () => {
     },
   ]
 
-  // Handle tooltip positioning
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (hoveredSkill) {
-        setTooltipPosition({
-          x: e.clientX + 15,
-          y: e.clientY + 15,
-        })
-      }
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [hoveredSkill])
-
   // Filter skills based on search term and category
   const filteredCategories = skillCategories
     .filter((category) => selectedCategory === "all" || category.name === selectedCategory)
@@ -256,27 +244,6 @@ const Skills = () => {
       ),
     }))
     .filter((category) => category.skills.length > 0)
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  }
 
   return (
     <section id="skills" className="py-24 relative" ref={ref}>
@@ -346,7 +313,7 @@ const Skills = () => {
             <TabsTrigger value="list">Detailed View</TabsTrigger>
           </TabsList>
 
-          {/* Grid View - Professional Cards */}
+          {/* Grid View - Sophisticated Professional Cards */}
           <TabsContent value="grid">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCategories.map((category, categoryIndex) => (
@@ -356,43 +323,65 @@ const Skills = () => {
                   animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
                 >
-                  <Card className="h-full bg-background/80 backdrop-blur-sm border border-border/50 overflow-hidden hover:shadow-md transition-all duration-300 group">
-                    <div className="p-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`p-2 bg-gradient-to-br ${category.color} rounded-md`}>
-                          <category.icon className="h-5 w-5 text-white" />
-                        </div>
-                        <h3 className="text-xl font-semibold tracking-tight">{category.name}</h3>
-                      </div>
+                  <Card className="h-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
+                    <div className="relative">
+                      {/* Elegant accent line at top */}
+                      <div className={`h-1 w-full bg-gradient-to-r ${category.color}`}></div>
                       
-                      <div className="space-y-4 mt-5">
-                        {category.skills.slice(0, 4).map((skill) => (
-                          <div key={skill.name} className="relative">
-                            <div className="flex items-center justify-between mb-1.5">
-                              <h4 className="text-sm font-medium">{skill.name}</h4>
-                              <span className="text-xs text-muted-foreground">
-                                {skill.level}%
-                              </span>
-                            </div>
-                            <div className="h-1.5 w-full bg-muted/50 rounded-full overflow-hidden">
-                              <motion.div
-                                className={`h-full bg-gradient-to-r ${category.color} rounded-full`}
-                                initial={{ width: 0 }}
-                                animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                                transition={{ duration: 1, delay: categoryIndex * 0.05, ease: "easeOut" }}
-                              />
-                            </div>
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className={`p-2 rounded-md bg-background backdrop-blur-lg border border-border/80 shadow-sm`}>
+                            <category.icon className={`h-5 w-5 opacity-90`} />
                           </div>
-                        ))}
-                      </div>
-                      
-                      {category.skills.length > 4 && (
-                        <div className="mt-4 text-right">
-                          <span className="text-xs text-muted-foreground">
-                            +{category.skills.length - 4} more skills
-                          </span>
+                          <h3 className="text-xl font-semibold tracking-tight">{category.name}</h3>
                         </div>
-                      )}
+                        
+                        <div className="space-y-5 mt-6">
+                          {category.skills.slice(0, 4).map((skill) => (
+                            <div key={skill.name} className="relative group/skill">
+                              <div className="flex items-center justify-between mb-2.5">
+                                <h4 className="text-sm font-medium tracking-tight group-hover/skill:text-foreground transition-colors">{skill.name}</h4>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-8 h-8 relative">
+                                    <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 36 36">
+                                      <circle cx="18" cy="18" r="16" fill="none" className="stroke-muted/30 stroke-[3]" />
+                                      <motion.circle 
+                                        cx="18" 
+                                        cy="18" 
+                                        r="16" 
+                                        fill="none" 
+                                        className="stroke-foreground/60 stroke-[3]" 
+                                        strokeDasharray={`${skill.level}, 100`}
+                                        initial={{ strokeDasharray: "0, 100" }}
+                                        animate={inView ? { strokeDasharray: `${skill.level}, 100` } : { strokeDasharray: "0, 100" }}
+                                        transition={{ duration: 1.5, delay: categoryIndex * 0.05, ease: "easeOut" }}
+                                      />
+                                    </svg>
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <span className="text-[10px] font-medium">{skill.level}%</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              {/* Subtle info tooltip */}
+                              <div className="opacity-0 group-hover/skill:opacity-100 transition-opacity duration-200 text-xs text-muted-foreground mt-1.5">
+                                {skill.description.length > 60 
+                                  ? `${skill.description.substring(0, 60)}...` 
+                                  : skill.description}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {category.skills.length > 4 && (
+                          <div className="mt-4 text-right">
+                            <span className="text-xs text-muted-foreground">
+                              +{category.skills.length - 4} more skills
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </Card>
                 </motion.div>
@@ -402,59 +391,86 @@ const Skills = () => {
 
           {/* List View - Professional Detailed */}
           <TabsContent value="list">
-            <div className="space-y-10">
+            <div className="space-y-8">
               {filteredCategories.map((category, categoryIndex) => (
                 <motion.div
                   key={category.name}
                   initial={{ opacity: 0, y: 30 }}
                   animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                  className="bg-background/50 backdrop-blur-sm border border-border/50 rounded-lg overflow-hidden"
+                  className="bg-background/80 backdrop-blur-sm border border-border/50 rounded-lg overflow-hidden shadow-md"
                 >
-                  <div className="p-6 border-b border-border/50">
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 bg-gradient-to-br ${category.color} rounded-md`}>
-                        <category.icon className="h-5 w-5 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold tracking-tight">{category.name}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {category.skills.length} specialized capabilities
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {category.skills.map((skill, skillIndex) => (
-                        <div
-                          key={skill.name}
-                          className={`p-4 rounded-lg border border-transparent hover:border-border/50 transition-colors hover:bg-accent/5`}
-                          onMouseEnter={() => setHoveredSkill(skill)}
-                          onMouseLeave={() => setHoveredSkill(null)}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="text-base font-medium">{skill.name}</h4>
-                            <Badge variant="secondary" className="text-xs font-normal">
-                              {skill.level}%
-                            </Badge>
-                          </div>
-                          
-                          <div className="h-1 w-full bg-muted/30 rounded-full overflow-hidden mb-3">
-                            <motion.div
-                              className="h-full bg-gradient-to-r from-foreground/50 to-foreground/80 rounded-full"
-                              initial={{ width: 0 }}
-                              animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                              transition={{ duration: 1, delay: categoryIndex * 0.05 + skillIndex * 0.05, ease: "easeOut" }}
-                            />
-                          </div>
-                          
-                          <p className="text-sm text-muted-foreground mt-2 line-clamp-2 hover:line-clamp-none transition-all">
-                            {skill.description}
+                  <div className="relative">
+                    {/* Elegant accent line at top */}
+                    <div className={`h-1 w-full bg-gradient-to-r ${category.color}`}></div>
+                    
+                    <div className="p-6 border-b border-border/30">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-md bg-background backdrop-blur-lg border border-border/80 shadow-sm`}>
+                          <category.icon className={`h-5 w-5 opacity-90`} />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-semibold tracking-tight">{category.name}</h3>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {category.skills.length} specialized capabilities
                           </p>
                         </div>
-                      ))}
+                      </div>
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {category.skills.map((skill, skillIndex) => (
+                          <div
+                            key={skill.name}
+                            className={`p-5 rounded-lg border border-border/30 hover:border-border/70 transition-all duration-300 ${
+                              activeSkill === `${category.name}-${skill.name}` 
+                                ? 'bg-background shadow-sm border-border/50' 
+                                : 'hover:bg-background/50 hover:shadow-sm'
+                            }`}
+                            onClick={() => 
+                              setActiveSkill(
+                                activeSkill === `${category.name}-${skill.name}`
+                                  ? null
+                                  : `${category.name}-${skill.name}`
+                              )
+                            }
+                          >
+                            <div className="flex items-center justify-between mb-3">
+                              <h4 className="text-base font-medium tracking-tight">{skill.name}</h4>
+                              <div className="flex items-center">
+                                <svg className="w-9 h-9 -mr-1" viewBox="0 0 36 36">
+                                  <circle cx="18" cy="18" r="16" fill="none" className="stroke-muted/30 stroke-[2]" />
+                                  <motion.circle 
+                                    cx="18" 
+                                    cy="18" 
+                                    r="16" 
+                                    fill="none" 
+                                    className="stroke-foreground/60 stroke-[2]" 
+                                    strokeDasharray={`${skill.level}, 100`}
+                                    initial={{ strokeDasharray: "0, 100" }}
+                                    animate={inView ? { strokeDasharray: `${skill.level}, 100` } : { strokeDasharray: "0, 100" }}
+                                    transition={{ duration: 1.5, delay: categoryIndex * 0.05 + skillIndex * 0.05, ease: "easeOut" }}
+                                  />
+                                  <text x="18" y="18" textAnchor="middle" dominantBaseline="central" 
+                                    className="text-[8px] font-medium fill-foreground">
+                                    {skill.level}%
+                                  </text>
+                                </svg>
+                              </div>
+                            </div>
+                            
+                            <motion.div
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.5, delay: 0.3 }}
+                              className="text-sm text-muted-foreground mt-1 line-clamp-2 hover:line-clamp-none transition-all duration-300"
+                            >
+                              {skill.description}
+                            </motion.div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -463,21 +479,21 @@ const Skills = () => {
           </TabsContent>
         </Tabs>
 
-        {/* Professional Achievements */}
+        {/* Professional Achievements Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20"
+          className="mt-24"
         >
-          <div className="p-8 bg-background/70 backdrop-blur-sm border border-border/50 rounded-lg">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 bg-gradient-to-br from-gray-700 to-gray-900 rounded-md">
-                <FileCode className="h-5 w-5 text-white" />
+          <div className="p-8 bg-background/80 backdrop-blur-sm border border-border/50 rounded-lg shadow-md">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="p-3 rounded-md bg-background backdrop-blur-lg border border-border/80 shadow-sm">
+                <FileCode className="h-5 w-5 opacity-90" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold tracking-tight">Professional Achievements</h3>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-sm text-muted-foreground mt-1.5">
                   Key certifications, leadership roles, and professional milestones
                 </p>
               </div>
@@ -518,21 +534,23 @@ const Skills = () => {
               ].map((achievement, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
-                  className="flex gap-3 p-4 rounded-lg border border-border/30 bg-background/50 hover:bg-background/70 hover:border-border/50 transition-all duration-300"
+                  className="p-5 rounded-lg border border-border/30 bg-background/50 hover:bg-background/90 hover:border-border/70 hover:shadow-sm transition-all duration-300"
                 >
-                  <div className="h-10 w-10 flex items-center justify-center rounded-full bg-muted/30 text-xl shrink-0">
-                    {achievement.icon}
-                  </div>
-                  <div>
-                    <Badge variant="outline" className="mb-2">
-                      {achievement.category}
-                    </Badge>
-                    <h4 className="text-sm font-medium leading-tight">
-                      {achievement.name}
-                    </h4>
+                  <div className="flex items-start gap-3">
+                    <div className="h-10 w-10 flex items-center justify-center rounded-md bg-background border border-border/50 text-xl shrink-0">
+                      {achievement.icon}
+                    </div>
+                    <div>
+                      <Badge variant="secondary" className="mb-2 font-normal">
+                        {achievement.category}
+                      </Badge>
+                      <h4 className="text-sm font-medium leading-tight">
+                        {achievement.name}
+                      </h4>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -540,34 +558,8 @@ const Skills = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Skill Tooltip - Modern professional tooltip that follows cursor */}
-      {hoveredSkill && (
-        <div
-          className="fixed bg-background/95 backdrop-blur-md shadow-lg border border-border/40 p-4 rounded-lg z-50 max-w-xs transition-all duration-200"
-          style={{
-            left: `${tooltipPosition.x}px`,
-            top: `${tooltipPosition.y}px`,
-            transform: "translate(0, -50%)",
-          }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-1.5 h-1.5 bg-foreground rounded-full"></div>
-            <h4 className="font-semibold text-foreground">{hoveredSkill.name}</h4>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">{hoveredSkill.description}</p>
-          <div className="mt-2 flex items-center justify-between">
-            <div className="text-xs font-medium">
-              Proficiency:
-            </div>
-            <Badge variant="secondary" className="text-xs">
-              {hoveredSkill.level}%
-            </Badge>
-          </div>
-        </div>
-      )}
     </section>
   )
 }
 
-export default Skills
+export default ProfessionalSkills

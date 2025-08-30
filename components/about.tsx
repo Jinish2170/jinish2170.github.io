@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Brain, Shield, Code, Briefcase, GraduationCap, Award } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { Download, ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -13,297 +13,167 @@ const About = () => {
     threshold: 0.1,
   })
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  }
-
-  const specialties = [
-    {
-      title: "AI & Machine Learning",
-      icon: <Brain className="h-10 w-10 text-techBlue" />,
-      description:
-        "Specializing in neural networks, deep learning, and AI security solutions with a focus on threat intelligence systems.",
-    },
-    {
-      title: "Cybersecurity",
-      icon: <Shield className="h-10 w-10 text-techPurple" />,
-      description:
-        "Expert in zero-day vulnerability detection, penetration testing, and quantum-resistant cryptography implementations.",
-    },
-    {
-      title: "Full-Stack Development",
-      icon: <Code className="h-10 w-10 text-techGreen" />,
-      description:
-        "Building robust applications with React, Node.js, Express.js, and various databases including MongoDB and PostgreSQL.",
-    },
+  const stats = [
+    { number: "50+", label: "Projects Completed" },
+    { number: "3+", label: "Years Experience" },
+    { number: "15+", label: "Technologies" },
+    { number: "100%", label: "Dedication" }
   ]
 
-  const timelineItems = [
+  const values = [
     {
-      year: "2022-2026",
-      title: "Bachelor of Engineering in Computer Engineering",
-      description: "C.K. Pithawala College of Engineering & Technology, Gujarat (Expected Graduation: May 2026)",
-      icon: <GraduationCap className="h-5 w-5 text-techPurple" />,
+      title: "Innovation",
+      description: "Always exploring cutting-edge technologies and creative solutions to complex problems."
     },
     {
-      year: "2022",
-      title: "Higher Secondary Education (12th)",
-      description: "Gurukul V.V.T.C ENG MED SCHOOL - Katargam, Surat, Gujarat (April 2006 to March 2022)",
-      icon: <GraduationCap className="h-5 w-5 text-techBlue" />,
+      title: "Security First",
+      description: "Prioritizing cybersecurity best practices in every project and solution I develop."
     },
     {
-      year: "2023",
-      title: "Google Developers Group",
-      description: "Technical Head and Cybersecurity Head, organizing workshops and security initiatives",
-      icon: <Briefcase className="h-5 w-5 text-techGreen" />,
-    },
-  ]
-
-  const achievements = [
-    {
-      title: "AI Certification",
-      year: "2023",
-      icon: <Award className="h-5 w-5 text-techPurple" />,
-      link: "#", // Replace with actual certificate link
-    },
-    {
-      title: "Python Programming Certification",
-      year: "2023",
-      icon: <Award className="h-5 w-5 text-techGreen" />,
-      link: "#", // Replace with actual certificate link
-    },
-    {
-      title: "Data Science Certification",
-      year: "2022",
-      icon: <Award className="h-5 w-5 text-techBlue" />,
-      link: "#", // Replace with actual certificate link
-    },
+      title: "Continuous Learning",
+      description: "Committed to staying current with emerging technologies and industry trends."
+    }
   ]
 
   return (
-    <section id="about" className="py-20 relative bg-bgPrimary" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="section-padding">
+      <div className="section-container">
         <motion.div
-          className="text-center mb-16"
+          ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-textPrimary">
-            About <span className="tech-gradient">Me</span>
+          <h2 className="heading-lg mb-4">
+            About <span className="gradient-text">Me</span>
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-techBlue to-techPurple mx-auto mb-8"></div>
+          <p className="body-lg max-w-2xl mx-auto">
+            Passionate developer with expertise in AI, cybersecurity, and full-stack development.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-8 mb-16">
+        {/* Main About Content */}
+        <div className="two-column-grid mb-20">
+          {/* Image Side */}
           <motion.div
-            className="max-w-4xl mx-auto w-full"
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative"
           >
-            <Tabs defaultValue="bio" className="w-full">
-              <TabsList className="grid grid-cols-3 mb-8 glass-card">
-                <TabsTrigger value="bio">Biography</TabsTrigger>
-                <TabsTrigger value="journey">Journey</TabsTrigger>
-                <TabsTrigger value="achievements">Achievements</TabsTrigger>
-              </TabsList>
+            <div className="relative w-full max-w-md mx-auto">
+              <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-blue-600/10 to-purple-600/10 border border-border/50 p-4">
+                <Image
+                  src="/placeholder-user.jpg"
+                  alt="Jinish Kathiriya"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover rounded-xl"
+                />
+              </div>
+              
+              {/* Floating Elements */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-blue-600 rounded-full opacity-20" />
+              <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-600 rounded-full opacity-30" />
+            </div>
+          </motion.div>
 
-              <TabsContent value="bio" className="space-y-6">
-                <div className="prose prose-invert max-w-none">
-                  <p className="text-lg text-textSecondary leading-relaxed">
-                    As a Computer Engineering student at C.K. Pithawala College of Engineering & Technology, I'm
-                    passionate about exploring the frontiers of technology. My focus on AI and cybersecurity has led me
-                    to take on leadership roles and develop innovative solutions that address complex security
-                    challenges.
-                  </p>
-                  <p className="text-lg text-textSecondary leading-relaxed">
-                    Currently serving as the Technical Head and Cybersecurity Head for the Google Developers Group, I
-                    organize workshops, lead security initiatives, and mentor new developers. My approach combines
-                    cutting-edge research with practical implementation, ensuring that theoretical advances translate
-                    into real-world solutions.
-                  </p>
-                  <p className="text-lg text-textSecondary leading-relaxed">
-                    I believe in the power of ethical technology to transform our world, and I'm committed to creating
-                    solutions that are both innovative and responsible. My work is guided by a deep commitment to
-                    privacy, security, and the responsible use of AI.
-                  </p>
-                </div>
+          {/* Content Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-6"
+          >
+            <div>
+              <h3 className="heading-md mb-4">
+                Building the Future with Code
+              </h3>
+              <div className="space-y-4 body-md">
+                <p>
+                  I'm a passionate developer specializing in AI/ML, cybersecurity, and full-stack development. 
+                  With a strong foundation in computer science and years of hands-on experience, I create 
+                  innovative solutions that bridge technology and real-world impact.
+                </p>
+                <p>
+                  Currently serving as Technical Head at Google Developer Group (GDG) CKPCET and leading 
+                  cybersecurity initiatives. I'm driven by the challenge of solving complex problems and 
+                  the opportunity to make technology more secure and accessible.
+                </p>
+                <p>
+                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
+                  projects, or mentoring fellow developers in the community.
+                </p>
+              </div>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                  {specialties.map((specialty, index) => (
-                    <Card
-                      key={index}
-                      className="glass-card card-hover h-full"
-                    >
-                      <CardContent className="p-6 flex flex-col items-center text-center">
-                        <div className="mb-4 p-3 rounded-full bg-bgSecondary">{specialty.icon}</div>
-                        <h3 className="text-xl font-bold mb-3 text-textPrimary">{specialty.title}</h3>
-                        <p className="text-textMuted">{specialty.description}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="journey">
-                <div className="relative pl-8 border-l-2 border-gradient-to-b from-techBlue via-techPurple to-techGreen">
-                  {timelineItems.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      className="mb-8 relative"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <div className="absolute -left-10 p-2 rounded-full bg-bgCard border border-cardBorder">
-                        {item.icon}
-                      </div>
-                      <div className="glass-card rounded-lg p-5">
-                        <div className="flex justify-between items-center mb-2">
-                          <h3 className="text-xl font-bold text-textPrimary">{item.title}</h3>
-                          <span className="text-sm px-2 py-1 bg-bgSecondary rounded-full text-textSecondary">{item.year}</span>
-                        </div>
-                        <p className="text-textMuted">{item.description}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="achievements">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="glass-card rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4 flex items-center text-textPrimary">
-                      <Award className="h-5 w-5 mr-2 text-techPurple" /> Certifications
-                    </h3>
-                    <ul className="space-y-4">
-                      {achievements.map((achievement, index) => (
-                        <li key={index} className="flex items-start">
-                          <div className="h-2 w-2 rounded-full bg-techPurple mt-2 mr-2"></div>
-                          <div>
-                            <p className="font-medium">{achievement.title}</p>
-                            <p className="text-sm text-textTertiary">
-                              {achievement.year} -{" "}
-                              <a
-                                href={achievement.link}
-                                className="text-techBlue hover:underline"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Certificate Link
-                              </a>
-                            </p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-4 text-sm text-textSecondary">
-                      For more certificates, please check my{" "}
-                      <a
-                        href="https://www.linkedin.com/in/jinish-kathiriya"
-                        className="text-techBlue hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        LinkedIn profile
-                      </a>
-                      .
-                    </p>
-                  </div>
-
-                  <div className="bg-surfaceGlass border border-borderSecondary rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4 text-textPrimary">My Approach</h3>
-                    <ul className="space-y-3 text-textSecondary">
-                      <li className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-techBlue/20 flex items-center justify-center mr-3 mt-1">
-                          <span className="text-techBlue text-sm">01</span>
-                        </div>
-                        <span>Research-driven development with a focus on security</span>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-techPurple/20 flex items-center justify-center mr-3 mt-1">
-                          <span className="text-techPurple text-sm">02</span>
-                        </div>
-                        <span>Continuous learning and adaptation to emerging technologies</span>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-techGreen/20 flex items-center justify-center mr-3 mt-1">
-                          <span className="text-techGreen text-sm">03</span>
-                        </div>
-                        <span>Ethical considerations at every stage of development</span>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="h-6 w-6 rounded-full bg-techBlue/20 flex items-center justify-center mr-3 mt-1">
-                          <span className="text-techBlue text-sm">04</span>
-                        </div>
-                        <span>Collaborative mindset and knowledge sharing</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-6 bg-surfaceGlass border border-borderSecondary rounded-lg p-6">
-                  <h3 className="text-xl font-bold mb-4 flex items-center text-textPrimary">
-                    <Briefcase className="h-5 w-5 mr-2 text-techGreen" /> Extracurricular Leadership
-                  </h3>
-                  <div className="p-4 bg-surfaceHover rounded-lg border border-borderSecondary mb-4">
-                    <h4 className="font-bold text-lg mb-2 text-textPrimary">Google Developers Group</h4>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <span className="px-3 py-1 bg-techBlue/20 text-techBlue rounded-full text-sm">
-                        Technical Head
-                      </span>
-                      <span className="px-3 py-1 bg-techPurple/20 text-techPurple rounded-full text-sm">
-                        Cybersecurity Head
-                      </span>
-                    </div>
-                    <p className="text-textSecondary">
-                      Leading technical initiatives and cybersecurity workshops, organizing events, and mentoring new
-                      developers in the community.
-                    </p>
-                  </div>
-                  <div className="p-4 bg-surfaceHover rounded-lg border border-borderSecondary mb-4">
-                    <h4 className="font-bold text-lg mb-2 text-textPrimary">TechFest Event Co-ordinator </h4>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      <span className="px-3 py-1 bg-techBlue/20 text-techBlue rounded-full text-sm">
-                        IPL Auction
-                      </span>
-                      <span className="px-3 py-1 bg-techPurple/20 text-techPurple rounded-full text-sm">
-                        Wallstreet Wizards
-                      </span>
-                    </div>
-                    <p className="text-textSecondary">
-                      Leading technical initiatives, organizing events and mentoring
-                      volunteers in the college campus.
-                    </p>
-                  </div>
-                  <blockquote className="text-lg italic text-textSecondary">
-                    "My goal is to create technology that not only solves complex problems but does so in a way that
-                    respects privacy, enhances security, and contributes positively to society."
-                  </blockquote>
-                  <p className="mt-4 text-right text-techBlue font-medium">— Jinish Kathiriya</p>
-                </div>
-              </TabsContent>
-            </Tabs>
+            {/* CTA Button */}
+            <div className="flex gap-4">
+              <Button className="btn-primary group">
+                <Link href="#contact" className="flex items-center">
+                  Let's Connect
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+              
+              <Button variant="outline" className="btn-secondary group">
+                <Download className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
+                Resume
+              </Button>
+            </div>
           </motion.div>
         </div>
+
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
+        >
+          {stats.map((stat, index) => (
+            <div key={stat.label} className="text-center">
+              <div className="next-card p-6">
+                <div className="heading-md gradient-text mb-2">
+                  {stat.number}
+                </div>
+                <div className="body-sm">
+                  {stat.label}
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Values Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <div className="text-center mb-12">
+            <h3 className="heading-md mb-4">Core Values</h3>
+            <p className="body-lg max-w-2xl mx-auto">
+              The principles that guide my work and drive my passion for technology.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                className="next-card text-center"
+              >
+                <h4 className="heading-sm mb-3">{value.title}</h4>
+                <p className="body-sm">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   )
