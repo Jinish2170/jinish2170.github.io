@@ -1,51 +1,37 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { motion, AnimatePresence } from "framer-motion"
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const pathname = usePathname()
+// Constants and Utils
+import { NAV_LINKS } from "@/config/constants";
+import { useScrollDetection } from "@/hooks/useScrollDetection";
+import { handleNavigation } from "@/utils/navigation";
+import type { NavLink } from "@/types";
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+/**
+ * Navigation Component
+ * Responsive navigation bar with scroll detection and mobile menu
+ */
+const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isScrolled = useScrollDetection(20);
+  const pathname = usePathname();
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  // Define navigation links
-  const navLinks = [
-    { name: "Home", href: "/", type: "link" },
-    { name: "About", href: "/about", type: "link" },
-    { name: "Skills", href: "/#skills", type: "link" },
-    { name: "Projects", href: "/projects", type: "link" },
-    { name: "Contact", href: "/#contact", type: "link" },
-  ]
-  
-  const handleNavigation = (link: any) => {
-    setIsOpen(false)
-    if (link.type === "scroll") {
-      const element = document.querySelector(link.href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-    // Let Next.js handle all link navigations
-  }
+  const onNavigation = (link: NavLink): void => {
+    setIsOpen(false);
+    handleNavigation(link.href, link.type);
+  };
 
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
+        isScrolled 
           ? 'bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-lg shadow-foreground/5' 
           : 'bg-transparent'
       }`}
@@ -67,11 +53,11 @@ const Navbar = () => {
 
           {/* Desktop Navigation - Enhanced */}
           <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               link.type === "scroll" ? (
                 <button
                   key={link.name}
-                  onClick={() => handleNavigation(link)}
+                  onClick={() => onNavigation(link)}
                   className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-all duration-300 
                            rounded-lg group overflow-hidden"
                 >
@@ -125,36 +111,36 @@ const Navbar = () => {
               className="md:hidden overflow-hidden"
             >
               <div className="py-4 space-y-2 border-t border-border/50">
-                {navLinks.map((link, index) => (
-                  link.type === "scroll" ? (
-                    <motion.button
-                      key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      onClick={() => handleNavigation(link)}
+              {NAV_LINKS.map((link, index) => (
+                link.type === "scroll" ? (
+                  <motion.button
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    onClick={() => onNavigation(link)}
+                    className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
+                  >
+                    {link.name}
+                  </motion.button>
+                ) : (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
                       className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
                     >
                       {link.name}
-                    </motion.button>
-                  ) : (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
-                      >
-                        {link.name}
-                      </Link>
-                    </motion.div>
-                  )
-                ))}
-              </div>
+                    </Link>
+                  </motion.div>
+                )
+              ))}
+            </div>
             </motion.div>
           )}
         </AnimatePresence>

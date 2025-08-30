@@ -17,7 +17,12 @@
 
 body { background-color: rgb(9, 9, 11); color: rgb(250, 250, 250); }
 .nav-blur { background-color: rgba(9, 9, 11, 0.8); backdrop-filter: blur(8px); }
-.gradient-text { background: linear-gradient(to right, #4f46e5, #8b5cf6); -webkit-background-clip: text; color: transparent; }
+.gradient-text { 
+  background: linear-gradient(to right, #4f46e5, #8b5cf6); 
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
+}
 
 /* Hot spots effects */
 .red-hot-spot {

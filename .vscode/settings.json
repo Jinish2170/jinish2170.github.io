@@ -1,0 +1,18 @@
+{
+  "css.validate": false,
+  "postcss.validate": false,
+  "tailwindCSS.includeLanguages": {
+    "css": "css",
+    "html": "html"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

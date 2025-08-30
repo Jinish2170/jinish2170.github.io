@@ -1,43 +1,43 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import dynamic from "next/dynamic"
+import React from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
-// Dynamically import Lucide icons to reduce initial bundle size
-const ArrowRight = dynamic(() => import("lucide-react").then(mod => mod.ArrowRight))
-const Download = dynamic(() => import("lucide-react").then(mod => mod.Download))
-const Github = dynamic(() => import("lucide-react").then(mod => mod.Github))
-const Linkedin = dynamic(() => import("lucide-react").then(mod => mod.Linkedin))
-const Mail = dynamic(() => import("lucide-react").then(mod => mod.Mail))
+// Types and Constants
+import type { HeroProps } from "@/types";
+import { 
+  PERSONAL_INFO, 
+  SOCIAL_LINKS, 
+  HERO_TITLES, 
+  HERO_CONFIG 
+} from "@/config/constants";
 
-const Hero = () => {
-  const [currentTitle, setCurrentTitle] = useState(0)
-  
-  const titles = [
-    "AI & ML Engineer",
-    "Full-Stack Developer", 
-    "Cybersecurity Specialist"
-  ]
+// Hooks and Utils
+import { useTitleRotation } from "@/hooks/useTitleRotation";
+import { downloadFile } from "@/utils/navigation";
+import { fadeInWithDelay, staggerContainer } from "@/utils/animations";
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitle((prev) => (prev + 1) % titles.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [titles.length])
+// Dynamic icon imports for better performance
+const ArrowRight = dynamic(() => import("lucide-react").then(mod => ({ default: mod.ArrowRight })));
+const Download = dynamic(() => import("lucide-react").then(mod => ({ default: mod.Download })));
+const Github = dynamic(() => import("lucide-react").then(mod => ({ default: mod.Github })));
+const Linkedin = dynamic(() => import("lucide-react").then(mod => ({ default: mod.Linkedin })));
+const Mail = dynamic(() => import("lucide-react").then(mod => ({ default: mod.Mail })));
 
-  const handleDownload = () => {
-    const link = document.createElement('a')
-    link.href = '/resume/JinishKathiriya_fullstack.pdf'
-    link.download = 'JinishKathiriya_Resume.pdf'
-    link.target = '_blank'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+/**
+ * Hero Section Component
+ * Main landing section with animated title, CTA buttons, and social links
+ */
+const Hero: React.FC<HeroProps> = ({ 
+  personalInfo = PERSONAL_INFO, 
+  socialLinks = SOCIAL_LINKS 
+}) => {
+  const { currentTitle, currentIndex } = useTitleRotation(HERO_TITLES, HERO_CONFIG.titleRotationInterval);
+
+  const handleResumeDownload = () => downloadFile();
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -121,14 +121,14 @@ const Hero = () => {
             <div className="h-16 flex items-center justify-center overflow-hidden">
               <h2 className="heading-md relative">
                 <span className="text-muted-foreground mr-2">I'm a</span>
-                {titles.map((title, index) => (
+                {HERO_TITLES.map((title: string, index: number) => (
                   <motion.span
                     key={title}
-                    className={`absolute inline-flex items-center relative ${index === currentTitle ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute inline-flex items-center relative ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ 
-                      opacity: index === currentTitle ? 1 : 0,
-                      y: index === currentTitle ? 0 : 10 
+                      opacity: index === currentIndex ? 1 : 0,
+                      y: index === currentIndex ? 0 : 10 
                     }}
                     transition={{ duration: 0.5 }}
                   >
@@ -177,7 +177,7 @@ const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                onClick={handleDownload}
+                onClick={handleResumeDownload}
                 className="relative overflow-hidden border-2 border-blue-500/30 hover:border-blue-500/60 
                           bg-background/50 backdrop-blur-sm hover:bg-blue-500/5 
                           transition-all duration-300 group px-8 py-4"
@@ -201,8 +201,9 @@ const Hero = () => {
           >
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <Link 
-                href="https://github.com/Jinish2170" 
+                href={socialLinks.github} 
                 target="_blank"
+                rel="noopener noreferrer"
                 className="relative p-4 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/30 
                          hover:border-blue-500/50 transition-all duration-300 group overflow-hidden"
               >
@@ -216,8 +217,9 @@ const Hero = () => {
             
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <Link 
-                href="https://linkedin.com/in/jinish-kathiriya" 
+                href={socialLinks.linkedin} 
                 target="_blank"
+                rel="noopener noreferrer"
                 className="relative p-4 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/30 
                          hover:border-blue-600/50 transition-all duration-300 group overflow-hidden"
               >
@@ -231,7 +233,7 @@ const Hero = () => {
             
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <Link 
-                href="mailto:jinishkathiriya2170@gmail.com"
+                href={socialLinks.email}
                 className="relative p-4 rounded-2xl bg-background/50 backdrop-blur-sm border border-border/30 
                          hover:border-purple-500/50 transition-all duration-300 group overflow-hidden"
               >
