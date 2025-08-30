@@ -44,42 +44,55 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'nav-blur shadow-lg' 
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-lg shadow-foreground/5' 
           : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="section-container">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - Always navigates to homepage */}
-          <Link href="/" className="font-bold text-xl gradient-text">
-            JK
+          {/* Logo - Premium version */}
+          <Link href="/" className="relative group">
+            <div className="font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 
+                          bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
+              JK
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-500/20 
+                          rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Enhanced */}
+          <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
               link.type === "scroll" ? (
                 <button
                   key={link.name}
                   onClick={() => handleNavigation(link)}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                  className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-all duration-300 
+                           rounded-lg group overflow-hidden"
                 >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:w-full" />
+                  <span className="relative z-10 font-medium">{link.name}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 
+                                transition-all duration-300 group-hover:w-4/5 transform -translate-x-1/2" />
                 </button>
               ) : (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                  className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-all duration-300 
+                           rounded-lg group overflow-hidden"
                 >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 group-hover:w-full" />
+                  <span className="relative z-10 font-medium">{link.name}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 
+                                transition-all duration-300 group-hover:w-4/5 transform -translate-x-1/2" />
                 </Link>
               )
             ))}
