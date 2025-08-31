@@ -20,7 +20,7 @@ import {
   Folder
 } from "lucide-react"
 import Link from "next/link"
-import { getAllProjects } from "@/lib/github-service"
+import { getAllRepositories, clearCache } from "@/lib/github-service"
 import { ProcessedProject } from "@/lib/github-types"
 
 const ProjectsPage = () => {
@@ -33,8 +33,11 @@ const ProjectsPage = () => {
     const fetchProjects = async () => {
       try {
         setLoading(true)
-        const fetchedProjects = await getAllProjects()
+        // Clear cache for testing
+        clearCache()
+        const fetchedProjects = await getAllRepositories()
         setProjects(fetchedProjects)
+        console.log(`Loaded ${fetchedProjects.length} projects`)
       } catch (error) {
         console.error("Failed to fetch projects:", error)
       } finally {

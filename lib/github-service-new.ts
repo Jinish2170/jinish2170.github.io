@@ -43,12 +43,6 @@ function setCache(key: string, data: any): void {
   cache.set(key, { data, timestamp: Date.now() })
 }
 
-// Clear cache (for testing)
-export function clearCache(): void {
-  cache.clear()
-  console.log('GitHub service cache cleared')
-}
-
 // Fetch GitHub API with error handling
 async function fetchGitHub(endpoint: string): Promise<any> {
   const cacheKey = endpoint
@@ -234,86 +228,6 @@ function getHardcodedFallbackProjects(): ProcessedProject[] {
       featured: true,
       isPinned: false,
       languageColor: "#2b7489"
-    },
-    {
-      id: 'fallback-4',
-      title: "BIZZ Portal",
-      description: "Secure business intelligence platform with encrypted analytics and enterprise-grade data management solutions.",
-      techStack: ["React", "Node.js", "MongoDB", "JWT", "Chart.js"],
-      githubLink: "https://github.com/Jinish2170/BIZZ_PORTAL",
-      category: "Full-Stack Development",
-      stars: 0,
-      forks: 0,
-      language: "JavaScript",
-      topics: ["business", "analytics", "dashboard"],
-      lastUpdated: "2024-09-15",
-      featured: false,
-      isPinned: false,
-      languageColor: "#f1e05a"
-    },
-    {
-      id: 'fallback-5',
-      title: "SecureChat",
-      description: "End-to-end encrypted messaging application with advanced security features and real-time communication.",
-      techStack: ["React Native", "Node.js", "Socket.io", "Cryptography"],
-      githubLink: "https://github.com/Jinish2170/SecureChat",
-      category: "Cybersecurity",
-      stars: 0,
-      forks: 0,
-      language: "JavaScript",
-      topics: ["security", "encryption", "messaging"],
-      lastUpdated: "2024-08-20",
-      featured: false,
-      isPinned: false,
-      languageColor: "#f1e05a"
-    },
-    {
-      id: 'fallback-6',
-      title: "Neural Chess Engine",
-      description: "AI-powered chess engine utilizing neural networks and reinforcement learning for strategic gameplay.",
-      techStack: ["Python", "PyTorch", "Chess.js", "React"],
-      githubLink: "https://github.com/Jinish2170/Neural-Chess",
-      category: "AI & Machine Learning",
-      stars: 0,
-      forks: 0,
-      language: "Python",
-      topics: ["ai", "chess", "neural-networks"],
-      lastUpdated: "2024-07-10",
-      featured: false,
-      isPinned: false,
-      languageColor: "#3572A5"
-    },
-    {
-      id: 'fallback-7',
-      title: "DataViz Dashboard",
-      description: "Interactive data visualization platform for complex datasets featuring real-time updates and customizable charts.",
-      techStack: ["Vue.js", "D3.js", "Python", "FastAPI"],
-      githubLink: "https://github.com/Jinish2170/DataViz-Dashboard",
-      category: "Web Development",
-      stars: 0,
-      forks: 0,
-      language: "Vue",
-      topics: ["data", "visualization", "dashboard"],
-      lastUpdated: "2024-06-25",
-      featured: false,
-      isPinned: false,
-      languageColor: "#4FC08D"
-    },
-    {
-      id: 'fallback-8',
-      title: "Blockchain Voting System",
-      description: "Decentralized voting platform using blockchain technology to ensure transparency and security.",
-      techStack: ["Solidity", "Web3.js", "React", "Ethereum"],
-      githubLink: "https://github.com/Jinish2170/Blockchain-Voting",
-      category: "Blockchain",
-      stars: 0,
-      forks: 0,
-      language: "Solidity",
-      topics: ["blockchain", "voting", "ethereum"],
-      lastUpdated: "2024-05-15",
-      featured: false,
-      isPinned: false,
-      languageColor: "#AA6746"
     }
   ]
 }
@@ -364,18 +278,11 @@ export async function getPinnedRepositories(): Promise<ProcessedProject[]> {
 export async function getAllRepositories(): Promise<ProcessedProject[]> {
   const cacheKey = 'all-repos'
   const cached = getFromCache<ProcessedProject[]>(cacheKey, REPO_CACHE_DURATION)
-  if (cached) {
-    console.log(`Returning ${cached.length} cached repositories`)
-    return cached
-  }
+  if (cached) return cached
 
   try {
-    console.log('Fetching all repositories from GitHub API...')
-    const repos = await fetchGitHub(`/users/${USERNAME}/repos?sort=updated&per_page=100`)
-    console.log(`Fetched ${repos.length} raw repositories from GitHub`)
-    
+    const repos = await fetchGitHub(`/users/${USERNAME}/repos?sort=updated&per_page=50`)
     const filteredRepos = repos.filter((repo: GitHubRepo) => !repo.fork && !repo.archived)
-    console.log(`Filtered to ${filteredRepos.length} repositories (excluding forks and archived)`)
     
     const processedProjects = await Promise.all(
       filteredRepos.map((repo: GitHubRepo) => processRepository(repo))
@@ -386,14 +293,11 @@ export async function getAllRepositories(): Promise<ProcessedProject[]> {
       new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
     )
     
-    console.log(`Successfully processed ${processedProjects.length} repositories`)
     setCache(cacheKey, processedProjects)
     return processedProjects
   } catch (error) {
-    console.error('Error fetching all repositories, using fallback:', error)
-    const fallbackProjects = getHardcodedFallbackProjects()
-    console.log(`Returning ${fallbackProjects.length} fallback projects`)
-    return fallbackProjects
+    console.error('Error fetching all repositories:', error)
+    return getHardcodedFallbackProjects()
   }
 }
 
