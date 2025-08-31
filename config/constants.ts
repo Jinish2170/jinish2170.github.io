@@ -47,8 +47,8 @@ export const HERO_CONFIG = {
 
 // Resume Configuration
 export const RESUME_CONFIG = {
-  fileName: 'JinishKathiriya_Resume.pdf',
-  filePath: '/resume/JinishKathiriya_fullstack.pdf'
+  fileName: 'Jinish_Kathiriya_Resume.pdf',
+  filePath: '/resume/jinish Kathiriya (F-FullStack).pdf'
 };
 
 // Animation Configuration
