@@ -62,15 +62,27 @@ async function fetchGitHub(endpoint: string): Promise<any> {
   }
 
   try {
+    const headers: Record<string, string> = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'Portfolio-Website'
+    }
+
+    // Add GitHub token if available
+    if (process.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`
+    }
+
     const response = await fetch(`${GITHUB_API_BASE}${endpoint}`, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'Portfolio-Website'
-      },
+      headers,
       next: { revalidate: 3600 } // Cache for 1 hour in Next.js
     })
 
     if (!response.ok) {
+      // Log rate limit info for debugging
+      const remaining = response.headers.get('x-ratelimit-remaining')
+      const resetTime = response.headers.get('x-ratelimit-reset')
+      console.warn(`GitHub API error: ${response.status}, Rate limit remaining: ${remaining}, Reset: ${resetTime}`)
+      
       throw new Error(`GitHub API error: ${response.status}`)
     }
 
@@ -127,9 +139,14 @@ export async function getPinnedRepositories(): Promise<ProcessedProject[]> {
     }
   }
 
-  // Fallback: use featured repositories from regular API
+// Fallback: use featured repositories from regular API
   console.log('Falling back to featured repositories')
-  return getFallbackFeaturedProjects()
+  try {
+    return await getFallbackFeaturedProjects()
+  } catch (error) {
+    console.error('All APIs failed, using hardcoded fallback projects:', error)
+    return getHardcodedFallbackProjects()
+  }
 }
 
 // Get all repositories for user
