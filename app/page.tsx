@@ -16,12 +16,6 @@ const ProfessionalSkills = dynamic(() => import("@/components/professional-skill
 const Projects = dynamic(() => import("@/components/projects"), { 
   loading: () => <div className="section-padding"><Skeleton className="h-96 w-full" /></div>
 })
-const Research = dynamic(() => import("@/components/research"), { 
-  loading: () => <div className="section-padding"><Skeleton className="h-80 w-full" /></div>
-})
-const Publications = dynamic(() => import("@/components/publications"), { 
-  loading: () => <div className="section-padding"><Skeleton className="h-80 w-full" /></div>
-})
 const Contact = dynamic(() => import("@/components/contact"), { 
   loading: () => <div className="section-padding"><Skeleton className="h-64 w-full" /></div>
 })
@@ -63,12 +57,6 @@ export default function Home() {
       </section>
       <section id="projects">
         <Projects />
-      </section>
-      <section id="research">
-        <Research />
-      </section>
-      <section id="publications">
-        <Publications />
       </section>
       <section id="contact">
         <Contact />

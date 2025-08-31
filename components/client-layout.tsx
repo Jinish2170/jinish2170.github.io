@@ -12,7 +12,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       disableTransitionOnChange={false}
       themes={['light', 'dark']}
     >
-      {children}
+      <div className="min-h-screen">
+        {children}
+      </div>
     </ThemeProvider>
   )
 }

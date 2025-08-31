@@ -16,12 +16,27 @@ export interface SocialLinks {
 export interface Project {
   id: string;
   title: string;
+  name: string;
   description: string;
+  longDescription?: string;
   technologies: string[];
   imageUrl?: string;
+  image?: string;
   projectUrl?: string;
   githubUrl?: string;
+  demoUrl?: string;
   featured?: boolean;
+  startDate?: string;
+  endDate?: string;
+  duration?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  language?: string;
+  license?: string;
+  overview?: string;
+  challenges?: string[];
+  solutions?: string[];
+  outcomes?: string[];
 }
 
 export interface Skill {

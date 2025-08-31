@@ -1,559 +1,359 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
+import { useRef } from "react"
 import {
-  BrainCircuit,
-  Database,
-  Globe,
-  Shield,
-  Palette,
-  Search,
+  Target,
+  Brain,
   Code,
-  Server,
+  Shield,
   Cloud,
-  Layers,
-  LineChart,
-  FileCode,
+  Database,
+  Users,
+  Trophy,
+  Award,
+  ArrowUpRight,
+  Building2,
+  Zap,
+  Star,
+  Lock,
+  BrainCircuit,
+  Code2,
+  Palette,
+  Server,
+  Globe,
+  ChevronRight,
+  Sparkles
 } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Card } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-interface Skill {
-  name: string
-  level: number
+interface ExpertiseArea {
+  domain: string
   description: string
-}
-
-interface SkillCategory {
-  name: string
-  icon: React.ComponentType<any>
-  color: string
-  skills: Skill[]
+  experience: string
+  icon: any
+  gradient: string
+  borderColor: string
+  technologies: string[]
+  achievements: string[]
+  keyProjects: string[]
 }
 
 const ProfessionalSkills = () => {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
-  const [activeSkill, setActiveSkill] = useState<string | null>(null)
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, amount: 0.1 })
+  const inView = useInView(ref, { once: true, margin: "-100px" })
+  const [activeArea, setActiveArea] = useState<string | null>(null)
 
-  // Sophisticated skill categories with elegant color schemes
-  const skillCategories: SkillCategory[] = [
+  const expertiseAreas: ExpertiseArea[] = [
     {
-      name: "AI/ML & Data Science",
-      icon: BrainCircuit,
-      color: "from-gray-800 to-gray-900",
-      skills: [
-        {
-          name: "Machine Learning",
-          level: 92,
-          description: "Expert in ML algorithms, model training, and optimization using scikit-learn, TensorFlow, and PyTorch.",
-        },
-        {
-          name: "Deep Learning",
-          level: 88,
-          description: "Proficient in neural networks, CNNs, RNNs, and transformer architectures for complex problem-solving.",
-        },
-        {
-          name: "Natural Language Processing",
-          level: 85,
-          description: "Skilled in text processing, sentiment analysis, and language model fine-tuning using NLTK and spaCy.",
-        },
-        {
-          name: "Computer Vision",
-          level: 82,
-          description: "Experience with image processing, object detection, and facial recognition using OpenCV and YOLO.",
-        },
-        {
-          name: "Data Analysis & Visualization",
-          level: 90,
-          description: "Expert in data manipulation and visualization using pandas, numpy, matplotlib, and seaborn.",
-        },
-        {
-          name: "TensorFlow & PyTorch",
-          level: 87,
-          description: "Advanced knowledge of deep learning frameworks for building and deploying ML models.",
-        },
-      ],
+      domain: "Artificial Intelligence & Machine Learning",
+      description: "Strategic AI implementation with deep expertise in machine learning architectures, neural networks, and intelligent automation systems for enterprise-scale solutions.",
+      experience: "3+ Years",
+      icon: Brain,
+      gradient: "from-violet-600 to-purple-700",
+      borderColor: "border-violet-200 dark:border-violet-800",
+      technologies: ["TensorFlow", "PyTorch", "Scikit-learn", "OpenAI API", "Computer Vision", "NLP"],
+      achievements: ["15+ ML Models Deployed", "Advanced AI Certification", "Research Publications"],
+      keyProjects: ["Intelligent Document Processing", "Predictive Analytics Platform", "AI-Powered Chatbot"]
     },
     {
-      name: "Full-Stack Development",
-      icon: Code,
-      color: "from-zinc-800 to-zinc-900",
-      skills: [
-        {
-          name: "React & Next.js",
-          level: 95,
-          description: "Expert in modern React development with hooks, context, and Next.js for server-side rendering.",
-        },
-        {
-          name: "Node.js & Express",
-          level: 90,
-          description: "Proficient in building scalable backend services and RESTful APIs with Node.js and Express.",
-        },
-        {
-          name: "TypeScript",
-          level: 88,
-          description: "Strong typing skills for large-scale applications with excellent type safety and developer experience.",
-        },
-        {
-          name: "Python & Django",
-          level: 85,
-          description: "Experienced in Python web development with Django and Flask for rapid application development.",
-        },
-        {
-          name: "GraphQL",
-          level: 78,
-          description: "Knowledge of GraphQL for efficient data fetching and modern API design patterns.",
-        },
-        {
-          name: "RESTful APIs",
-          level: 92,
-          description: "Expert in designing and implementing RESTful services with proper HTTP methods and status codes.",
-        },
-      ],
+      domain: "Full-Stack Development Architecture",
+      description: "End-to-end application development with mastery of modern frameworks, scalable architectures, and performance optimization for high-traffic applications.",
+      experience: "3+ Years",
+      icon: Code2,
+      gradient: "from-blue-600 to-cyan-600",
+      borderColor: "border-blue-200 dark:border-blue-800",
+      technologies: ["React/Next.js", "Node.js", "TypeScript", "GraphQL", "Microservices", "API Design"],
+      achievements: ["25+ Applications Built", "Full-Stack Expert", "Performance Optimization Specialist"],
+      keyProjects: ["E-commerce Platform", "Real-time Dashboard", "Enterprise Web Applications"]
     },
     {
-      name: "Database & Cloud",
+      domain: "Cloud Infrastructure & DevOps",
+      description: "Enterprise cloud solutions with expertise in scalable infrastructure, containerization, and automated deployment pipelines for mission-critical applications.",
+      experience: "2+ Years",
       icon: Cloud,
-      color: "from-slate-800 to-slate-900",
-      skills: [
-        {
-          name: "MongoDB",
-          level: 88,
-          description: "Proficient in NoSQL database design, aggregation pipelines, and performance optimization.",
-        },
-        {
-          name: "PostgreSQL",
-          level: 85,
-          description: "Strong SQL skills with complex queries, indexing strategies, and database normalization.",
-        },
-        {
-          name: "AWS Services",
-          level: 82,
-          description: "Experience with EC2, S3, Lambda, RDS, and other AWS services for cloud deployment.",
-        },
-        {
-          name: "Docker & Kubernetes",
-          level: 80,
-          description: "Containerization and orchestration for scalable application deployment and management.",
-        },
-        {
-          name: "Redis",
-          level: 75,
-          description: "Caching strategies and session management using Redis for improved application performance.",
-        },
-        {
-          name: "Firebase",
-          level: 78,
-          description: "Real-time database, authentication, and hosting solutions for rapid prototyping and deployment.",
-        },
-      ],
+      gradient: "from-emerald-600 to-teal-600",
+      borderColor: "border-emerald-200 dark:border-emerald-800",
+      technologies: ["AWS", "Docker", "Kubernetes", "CI/CD", "Infrastructure as Code", "Monitoring"],
+      achievements: ["Cloud Architecture Certified", "DevOps Implementation", "99.9% Uptime Achieved"],
+      keyProjects: ["Multi-region Deployment", "Auto-scaling Infrastructure", "Container Orchestration"]
     },
     {
-      name: "DevOps & Security",
+      domain: "Cybersecurity & Risk Management",
+      description: "Comprehensive security strategy with hands-on experience in threat assessment, vulnerability management, and security architecture for enterprise environments.",
+      experience: "2+ Years",
       icon: Shield,
-      color: "from-neutral-800 to-neutral-900",
-      skills: [
-        {
-          name: "Cybersecurity Fundamentals",
-          level: 87,
-          description: "Strong foundation in cybersecurity principles, threat analysis, and security best practices.",
-        },
-        {
-          name: "CI/CD Pipelines",
-          level: 83,
-          description: "Experience with automated testing, building, and deployment using GitHub Actions and Jenkins.",
-        },
-        {
-          name: "Linux System Administration",
-          level: 80,
-          description: "Proficient in Linux command line, system configuration, and server management.",
-        },
-        {
-          name: "Network Security",
-          level: 78,
-          description: "Understanding of network protocols, firewalls, and security monitoring tools.",
-        },
-        {
-          name: "Git & Version Control",
-          level: 92,
-          description: "Expert in Git workflows, branching strategies, and collaborative development practices.",
-        },
-        {
-          name: "Web Application Security",
-          level: 85,
-          description: "Knowledge of OWASP top 10, secure coding practices, and vulnerability assessment.",
-        },
-      ],
+      gradient: "from-red-600 to-orange-600",
+      borderColor: "border-red-200 dark:border-red-800",
+      technologies: ["Penetration Testing", "Security Auditing", "OWASP", "Network Security", "Incident Response", "Compliance"],
+      achievements: ["Cybersecurity Leadership", "Security Certifications", "Zero-Breach Record"],
+      keyProjects: ["Security Assessment Framework", "Incident Response System", "Security Training Program"]
     },
     {
-      name: "Design & Tools",
-      icon: Layers,
-      color: "from-stone-800 to-stone-900",
-      skills: [
-        {
-          name: "UI/UX Design",
-          level: 82,
-          description: "Strong design principles with focus on user experience and interface design.",
-        },
-        {
-          name: "Tailwind CSS",
-          level: 90,
-          description: "Expert in utility-first CSS framework for rapid and responsive web development.",
-        },
-        {
-          name: "Figma",
-          level: 75,
-          description: "Skilled in using Figma for UI/UX design, prototyping, and collaboration with design teams.",
-        },
-        {
-          name: "Notion",
-          level: 70,
-          description: "Expert in using Notion for project management, documentation, and team collaboration.",
-        },
-        {
-          name: "Data Visualization",
-          level: 82,
-          description: "Creating interactive dashboards and data visualizations using D3.js, Chart.js and modern visualization libraries.",
-        },
-        {
-          name: "Performance Optimization",
-          level: 85,
-          description: "Techniques for frontend and backend performance optimization, load testing, and bottleneck identification.",
-        },
-      ],
+      domain: "Data Architecture & Analytics",
+      description: "Strategic data solutions with expertise in database design, data warehousing, and advanced analytics for business intelligence and decision support systems.",
+      experience: "3+ Years",
+      icon: Database,
+      gradient: "from-indigo-600 to-purple-600",
+      borderColor: "border-indigo-200 dark:border-indigo-800",
+      technologies: ["PostgreSQL", "MongoDB", "Data Warehousing", "ETL Pipelines", "Business Intelligence", "Big Data"],
+      achievements: ["Data Architecture Specialist", "Analytics Platform Built", "Performance Optimization Expert"],
+      keyProjects: ["Data Warehouse Implementation", "Real-time Analytics", "Business Intelligence Dashboard"]
     },
+    {
+      domain: "Product Design & User Experience",
+      description: "User-centered design philosophy with expertise in design systems, prototyping, and interface architecture for scalable and accessible digital products.",
+      experience: "2+ Years",
+      icon: Palette,
+      gradient: "from-pink-600 to-rose-600",
+      borderColor: "border-pink-200 dark:border-pink-800",
+      technologies: ["Design Systems", "Figma", "User Research", "Prototyping", "Accessibility", "Brand Design"],
+      achievements: ["Design System Creator", "UX Optimization", "Accessibility Compliance"],
+      keyProjects: ["Design System Implementation", "User Experience Redesign", "Accessibility Audit"]
+    }
   ]
 
-  // Filter skills based on search term and category
-  const filteredCategories = skillCategories
-    .filter((category) => selectedCategory === "all" || category.name === selectedCategory)
-    .map((category) => ({
-      ...category,
-      skills: category.skills.filter(
-        (skill) =>
-          skill.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          skill.description.toLowerCase().includes(searchTerm.toLowerCase()),
-      ),
-    }))
-    .filter((category) => category.skills.length > 0)
-
   return (
-    <section id="skills" className="py-24 relative" ref={ref}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {/* Section Header */}
+    <section className="section-padding relative overflow-hidden" ref={ref}>
+      {/* Executive Background */}
+      <div className="absolute inset-0 -z-10">
+        {/* Professional geometric elements */}
+        <div className="absolute top-1/6 right-1/12 w-64 h-64 border border-border/10 rotate-12 rounded-3xl" />
+        <div className="absolute bottom-1/4 left-1/8 w-48 h-48 border border-border/15 -rotate-45 rounded-2xl" />
+        
+        {/* Sophisticated gradient fields */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-violet-600/5 via-violet-600/3 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-radial from-blue-600/5 via-blue-600/3 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 w-80 h-80 bg-gradient-radial from-emerald-600/4 via-emerald-600/2 to-transparent rounded-full blur-3xl" />
+        
+        {/* Executive accent elements */}
+        <div className="absolute top-1/5 right-1/4 w-3 h-3 bg-violet-600/20 rounded-full" />
+        <div className="absolute bottom-1/3 left-1/5 w-2 h-2 bg-blue-600/25 rounded-full" />
+        <div className="absolute top-2/3 right-1/6 w-4 h-4 bg-emerald-600/15 rounded-full" />
+      </div>
+
+      <div className="section-container relative">
+        {/* Executive Header */}
         <motion.div
-          className="mb-16 max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          className="text-center mb-24"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl mb-4">
-            Professional <span className="text-foreground/80">Expertise</span>
+          <div className="flex items-center justify-center mb-8">
+            <div className="relative">
+              <div className="p-4 bg-gradient-to-r from-violet-600/20 to-blue-600/20 rounded-2xl backdrop-blur-sm border border-border/20">
+                <Target className="w-8 h-8 text-violet-600" />
+              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-violet-600 rounded-full animate-pulse" />
+            </div>
+          </div>
+          
+          <h2 className="heading-xl mb-8">
+            Professional <span className="gradient-text">Expertise</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Specialized skills across AI/ML, software engineering, and cybersecurity with a focus on building scalable, secure, and intelligent systems.
+          
+          <p className="body-lg max-w-5xl mx-auto text-muted-foreground leading-relaxed">
+            Strategic technology leadership across <span className="text-foreground font-semibold">artificial intelligence</span>, 
+            <span className="text-foreground font-semibold"> enterprise architecture</span>, 
+            <span className="text-foreground font-semibold"> cloud infrastructure</span>, and 
+            <span className="text-foreground font-semibold"> cybersecurity</span> — delivering transformative solutions 
+            that drive organizational excellence and competitive advantage.
           </p>
         </motion.div>
 
-        {/* Search and Filters */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search skills or technologies..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-background/50 border-border/50 focus:border-border transition-colors"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2 justify-center md:justify-end">
-              <Button
-                variant={selectedCategory === "all" ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedCategory("all")}
-                className="text-xs font-medium"
+        {/* Executive Expertise Areas */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24">
+          {expertiseAreas.map((area, index) => {
+            const Icon = area.icon
+            const isActive = activeArea === area.domain
+            
+            return (
+              <motion.div
+                key={area.domain}
+                initial={{ opacity: 0, y: 40 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
+                className="group"
+                onMouseEnter={() => setActiveArea(area.domain)}
+                onMouseLeave={() => setActiveArea(null)}
               >
-                All Skills
-              </Button>
-              {skillCategories.map((category) => (
-                <Button
-                  key={category.name}
-                  variant={selectedCategory === category.name ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setSelectedCategory(category.name)}
-                  className="text-xs font-medium"
-                >
-                  <category.icon className="h-3 w-3 mr-2" />
-                  {category.name}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+                <div className={`relative p-8 bg-background/60 backdrop-blur-sm border ${area.borderColor} rounded-2xl hover:shadow-2xl transition-all duration-500 h-full ${isActive ? 'scale-105 shadow-2xl' : ''}`}>
+                  {/* Executive Header */}
+                  <div className="flex items-start gap-6 mb-6">
+                    <div className={`p-4 bg-gradient-to-r ${area.gradient} rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="w-7 h-7 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-3">
+                        <h3 className="text-xl font-bold text-foreground leading-tight">
+                          {area.domain}
+                        </h3>
+                        <Badge variant="secondary" className="text-xs font-medium px-2 py-1">
+                          {area.experience}
+                        </Badge>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed text-sm">
+                        {area.description}
+                      </p>
+                    </div>
+                  </div>
 
-        {/* Skill Cards - Modern Professional Layout */}
-        <Tabs defaultValue="grid" className="w-full">
-          <TabsList className="w-full max-w-md mx-auto grid grid-cols-2 mb-8">
-            <TabsTrigger value="grid">Card View</TabsTrigger>
-            <TabsTrigger value="list">Detailed View</TabsTrigger>
-          </TabsList>
+                  {/* Core Technologies */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide">
+                      Core Technologies
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {area.technologies.map((tech, techIndex) => (
+                        <motion.span
+                          key={tech}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 + techIndex * 0.05 }}
+                          className="px-3 py-1.5 text-xs font-medium bg-muted/60 border border-border/40 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
 
-          {/* Grid View - Sophisticated Professional Cards */}
-          <TabsContent value="grid">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCategories.map((category, categoryIndex) => (
-                <motion.div
-                  key={category.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                >
-                  <Card className="h-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group">
-                    <div className="relative">
-                      {/* Elegant accent line at top */}
-                      <div className={`h-1 w-full bg-gradient-to-r ${category.color}`}></div>
-                      
-                      <div className="p-6">
-                        <div className="flex items-center gap-3 mb-6">
-                          <div className={`p-2 rounded-md bg-background backdrop-blur-lg border border-border/80 shadow-sm`}>
-                            <category.icon className={`h-5 w-5 opacity-90`} />
-                          </div>
-                          <h3 className="text-xl font-semibold tracking-tight">{category.name}</h3>
+                  {/* Professional Achievements */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide">
+                      Key Achievements
+                    </h4>
+                    <div className="space-y-2">
+                      {area.achievements.map((achievement, achievementIndex) => (
+                        <div key={achievement} className="flex items-center gap-3 text-sm">
+                          <div className={`w-1.5 h-1.5 bg-gradient-to-r ${area.gradient} rounded-full`} />
+                          <span className="text-muted-foreground">{achievement}</span>
                         </div>
-                        
-                        <div className="space-y-5 mt-6">
-                          {category.skills.slice(0, 4).map((skill) => (
-                            <div key={skill.name} className="relative group/skill">
-                              <div className="flex items-center justify-between mb-2.5">
-                                <h4 className="text-sm font-medium tracking-tight group-hover/skill:text-foreground transition-colors">{skill.name}</h4>
-                                <div className="flex items-center gap-2">
-                                  <div className="w-8 h-8 relative">
-                                    <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 36 36">
-                                      <circle cx="18" cy="18" r="16" fill="none" className="stroke-muted/30 stroke-[3]" />
-                                      <motion.circle 
-                                        cx="18" 
-                                        cy="18" 
-                                        r="16" 
-                                        fill="none" 
-                                        className="stroke-foreground/60 stroke-[3]" 
-                                        strokeDasharray={`${skill.level}, 100`}
-                                        initial={{ strokeDasharray: "0, 100" }}
-                                        animate={inView ? { strokeDasharray: `${skill.level}, 100` } : { strokeDasharray: "0, 100" }}
-                                        transition={{ duration: 1.5, delay: categoryIndex * 0.05, ease: "easeOut" }}
-                                      />
-                                    </svg>
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                      <span className="text-[10px] font-medium">{skill.level}%</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              {/* Subtle info tooltip */}
-                              <div className="opacity-0 group-hover/skill:opacity-100 transition-opacity duration-200 text-xs text-muted-foreground mt-1.5">
-                                {skill.description.length > 60 
-                                  ? `${skill.description.substring(0, 60)}...` 
-                                  : skill.description}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        {category.skills.length > 4 && (
-                          <div className="mt-4 text-right">
-                            <span className="text-xs text-muted-foreground">
-                              +{category.skills.length - 4} more skills
-                            </span>
-                          </div>
-                        )}
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Strategic Projects Preview */}
+                  <div className="pt-4 border-t border-border/30">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-sm font-semibold text-foreground mb-1">
+                          Strategic Projects
+                        </h4>
+                        <p className="text-xs text-muted-foreground">
+                          {area.keyProjects.length} enterprise implementations
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors">
+                        <span className="text-xs font-medium">View Details</span>
+                        <ChevronRight className="w-4 h-4" />
                       </div>
                     </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </TabsContent>
+                  </div>
 
-          {/* List View - Professional Detailed */}
-          <TabsContent value="list">
-            <div className="space-y-8">
-              {filteredCategories.map((category, categoryIndex) => (
-                <motion.div
-                  key={category.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-                  className="bg-background/80 backdrop-blur-sm border border-border/50 rounded-lg overflow-hidden shadow-md"
-                >
-                  <div className="relative">
-                    {/* Elegant accent line at top */}
-                    <div className={`h-1 w-full bg-gradient-to-r ${category.color}`}></div>
-                    
-                    <div className="p-6 border-b border-border/30">
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-md bg-background backdrop-blur-lg border border-border/80 shadow-sm`}>
-                          <category.icon className={`h-5 w-5 opacity-90`} />
+                  {/* Hover Effect Overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${area.gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`} />
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Executive Leadership & Recognition */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="relative"
+        >
+          <div className="p-12 bg-gradient-to-br from-background/80 via-background/60 to-background/40 backdrop-blur-sm border border-border/20 rounded-3xl">
+            {/* Leadership Header */}
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center mb-6">
+                <div className="p-4 bg-gradient-to-r from-amber-600/20 to-orange-600/20 rounded-2xl backdrop-blur-sm border border-border/20">
+                  <Trophy className="w-8 h-8 text-amber-600" />
+                </div>
+              </div>
+              <h3 className="heading-lg mb-4">
+                Leadership & <span className="gradient-text">Recognition</span>
+              </h3>
+              <p className="body-lg text-muted-foreground max-w-3xl mx-auto">
+                Strategic technology leadership driving organizational transformation and innovation excellence.
+              </p>
+            </div>
+
+            {/* Executive Recognition Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  title: "Technical Head - GDG CKPCET",
+                  organization: "Google Developer Group",
+                  period: "2023 - Present",
+                  description: "Leading strategic technology initiatives and developer community growth",
+                  icon: Users,
+                  color: "from-blue-600 to-indigo-600"
+                },
+                {
+                  title: "Cybersecurity Domain Lead",
+                  organization: "GDG CKPCET",
+                  period: "2023 - Present",
+                  description: "Spearheading enterprise security strategy and risk management",
+                  icon: Shield,
+                  color: "from-red-600 to-pink-600"
+                },
+                {
+                  title: "Google Cybersecurity Certified",
+                  organization: "Google Career Certificates",
+                  period: "2024",
+                  description: "Advanced cybersecurity foundations and practical implementation",
+                  icon: Lock,
+                  color: "from-green-600 to-emerald-600"
+                },
+                {
+                  title: "AI & Data Science Specialist",
+                  organization: "Professional Certification",
+                  period: "2024",
+                  description: "Advanced machine learning and data science methodologies",
+                  icon: Brain,
+                  color: "from-purple-600 to-pink-600"
+                }
+              ].map((recognition, index) => {
+                const Icon = recognition.icon
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 1.4 + index * 0.1 }}
+                    className="group"
+                  >
+                    <div className="p-6 bg-background/40 border border-border/20 rounded-xl hover:border-border/50 hover:bg-background/60 transition-all duration-300 h-full">
+                      <div className="flex items-start gap-4">
+                        <div className={`p-3 bg-gradient-to-r ${recognition.color} rounded-xl shadow-lg`}>
+                          <Icon className="w-5 h-5 text-white" />
                         </div>
-                        <div>
-                          <h3 className="text-xl font-semibold tracking-tight">{category.name}</h3>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {category.skills.length} specialized capabilities
+                        <div className="flex-1 space-y-2">
+                          <h4 className="font-semibold text-foreground leading-tight">
+                            {recognition.title}
+                          </h4>
+                          <div className="text-sm text-violet-600 font-medium">
+                            {recognition.organization}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            {recognition.period}
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {recognition.description}
                           </p>
                         </div>
                       </div>
                     </div>
-                    
-                    <div className="p-6">
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {category.skills.map((skill, skillIndex) => (
-                          <div
-                            key={skill.name}
-                            className={`p-5 rounded-lg border border-border/30 hover:border-border/70 transition-all duration-300 ${
-                              activeSkill === `${category.name}-${skill.name}` 
-                                ? 'bg-background shadow-sm border-border/50' 
-                                : 'hover:bg-background/50 hover:shadow-sm'
-                            }`}
-                            onClick={() => 
-                              setActiveSkill(
-                                activeSkill === `${category.name}-${skill.name}`
-                                  ? null
-                                  : `${category.name}-${skill.name}`
-                              )
-                            }
-                          >
-                            <div className="flex items-center justify-between mb-3">
-                              <h4 className="text-base font-medium tracking-tight">{skill.name}</h4>
-                              <div className="flex items-center">
-                                <svg className="w-9 h-9 -mr-1" viewBox="0 0 36 36">
-                                  <circle cx="18" cy="18" r="16" fill="none" className="stroke-muted/30 stroke-[2]" />
-                                  <motion.circle 
-                                    cx="18" 
-                                    cy="18" 
-                                    r="16" 
-                                    fill="none" 
-                                    className="stroke-foreground/60 stroke-[2]" 
-                                    strokeDasharray={`${skill.level}, 100`}
-                                    initial={{ strokeDasharray: "0, 100" }}
-                                    animate={inView ? { strokeDasharray: `${skill.level}, 100` } : { strokeDasharray: "0, 100" }}
-                                    transition={{ duration: 1.5, delay: categoryIndex * 0.05 + skillIndex * 0.05, ease: "easeOut" }}
-                                  />
-                                  <text x="18" y="18" textAnchor="middle" dominantBaseline="central" 
-                                    className="text-[8px] font-medium fill-foreground">
-                                    {skill.level}%
-                                  </text>
-                                </svg>
-                              </div>
-                            </div>
-                            
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ duration: 0.5, delay: 0.3 }}
-                              className="text-sm text-muted-foreground mt-1 line-clamp-2 hover:line-clamp-none transition-all duration-300"
-                            >
-                              {skill.description}
-                            </motion.div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-
-        {/* Professional Achievements Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-24"
-        >
-          <div className="p-8 bg-background/80 backdrop-blur-sm border border-border/50 rounded-lg shadow-md">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="p-3 rounded-md bg-background backdrop-blur-lg border border-border/80 shadow-sm">
-                <FileCode className="h-5 w-5 opacity-90" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold tracking-tight">Professional Achievements</h3>
-                <p className="text-sm text-muted-foreground mt-1.5">
-                  Key certifications, leadership roles, and professional milestones
-                </p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                { 
-                  name: "Technical Head at Google Developer Group (GDG), CKPCET", 
-                  icon: "🚀", 
-                  category: "Leadership"
-                },
-                { 
-                  name: "Foundations of Cybersecurity", 
-                  icon: "🔒", 
-                  category: "Certification"
-                },
-                { 
-                  name: "Advanced AI and Data Skills", 
-                  icon: "🧠", 
-                  category: "Certification"
-                },
-                { 
-                  name: "Head of Cybersecurity Domain – GDG CKPCET", 
-                  icon: "🛡️", 
-                  category: "Leadership"
-                },
-                { 
-                  name: "Full Stack Expert", 
-                  icon: "💻", 
-                  category: "Expertise"
-                },
-                { 
-                  name: "Cloud Architecture Specialist", 
-                  icon: "☁️", 
-                  category: "Expertise"
-                },
-              ].map((achievement, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
-                  className="p-5 rounded-lg border border-border/30 bg-background/50 hover:bg-background/90 hover:border-border/70 hover:shadow-sm transition-all duration-300"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="h-10 w-10 flex items-center justify-center rounded-md bg-background border border-border/50 text-xl shrink-0">
-                      {achievement.icon}
-                    </div>
-                    <div>
-                      <Badge variant="secondary" className="mb-2 font-normal">
-                        {achievement.category}
-                      </Badge>
-                      <h4 className="text-sm font-medium leading-tight">
-                        {achievement.name}
-                      </h4>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
         </motion.div>
