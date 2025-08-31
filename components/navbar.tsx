@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 // Constants and Utils
 import { NAV_LINKS } from "@/config/constants";
 import { useScrollDetection } from "@/hooks/useScrollDetection";
-import { handleNavigation } from "@/utils/navigation";
+import { handleNavigation, downloadFile } from "@/utils/navigation";
 import type { NavLink } from "@/types";
 
 /**
@@ -26,6 +26,10 @@ const Navbar: React.FC = () => {
   const onNavigation = (link: NavLink): void => {
     setIsOpen(false);
     handleNavigation(link.href, link.type);
+  };
+
+  const handleResumeDownload = (): void => {
+    downloadFile();
   };
 
   return (
@@ -84,8 +88,19 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Resume Download & Theme Toggle & Mobile Menu */}
+          <div className="flex items-center space-x-2">
+            {/* Resume Download Button - Desktop */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleResumeDownload}
+              className="hidden md:flex items-center gap-2 border-border/60 hover:border-blue-500 hover:text-blue-600 transition-all duration-300"
+            >
+              <Download className="h-4 w-4" />
+              <span className="font-medium">Resume</span>
+            </Button>
+            
             <ThemeToggle />
             
             {/* Mobile Menu Button */}
@@ -140,6 +155,21 @@ const Navbar: React.FC = () => {
                   </motion.div>
                 )
               ))}
+              
+              {/* Resume Download Button - Mobile */}
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: NAV_LINKS.length * 0.1 }}
+                onClick={() => {
+                  handleResumeDownload();
+                  setIsOpen(false);
+                }}
+                className="flex items-center gap-3 w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
+              >
+                <Download className="h-4 w-4" />
+                Download Resume
+              </motion.button>
             </div>
             </motion.div>
           )}

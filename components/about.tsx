@@ -5,12 +5,15 @@ import { useInView } from "react-intersection-observer"
 import { Button } from "@/components/ui/button"
 import { Download, ArrowRight, Code2, Shield, Brain, Users, Lightbulb, Target } from "lucide-react"
 import Link from "next/link"
+import { downloadFile } from "@/utils/navigation"
 
 const About = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
+
+  const handleResumeDownload = () => downloadFile();
 
   const stats = [
     { number: "50+", label: "Projects Completed", icon: Code2 },
@@ -219,7 +222,11 @@ const About = () => {
                 </Button>
               </Link>
               
-              <Button variant="outline" className="btn-secondary group flex-1">
+              <Button 
+                variant="outline" 
+                className="btn-secondary group flex-1"
+                onClick={handleResumeDownload}
+              >
                 <Download className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
                 Resume
               </Button>
