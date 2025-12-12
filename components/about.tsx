@@ -16,8 +16,8 @@ const About = () => {
   const handleResumeDownload = () => downloadFile();
 
   const stats = [
-    { number: "50+", label: "Projects Completed", icon: Code2 },
-    { number: "3+", label: "Years Experience", icon: Target },
+    { number: "35+", label: "Projects Completed", icon: Code2 },
+    { number: "1+", label: "Years Experience", icon: Target },
     { number: "15+", label: "Technologies", icon: Brain },
     { number: "100%", label: "Dedication", icon: Shield }
   ]
