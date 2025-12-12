@@ -32,7 +32,6 @@ import { Badge } from "@/components/ui/badge"
 interface ExpertiseArea {
   domain: string
   description: string
-  experience: string
   icon: any
   gradient: string
   borderColor: string
@@ -50,62 +49,36 @@ const ProfessionalSkills = () => {
     {
       domain: "Artificial Intelligence & Machine Learning",
       description: "Strategic AI implementation with deep expertise in machine learning architectures, neural networks, and intelligent automation systems for enterprise-scale solutions.",
-      experience: "3+ Years",
       icon: Brain,
       gradient: "from-violet-600 to-purple-700",
       borderColor: "border-violet-200 dark:border-violet-800",
-      technologies: ["TensorFlow", "PyTorch", "Scikit-learn", "OpenAI API", "Computer Vision", "NLP"],
-      achievements: ["15+ ML Models Deployed", "Advanced AI Certification", "Research Publications"],
-      keyProjects: ["Intelligent Document Processing", "Predictive Analytics Platform", "AI-Powered Chatbot"]
+      technologies: ["TensorFlow", "PyTorch", "Scikit-learn", "Gemini API", "Computer Vision", "NLP"],
+      achievements: ["Advanced AI Certification", "trained models for AI assistants"],
+      keyProjects: ["chatGpt like chat platform", "Predictive Analytics Platform", "AI-Powered Chatbot"]
     },
     {
       domain: "Full-Stack Development Architecture",
       description: "End-to-end application development with mastery of modern frameworks, scalable architectures, and performance optimization for high-traffic applications.",
-      experience: "3+ Years",
       icon: Code2,
       gradient: "from-blue-600 to-cyan-600",
       borderColor: "border-blue-200 dark:border-blue-800",
-      technologies: ["React/Next.js", "Node.js", "TypeScript", "GraphQL", "Microservices", "API Design"],
-      achievements: ["25+ Applications Built", "Full-Stack Expert", "Performance Optimization Specialist"],
+      technologies: ["React/Next.js", "Node.js", "TypeScript", "postgreSQL", "API Design"],
+      achievements: ["25+ Applications Built", "Full-Stack Expert", "Performance Optimization "],
       keyProjects: ["E-commerce Platform", "Real-time Dashboard", "Enterprise Web Applications"]
-    },
-    {
-      domain: "Cloud Infrastructure & DevOps",
-      description: "Enterprise cloud solutions with expertise in scalable infrastructure, containerization, and automated deployment pipelines for mission-critical applications.",
-      experience: "2+ Years",
-      icon: Cloud,
-      gradient: "from-emerald-600 to-teal-600",
-      borderColor: "border-emerald-200 dark:border-emerald-800",
-      technologies: ["AWS", "Docker", "Kubernetes", "CI/CD", "Infrastructure as Code", "Monitoring"],
-      achievements: ["Cloud Architecture Certified", "DevOps Implementation", "99.9% Uptime Achieved"],
-      keyProjects: ["Multi-region Deployment", "Auto-scaling Infrastructure", "Container Orchestration"]
     },
     {
       domain: "Cybersecurity & Risk Management",
       description: "Comprehensive security strategy with hands-on experience in threat assessment, vulnerability management, and security architecture for enterprise environments.",
-      experience: "2+ Years",
       icon: Shield,
       gradient: "from-red-600 to-orange-600",
       borderColor: "border-red-200 dark:border-red-800",
-      technologies: ["Penetration Testing", "Security Auditing", "OWASP", "Network Security", "Incident Response", "Compliance"],
-      achievements: ["Cybersecurity Leadership", "Security Certifications", "Zero-Breach Record"],
-      keyProjects: ["Security Assessment Framework", "Incident Response System", "Security Training Program"]
-    },
-    {
-      domain: "Data Architecture & Analytics",
-      description: "Strategic data solutions with expertise in database design, data warehousing, and advanced analytics for business intelligence and decision support systems.",
-      experience: "3+ Years",
-      icon: Database,
-      gradient: "from-indigo-600 to-purple-600",
-      borderColor: "border-indigo-200 dark:border-indigo-800",
-      technologies: ["PostgreSQL", "MongoDB", "Data Warehousing", "ETL Pipelines", "Business Intelligence", "Big Data"],
-      achievements: ["Data Architecture Specialist", "Analytics Platform Built", "Performance Optimization Expert"],
-      keyProjects: ["Data Warehouse Implementation", "Real-time Analytics", "Business Intelligence Dashboard"]
+      technologies: ["Penetration Testing", "Security Auditing", "Network Security", "Incident Response", "Compliance"],
+      achievements: ["Cybersecurity Leadership", "Security Certifications", "Risk Mitigation Strategies"],
+      keyProjects: ["Security scanner Framework", "Security Training Program", "Incident Response Plan"]
     },
     {
       domain: "Product Design & User Experience",
       description: "User-centered design philosophy with expertise in design systems, prototyping, and interface architecture for scalable and accessible digital products.",
-      experience: "2+ Years",
       icon: Palette,
       gradient: "from-pink-600 to-rose-600",
       borderColor: "border-pink-200 dark:border-pink-800",
@@ -187,14 +160,9 @@ const ProfessionalSkills = () => {
                       <Icon className="w-7 h-7 text-white" />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-3">
-                        <h3 className="text-xl font-bold text-foreground leading-tight">
-                          {area.domain}
-                        </h3>
-                        <Badge variant="secondary" className="text-xs font-medium px-2 py-1">
-                          {area.experience}
-                        </Badge>
-                      </div>
+                      <h3 className="text-xl font-bold text-foreground leading-tight mb-3">
+                        {area.domain}
+                      </h3>
                       <p className="text-muted-foreground leading-relaxed text-sm">
                         {area.description}
                       </p>
@@ -222,7 +190,7 @@ const ProfessionalSkills = () => {
                   </div>
 
                   {/* Professional Achievements */}
-                  <div className="mb-6">
+                  <div>
                     <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide">
                       Key Achievements
                     </h4>
@@ -233,24 +201,6 @@ const ProfessionalSkills = () => {
                           <span className="text-muted-foreground">{achievement}</span>
                         </div>
                       ))}
-                    </div>
-                  </div>
-
-                  {/* Strategic Projects Preview */}
-                  <div className="pt-4 border-t border-border/30">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-1">
-                          Strategic Projects
-                        </h4>
-                        <p className="text-xs text-muted-foreground">
-                          {area.keyProjects.length} enterprise implementations
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors">
-                        <span className="text-xs font-medium">View Details</span>
-                        <ChevronRight className="w-4 h-4" />
-                      </div>
                     </div>
                   </div>
 
