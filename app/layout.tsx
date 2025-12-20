@@ -32,8 +32,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Jinish Kathiriya",
-    "jobTitle": ["Aspiring Tech Founder", "Cybersecurity & AI Enthusiast", "Software Engineer in Making", "GTU CSE Student"],
-    "description": "Aspiring Tech Founder, Cybersecurity & AI Enthusiast, and Software Engineer in Making. Technical Head at Google Developer Group (GDG) CKPCET. Currently pursuing B.E. in Computer Engineering at CKPCET under GTU.",
+    "jobTitle": ["Full Stack Developer", "GenAI Developer", "Backend Systems Engineer", "AI & ML Engineer"],
+    "description": "Full Stack Developer specializing in GenAI and Backend Systems. Technical Head at Google Developer Group (GDG) CKPCET. Currently pursuing B.E. in Computer Engineering at CKPCET under GTU.",
     "url": "https://jinish2170.github.io",
     "image": "https://jinish2170.github.io/og-image.jpg",
     "address": {
@@ -58,16 +58,16 @@ export default function RootLayout({
       "description": "B.E. in Computer Engineering, Semester 6, under GTU"
     },
     "knowsAbout": [
-      "Cybersecurity",
+      "Generative AI",
+      "Backend Systems",
+      "Full Stack Development",
       "Artificial Intelligence",
-      "Software Engineering",
-      "Tech Entrepreneurship",
-      "Computer Engineering",
+      "Machine Learning",
+      "Node.js",
       "Python",
-      "JavaScript",
+      "TypeScript",
       "React",
-      "Next.js",
-      "Machine Learning"
+      "Next.js"
     ],
     "knowsLanguage": ["English", "Hindi", "Gujarati"],
     "contactPoint": {

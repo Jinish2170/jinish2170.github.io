@@ -3,7 +3,7 @@ import type { PersonalInfo, SocialLinks, NavLink } from '@/types';
 // Personal Information
 export const PERSONAL_INFO: PersonalInfo = {
   name: "Jinish Kathiriya",
-  title: "AI & ML Engineer | Cybersecurity Specialist", 
+  title: "Full Stack Developer | GenAI & Backend Systems", 
   email: "jinishkathiriya2170@gmail.com",
   location: "Surat, Gujarat, India",
   bio: "Aspiring Tech Founder, passionate about Cybersecurity & AI, and Software Engineer in Making. Currently pursuing Computer Engineering and serving as Technical Head at GDG CKPCET."
@@ -27,9 +27,10 @@ export const NAV_LINKS: NavLink[] = [
 
 // Hero Section Config
 export const HERO_TITLES = [
-  "AI & ML Engineer",
-  "Full-Stack Developer", 
-  "Cybersecurity Specialist"
+  "GenAI Developer",
+  "Backend Systems Engineer",
+  "Full-Stack Developer",
+  "AI & ML Engineer"
 ];
 
 export const HERO_CONFIG = {

@@ -157,7 +157,7 @@ const Hero: React.FC<HeroProps> = ({
             className="body-lg max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 text-center"
           >
             Passionate about building intelligent solutions that bridge technology and real-world impact. 
-            Specialized in AI/ML, cybersecurity, and full-stack development.
+            Specialized in GenAI, backend systems, and full-stack development.
           </motion.p>
 
           {/* Premium CTA Buttons */}

@@ -47,44 +47,44 @@ const ProfessionalSkills = () => {
 
   const expertiseAreas: ExpertiseArea[] = [
     {
-      domain: "Artificial Intelligence & Machine Learning",
-      description: "Strategic AI implementation with deep expertise in machine learning architectures, neural networks, and intelligent automation systems for enterprise-scale solutions.",
-      icon: Brain,
+      domain: "Generative AI Development",
+      description: "Building intelligent GenAI solutions with expertise in LLM integration, prompt engineering, and AI-powered applications that transform user experiences.",
+      icon: BrainCircuit,
       gradient: "from-violet-600 to-purple-700",
       borderColor: "border-violet-200 dark:border-violet-800",
-      technologies: ["TensorFlow", "PyTorch", "Scikit-learn", "Gemini API", "Computer Vision", "NLP"],
-      achievements: ["Advanced AI Certification", "trained models for AI assistants"],
-      keyProjects: ["chatGpt like chat platform", "Predictive Analytics Platform", "AI-Powered Chatbot"]
+      technologies: ["Gemini API", "OpenAI", "LangChain", "RAG", "Prompt Engineering", "NLP"],
+      achievements: ["GenAI Developer Intern", "API Response Time +20%", "Integrated Speech-to-Text"],
+      keyProjects: ["TalkNotes Voice App", "Personal AI Assistant (RAG)", "AI-Powered Chatbot"]
     },
     {
-      domain: "Full-Stack Development Architecture",
+      domain: "Backend Systems Engineering",
+      description: "Designing and building scalable backend architectures with expertise in API development, database optimization, and microservices for high-performance applications.",
+      icon: Server,
+      gradient: "from-emerald-600 to-teal-600",
+      borderColor: "border-emerald-200 dark:border-emerald-800",
+      technologies: ["Node.js", "Express", "PostgreSQL", "MongoDB", "Supabase", "RESTful APIs"],
+      achievements: ["Scalable Backend Systems", "Real-time Subscriptions", "JWT Authentication"],
+      keyProjects: ["TalkNotes Backend", "Secure Student Activity Portal", "Enterprise APIs"]
+    },
+    {
+      domain: "Full-Stack Development",
       description: "End-to-end application development with mastery of modern frameworks, scalable architectures, and performance optimization for high-traffic applications.",
       icon: Code2,
       gradient: "from-blue-600 to-cyan-600",
       borderColor: "border-blue-200 dark:border-blue-800",
-      technologies: ["React/Next.js", "Node.js", "TypeScript", "postgreSQL", "API Design"],
-      achievements: ["25+ Applications Built", "Full-Stack Expert", "Performance Optimization "],
+      technologies: ["React/Next.js", "Node.js", "TypeScript", "PostgreSQL", "API Design"],
+      achievements: ["25+ Applications Built", "Full-Stack Expert", "Performance Optimization"],
       keyProjects: ["E-commerce Platform", "Real-time Dashboard", "Enterprise Web Applications"]
     },
     {
-      domain: "Cybersecurity & Risk Management",
-      description: "Comprehensive security strategy with hands-on experience in threat assessment, vulnerability management, and security architecture for enterprise environments.",
-      icon: Shield,
-      gradient: "from-red-600 to-orange-600",
-      borderColor: "border-red-200 dark:border-red-800",
-      technologies: ["Penetration Testing", "Security Auditing", "Network Security", "Incident Response", "Compliance"],
-      achievements: ["Cybersecurity Leadership", "Security Certifications", "Risk Mitigation Strategies"],
-      keyProjects: ["Security scanner Framework", "Security Training Program", "Incident Response Plan"]
-    },
-    {
-      domain: "Product Design & User Experience",
-      description: "User-centered design philosophy with expertise in design systems, prototyping, and interface architecture for scalable and accessible digital products.",
-      icon: Palette,
-      gradient: "from-pink-600 to-rose-600",
-      borderColor: "border-pink-200 dark:border-pink-800",
-      technologies: ["Design Systems", "Figma", "User Research", "Prototyping", "Accessibility", "Brand Design"],
-      achievements: ["Design System Creator", "UX Optimization", "Accessibility Compliance"],
-      keyProjects: ["Design System Implementation", "User Experience Redesign", "Accessibility Audit"]
+      domain: "AI & Machine Learning",
+      description: "Strategic AI implementation with deep expertise in machine learning architectures, neural networks, and intelligent automation systems for enterprise-scale solutions.",
+      icon: Brain,
+      gradient: "from-orange-600 to-amber-600",
+      borderColor: "border-orange-200 dark:border-orange-800",
+      technologies: ["TensorFlow", "PyTorch", "Scikit-learn", "Computer Vision", "VectorDB", "Ollama"],
+      achievements: ["ML Specialization (Stanford)", "Trained AI Assistants", "Sub-second Retrieval"],
+      keyProjects: ["Local RAG Assistant", "Predictive Analytics", "AI-Powered Applications"]
     }
   ]
 
@@ -129,10 +129,10 @@ const ProfessionalSkills = () => {
           </h2>
           
           <p className="body-lg max-w-5xl mx-auto text-muted-foreground leading-relaxed">
-            Strategic technology leadership across <span className="text-foreground font-semibold">artificial intelligence</span>, 
-            <span className="text-foreground font-semibold"> enterprise architecture</span>, 
-            <span className="text-foreground font-semibold"> cloud infrastructure</span>, and 
-            <span className="text-foreground font-semibold"> cybersecurity</span> — delivering transformative solutions 
+            Strategic technology leadership across <span className="text-foreground font-semibold">generative AI</span>, 
+            <span className="text-foreground font-semibold"> backend systems</span>, 
+            <span className="text-foreground font-semibold"> full-stack development</span>, and 
+            <span className="text-foreground font-semibold"> AI/ML</span> — delivering transformative solutions 
             that drive organizational excellence and competitive advantage.
           </p>
         </motion.div>

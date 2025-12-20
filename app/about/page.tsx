@@ -223,7 +223,7 @@ const AboutPage = () => {
                       
                       <h2 className="heading-md mb-2">Jinish Kathiriya</h2>
                       <p className="text-muted-foreground font-semibold mb-2">Full-Stack Developer & Tech Leader</p>
-                      <p className="text-sm text-muted-foreground">AI/ML • Cybersecurity • Innovation</p>
+                      <p className="text-sm text-muted-foreground">GenAI • Backend Systems • AI/ML</p>
                     </div>
 
                     {/* Key Skills Preview */}
@@ -231,8 +231,20 @@ const AboutPage = () => {
                       <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Core Expertise</h3>
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
+                          <div className="p-2 bg-violet-600/20 rounded-lg">
+                            <Brain className="w-4 h-4 text-violet-600" />
+                          </div>
+                          <span className="text-sm">GenAI Development</span>
+                        </div>
+                        <div className="flex items-center gap-3">
                           <div className="p-2 bg-blue-600/20 rounded-lg">
                             <Code2 className="w-4 h-4 text-blue-600" />
+                          </div>
+                          <span className="text-sm">Backend Systems</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-cyan-600/20 rounded-lg">
+                            <Code2 className="w-4 h-4 text-cyan-600" />
                           </div>
                           <span className="text-sm">Full-Stack Development</span>
                         </div>
@@ -241,18 +253,6 @@ const AboutPage = () => {
                             <Brain className="w-4 h-4 text-purple-600" />
                           </div>
                           <span className="text-sm">AI/ML Implementation</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 bg-cyan-600/20 rounded-lg">
-                            <Shield className="w-4 h-4 text-cyan-600" />
-                          </div>
-                          <span className="text-sm">Cybersecurity Solutions</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <div className="p-2 bg-green-600/20 rounded-lg">
-                            <Users className="w-4 h-4 text-green-600" />
-                          </div>
-                          <span className="text-sm">Technical Leadership</span>
                         </div>
                       </div>
                     </div>

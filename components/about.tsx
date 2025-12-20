@@ -41,12 +41,12 @@ const About = () => {
   ]
 
   const expertise = [
+    "GenAI Development",
+    "Backend Systems",
     "Full-Stack Development",
     "AI/ML Implementation",
-    "Cybersecurity Solutions",
-    "Cloud Architecture",
     "API Development",
-    "System Security"
+    "Cloud Architecture"
   ]
 
   return (
@@ -78,7 +78,7 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="body-lg max-w-3xl mx-auto text-muted-foreground leading-relaxed">
-            Passionate developer with expertise in AI, cybersecurity, and full-stack development. 
+            Passionate developer with expertise in GenAI, backend systems, and full-stack development. 
             Creating innovative solutions that bridge technology and real-world impact.
           </p>
         </motion.div>
@@ -115,7 +115,7 @@ const About = () => {
                   
                   <h3 className="heading-md mb-2">Jinish Kathiriya</h3>
                   <p className="text-muted-foreground font-medium mb-2">Full-Stack Developer</p>
-                  <p className="text-sm text-muted-foreground mb-6">AI/ML • Cybersecurity • Innovation</p>
+                  <p className="text-sm text-muted-foreground mb-6">GenAI • Backend Systems • AI/ML</p>
                 </div>
 
                 {/* Expertise Tags */}
@@ -143,8 +143,8 @@ const About = () => {
                     <span>Technical Head at GDG CKPCET</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
-                    <Shield className="w-4 h-4 text-purple-600" />
-                    <span>Cybersecurity Domain Leader</span>
+                    <Brain className="w-4 h-4 text-purple-600" />
+                    <span>GenAI & Backend Developer</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <Code2 className="w-4 h-4 text-cyan-600" />
@@ -169,10 +169,10 @@ const About = () => {
               
               <div className="space-y-6 body-md leading-relaxed text-muted-foreground">
                 <p className="text-lg leading-relaxed">
-                  I'm a passionate developer specializing in <span className="text-foreground font-semibold">AI/ML</span>, 
-                  <span className="text-foreground font-semibold"> cybersecurity</span>, and 
+                  I'm a passionate developer specializing in <span className="text-foreground font-semibold">GenAI</span>, 
+                  <span className="text-foreground font-semibold"> backend systems</span>, and 
                   <span className="text-foreground font-semibold"> full-stack development</span>. 
-                  With a strong foundation in computer science and years of hands-on experience, I create 
+                  With a strong foundation in computer science and hands-on experience in AI/ML, I create 
                   innovative solutions that bridge technology and real-world impact.
                 </p>
                 
