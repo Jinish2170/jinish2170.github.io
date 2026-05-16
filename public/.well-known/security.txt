@@ -1,0 +1,7 @@
+# Security policy for jinish2170.github.io
+# https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:jinishkathiriya@gmail.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://jinish2170.github.io/.well-known/security.txt

@@ -16,8 +16,9 @@ const FooterPremium = () => {
       label: "Site",
       items: [
         { name: "Home", href: "/" },
-        { name: "About", href: "/#about" },
-        { name: "Work", href: "/#projects" },
+        { name: "About", href: "/about" },
+        { name: "Work", href: "/projects" },
+        { name: "Writing", href: "/blog" },
         { name: "Contact", href: "/#contact" },
       ],
     },

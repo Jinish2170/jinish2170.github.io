@@ -1,25 +1,31 @@
 {
-  "name": "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
+  "name": "Jinish Kathiriya — Backend Systems & GenAI Engineer",
   "short_name": "Jinish Kathiriya",
-  "description": "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
+  "description": "Backend systems and GenAI engineer. Technical Head at GDG CKPCET. Long-form writing on production AI, vector search, and applied ML.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4299E1",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "orientation": "portrait-primary",
   "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
-  "keywords": ["Jinish", "Jinish Kathiriya", "AI Engineer", "Machine Learning", "Cybersecurity Specialist", "Full-Stack Developer", "Portfolio"],
-  "categories": ["education", "productivity", "business"],
-  "lang": "en-US"
+  "keywords": [
+    "Jinish Kathiriya",
+    "Backend Engineer",
+    "GenAI Engineer",
+    "RAG",
+    "LLM",
+    "Vector Search",
+    "AI Security",
+    "Full-Stack Developer",
+    "GDG CKPCET",
+    "Surat India"
+  ],
+  "categories": ["education", "productivity", "business", "technology"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "/?source=pwa"
 }

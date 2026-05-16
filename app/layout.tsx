@@ -28,54 +28,141 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Strong root JSON-LD — one connected entity graph for Person, WebSite,
+  // and Organization. Using @id refs lets engines resolve relationships
+  // (author of articles, member of organization) without duplication.
+  // This is the most load-bearing piece of AEO/LLMO on the site.
+  const SITE_URL = "https://jinish2170.github.io"
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Jinish Kathiriya",
-    "jobTitle": ["Full Stack Developer", "GenAI Developer", "Backend Systems Engineer", "AI & ML Engineer"],
-    "description": "Full Stack Developer specializing in GenAI and Backend Systems. Technical Head at Google Developer Group (GDG) CKPCET. Currently pursuing B.E. in Computer Engineering at CKPCET under GTU.",
-    "url": "https://jinish2170.github.io",
-    "image": "https://jinish2170.github.io/og-image.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Surat",
-      "addressRegion": "Gujarat",
-      "addressCountry": "India"
-    },
-    "sameAs": [
-      "https://github.com/Jinish2170",
-      "https://linkedin.com/in/jinish-kathiriya",
-      "https://twitter.com/JinishKathiriya"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: "Jinish Kathiriya",
+        givenName: "Jinish",
+        familyName: "Kathiriya",
+        alternateName: ["Jinish Kathiriya", "Jinish2170"],
+        jobTitle: [
+          "Backend Systems Engineer",
+          "GenAI Developer",
+          "Full-Stack Developer",
+          "AI & ML Engineer",
+        ],
+        description:
+          "Backend systems and GenAI engineer. Technical Head at Google Developer Group (GDG) CKPCET. B.E. Computer Engineering, GTU.",
+        url: SITE_URL,
+        image: `${SITE_URL}/og-image.jpg`,
+        email: "jinishkathiriya@gmail.com",
+        telephone: "+91-90991-77304",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Surat",
+          addressRegion: "Gujarat",
+          postalCode: "395007",
+          addressCountry: "IN",
+        },
+        sameAs: [
+          "https://github.com/Jinish2170",
+          "https://linkedin.com/in/jinish-kathiriya",
+          "https://twitter.com/JinishKathiriya",
+        ],
+        worksFor: { "@id": `${SITE_URL}/#org-gdg-ckpcet` },
+        alumniOf: { "@id": `${SITE_URL}/#org-ckpcet` },
+        knowsAbout: [
+          "Generative AI",
+          "Retrieval Augmented Generation",
+          "RAG",
+          "Vector Search",
+          "Backend Systems",
+          "API Design",
+          "Authentication and Authorization",
+          "JWT",
+          "OAuth",
+          "PostgreSQL",
+          "pgvector",
+          "LLM Engineering",
+          "Prompt Engineering",
+          "Eval Harnesses",
+          "Machine Learning",
+          "Applied AI",
+          "AI Security",
+          "Prompt Injection Defense",
+          "Streaming APIs",
+          "Server-Sent Events",
+          "Observability",
+          "Cybersecurity",
+          "Full-Stack Development",
+          "Next.js",
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Python",
+        ],
+        knowsLanguage: ["English", "Hindi", "Gujarati"],
+        contactPoint: {
+          "@type": "ContactPoint",
+          email: "jinishkathiriya@gmail.com",
+          contactType: "professional",
+          availableLanguage: ["English", "Hindi", "Gujarati"],
+        },
+        nationality: { "@type": "Country", name: "India" },
+        gender: "male",
+      },
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#org-gdg-ckpcet`,
+        name: "Google Developer Group (GDG) CKPCET",
+        description:
+          "Student-led developer community chapter at CKPCET, affiliated with Google Developer Groups.",
+        member: { "@id": `${SITE_URL}/#person` },
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "@id": `${SITE_URL}/#org-ckpcet`,
+        name: "C. K. Pithawala College of Engineering and Technology",
+        alternateName: ["CKPCET"],
+        url: "https://ckpcet.ac.in",
+        parentOrganization: {
+          "@type": "EducationalOrganization",
+          name: "Gujarat Technological University",
+          alternateName: ["GTU"],
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Surat",
+          addressRegion: "Gujarat",
+          addressCountry: "IN",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
+        name: "Jinish Kathiriya",
+        description:
+          "Portfolio and writing of Jinish Kathiriya — backend systems and GenAI engineer.",
+        publisher: { "@id": `${SITE_URL}/#person` },
+        inLanguage: "en",
+        // Site-search action — opens a path to retrieval-engine integrations
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${SITE_URL}/#profilepage`,
+        url: SITE_URL,
+        mainEntity: { "@id": `${SITE_URL}/#person` },
+        dateModified: new Date().toISOString().slice(0, 10),
+      },
     ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Google Developer Group (GDG) CKPCET",
-      "description": "Technical Head"
-    },
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "CKPCET",
-      "description": "B.E. in Computer Engineering, Semester 6, under GTU"
-    },
-    "knowsAbout": [
-      "Generative AI",
-      "Backend Systems",
-      "Full Stack Development",
-      "Artificial Intelligence",
-      "Machine Learning",
-      "Node.js",
-      "Python",
-      "TypeScript",
-      "React",
-      "Next.js"
-    ],
-    "knowsLanguage": ["English", "Hindi", "Gujarati"],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "jinishkathiriya@gmail.com",
-      "contactType": "professional"
-    }
-  };
+  }
 
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
@@ -123,6 +210,38 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//linkedin.com" />
         <link rel="dns-prefetch" href="//twitter.com" />
+
+        {/* IndieWeb / rel=me — verifiable author identity across networks.
+            Search engines and AEO crawlers use these to reconcile that the
+            same person owns this site and the linked profiles. */}
+        <link rel="me" href="https://github.com/Jinish2170" />
+        <link rel="me" href="https://linkedin.com/in/jinish-kathiriya" />
+        <link rel="me" href="https://twitter.com/JinishKathiriya" />
+        <link rel="me" href="mailto:jinishkathiriya@gmail.com" />
+
+        {/* Author / human metadata — older but still respected by some crawlers */}
+        <link rel="author" href="/humans.txt" />
+
+        {/* Webmention / IndieAuth endpoints (placeholder — wire up later if desired) */}
+        {/* <link rel="webmention" href="https://webmention.io/jinish2170.github.io/webmention" /> */}
+
+        {/* Feed alternates — point AI agents and feed readers at structured content */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Jinish Kathiriya — Writing (RSS)"
+          href="/feed.xml"
+        />
+        <link
+          rel="alternate"
+          type="application/feed+json"
+          title="Jinish Kathiriya — Writing (JSON Feed)"
+          href="/feed.json"
+        />
+
+        {/* LLM-readable site index — emerging standard from llmstxt.org.
+            Tells AI crawlers where the canonical machine-readable content is. */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
         {/* Editorial backdrop — single fine grid + grain. No animation. */}
@@ -146,62 +265,71 @@ export default function RootLayout({
 
 export const metadata = {
   title: {
-    default: "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
-    template: "%s | Jinish Kathiriya"
+    default: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
+    template: "%s · Jinish Kathiriya",
   },
-  description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
+  description:
+    "Backend systems and GenAI engineer. Technical Head at GDG CKPCET. Long-form writing on production RAG, vector search, AI security, and applied ML — written for senior engineers.",
   keywords: [
-    "Jinish",
-    "Jinish Kathiriya", 
-    "AI Engineer",
-    "Machine Learning Engineer",
-    "Cybersecurity Specialist", 
+    "Jinish Kathiriya",
+    "Backend Engineer",
+    "GenAI Engineer",
+    "Production RAG",
+    "LLM Engineering",
+    "Vector Search",
+    "pgvector",
+    "AI Security",
+    "Prompt Injection Defense",
+    "Eval Harnesses",
     "Full-Stack Developer",
+    "Next.js Engineer",
     "Google Developer Group",
     "GDG CKPCET",
-    "Technical Head",
     "Computer Engineering",
     "CKPCET",
     "GTU",
-    "Surat Gujarat",
-    "Portfolio",
-    "Developer Portfolio"
+    "Surat India",
+    "AI Engineer India",
+    "RAG Engineer",
+    "Hire backend engineer",
   ],
-  authors: [{ name: "Jinish Kathiriya" }],
+  authors: [{ name: "Jinish Kathiriya", url: "https://jinish2170.github.io" }],
   creator: "Jinish Kathiriya",
   publisher: "Jinish Kathiriya",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  formatDetection: { email: false, address: false, telephone: false },
   metadataBase: new URL("https://jinish2170.github.io"),
   alternates: {
     canonical: "/",
+    types: {
+      "application/rss+xml": "/feed.xml",
+      "application/feed+json": "/feed.json",
+    },
   },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://jinish2170.github.io",
-    title: "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
-    description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
-    siteName: "Jinish Kathiriya Portfolio",
+    title: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
+    description:
+      "Backend systems and GenAI engineer. Writing on production RAG, vector search, AI security, applied ML.",
+    siteName: "Jinish Kathiriya",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Jinish Kathiriya - AI & ML Engineer Portfolio"
-      }
-    ]
+        alt: "Jinish Kathiriya — Backend & GenAI Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jinish Kathiriya | AI & ML Engineer | Cybersecurity Specialist",
-    description: "Portfolio of Jinish Kathiriya, AI & ML Engineer, Cybersecurity Specialist, and Full-Stack Developer",
+    title: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
+    description:
+      "Backend & GenAI engineer. Writing on production RAG, vector search, and AI security.",
     site: "@JinishKathiriya",
     creator: "@JinishKathiriya",
-    images: ["/og-image.jpg"]
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -209,23 +337,36 @@ export const metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
+  // Verification placeholders — replace with your real codes when you
+  // claim Google Search Console + Bing Webmaster Tools.
   verification: {
-    google: "your-google-verification-code", // Add your Google Search Console verification
+    google: "REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_CODE",
+    other: {
+      "msvalidate.01": "REPLACE_WITH_BING_VERIFICATION_CODE",
+    },
   },
-  generator: 'Next.js',
-  applicationName: 'Jinish Kathiriya Portfolio',
-  referrer: 'origin-when-cross-origin',
-};
+  generator: "Next.js",
+  applicationName: "Jinish Kathiriya",
+  referrer: "origin-when-cross-origin",
+  category: "technology",
+  other: {
+    // IndieAuth verification — rel=me on social profiles links back here
+    "fediverse:creator": "@JinishKathiriya@twitter.com",
+  },
+}
 
 export const viewport = {
-  colorScheme: 'dark light',
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  colorScheme: "dark light" as const,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' }
+    { media: "(prefers-color-scheme: light)", color: "#f7f5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
-};
+}

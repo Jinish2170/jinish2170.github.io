@@ -1,0 +1,50 @@
+
+> my-v0-project@0.1.0 build C:\files\coding dev era\port\jinish2170.github.io
+> next build
+
+   ▲ Next.js 15.2.4
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/30) ...
+   Generating static pages (7/30) 
+   Generating static pages (14/30) 
+   Generating static pages (22/30) 
+ ✓ Generating static pages (30/30)
+   Finalizing page optimization ...
+   Collecting build traces ...
+   Exporting (0/3) ...
+ ✓ Exporting (3/3)
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    14.8 kB         119 kB
+├ ○ /_not-found                            975 B         102 kB
+├ ○ /about                               3.19 kB         107 kB
+├ ƒ /api/github/pinned                     160 B         101 kB
+├ ƒ /api/github/projects                   160 B         101 kB
+├ ○ /blog                                  175 B         104 kB
+├ ● /blog/[slug]                           175 B         104 kB
+├   ├ /blog/production-rag-pipeline
+├   ├ /blog/streaming-llm-responses
+├   ├ /blog/vector-db-tradeoffs
+├   └ [+12 more paths]
+├ ○ /feed.json                             160 B         101 kB
+├ ○ /feed.xml                              160 B         101 kB
+├ ○ /llms-full.txt                         160 B         101 kB
+├ ○ /llms.txt                              160 B         101 kB
+├ ○ /projects                            5.69 kB         110 kB
+├ ○ /robots.txt                            160 B         101 kB
+└ ○ /sitemap.xml                           160 B         101 kB
++ First Load JS shared by all             101 kB
+  ├ chunks/11eacf67-ab874c04d4cac932.js  53.2 kB
+  ├ chunks/954-73a811e1a46d3a71.js         46 kB
+  └ other shared chunks (total)          1.99 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

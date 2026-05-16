@@ -6,59 +6,66 @@
 
 @layer base {
   :root {
-    /* Editorial mono — light */
-    --background: 0 0% 99%;
-    --foreground: 0 0% 7%;
+    /* Editorial mono — light (warm paper, denser hairlines) */
+    /* Subtle warm undertone — reads as paper, not sterile screen */
+    --background: 36 18% 97%;
+    --foreground: 30 10% 9%;
 
+    /* Cards/panels are pure white so they float above the paper bg */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
+    --card-foreground: 30 10% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
+    --popover-foreground: 30 10% 9%;
 
-    --primary: 0 0% 7%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 30 10% 9%;
+    --primary-foreground: 36 18% 98%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 7%;
+    --secondary: 36 12% 94%;
+    --secondary-foreground: 30 10% 9%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 38%;
+    --muted: 36 12% 94%;
+    --muted-foreground: 30 6% 36%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 0 0% 7%;
+    /* Deeper, richer amber — sweet-citrus is a v0 tell; this is closer to honey/burnt orange */
+    --accent: 28 88% 46%;
+    --accent-foreground: 36 18% 98%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 91%;
-    --input: 0 0% 91%;
-    --ring: 0 0% 7%;
+    --border: 30 12% 85%;
+    --input: 30 12% 85%;
+    --ring: 30 10% 9%;
     --radius: 0.375rem;
 
-    /* Editorial ink scale */
-    --hairline: 0 0% 88%;
-    --ink: 0 0% 7%;
-    --ink-2: 0 0% 23%;
-    --ink-3: 0 0% 45%;
-    --ink-4: 0 0% 64%;
+    /* Editorial ink scale — denser than naive inversion so it reads on paper */
+    --hairline: 30 10% 84%;
+    --ink: 30 10% 9%;
+    --ink-2: 30 7% 26%;
+    --ink-3: 30 5% 44%;
+    --ink-4: 30 6% 62%;
 
-    /* Legacy compat aliases — older components still reference these */
-    --surface: 0 0% 97%;
-    --surface-hover: 0 0% 95%;
-    --bg-primary: 0 0% 99%;
-    --bg-secondary: 0 0% 97%;
-    --bg-tertiary: 0 0% 95%;
+    /* Subtle depth — light themes need elevation cues that dark gets free */
+    --elev-1: 0 1px 2px rgba(20, 16, 12, 0.04);
+    --elev-2: 0 1px 3px rgba(20, 16, 12, 0.05), 0 2px 8px rgba(20, 16, 12, 0.04);
+
+    /* Legacy compat aliases */
+    --surface: 36 12% 95%;
+    --surface-hover: 36 12% 92%;
+    --bg-primary: 36 18% 97%;
+    --bg-secondary: 36 12% 95%;
+    --bg-tertiary: 36 12% 93%;
     --bg-card: 0 0% 100%;
     --bg-elevated: 0 0% 100%;
-    --text-primary: 0 0% 7%;
-    --text-secondary: 0 0% 23%;
-    --text-muted: 0 0% 45%;
-    --card-border: 0 0% 91%;
+    --text-primary: 30 10% 9%;
+    --text-secondary: 30 7% 26%;
+    --text-muted: 30 5% 44%;
+    --card-border: 30 12% 85%;
     --glass-bg: 0 0% 100%;
-    --glass-border: 0 0% 88%;
-    --glass-strong: 0 0% 95%;
-    --navbar-bg: 0 0% 99%;
+    --glass-border: 30 10% 84%;
+    --glass-strong: 36 12% 92%;
+    --navbar-bg: 36 18% 97%;
   }
 
   .dark {
@@ -96,6 +103,10 @@
     --ink-2: 0 0% 78%;
     --ink-3: 0 0% 55%;
     --ink-4: 0 0% 38%;
+
+    /* Dark gets its depth from emission — keep shadow tokens null-ish */
+    --elev-1: 0 0 0 transparent;
+    --elev-2: 0 0 0 transparent;
 
     --surface: 0 0% 7%;
     --surface-hover: 0 0% 10%;
@@ -414,10 +425,15 @@
     border: 1px solid hsl(var(--hairline));
     border-radius: var(--radius);
     padding: 2rem;
-    transition: border-color 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--elev-1);
+    transition: border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .premium-card:hover,
-  .next-card:hover { border-color: hsl(var(--ink-3)); }
+  .next-card:hover {
+    border-color: hsl(var(--ink-3));
+    box-shadow: var(--elev-2);
+  }
 
   .project-card {
     background: hsl(var(--card));
@@ -470,27 +486,33 @@
     animation: editorial-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  /* Fine grain layer — used once at page level */
+  /* Fine grain layer — light uses multiply (reads as paper texture);
+     dark uses overlay (reads as film grain). */
   .grain {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.04;
-    mix-blend-mode: overlay;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 
-  .dark .grain { opacity: 0.06; }
+  .dark .grain {
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+  }
 
-  /* Subtle 80px square grid — page background hairline */
+  /* Hairline grid — denser in light so it reads against bright paper */
   .grid-fine {
     background-image:
       linear-gradient(to right, hsl(var(--hairline)) 1px, transparent 1px),
       linear-gradient(to bottom, hsl(var(--hairline)) 1px, transparent 1px);
     background-size: 80px 80px;
     background-position: -1px -1px;
-    opacity: 0.5;
+    opacity: 0.7;
   }
+
+  .dark .grid-fine { opacity: 0.5; }
 }
 
 /* Legacy compat — used by a few older components */

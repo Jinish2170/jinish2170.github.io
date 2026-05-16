@@ -44,12 +44,24 @@ export default function DotMatrixCanvas({
     let height = 0
     let dpr = 1
     let inkColor = "rgba(255,255,255,1)"
+    // Alpha range adapts to theme — graphite on paper for light,
+    // bright signal on void for dark. Hard ink-blots on white look cheap.
+    let alphaMin = 0.08
+    let alphaMax = 0.8
 
-    const resolveInk = () => {
-      // Read ink color from CSS custom property so dark/light themes follow.
+    const resolveTheme = () => {
       const styles = getComputedStyle(document.documentElement)
       const ink = styles.getPropertyValue("--ink").trim()
       inkColor = ink ? `hsl(${ink})` : "rgba(255,255,255,1)"
+      const isDark = document.documentElement.classList.contains("dark")
+      if (isDark) {
+        alphaMin = 0.08
+        alphaMax = 0.8
+      } else {
+        // Lower ceiling = graphite, not ink-blot. Floor stays at "dust".
+        alphaMin = 0.05
+        alphaMax = 0.45
+      }
     }
 
     const setSize = () => {
@@ -100,7 +112,7 @@ export default function DotMatrixCanvas({
           // Ease-out cubic for nicer shape near the cursor.
           const eased = t * t * (3 - 2 * t)
           const r = baseRadius + (hoverRadius - baseRadius) * eased
-          const alpha = 0.08 + eased * 0.72
+          const alpha = alphaMin + eased * (alphaMax - alphaMin)
 
           ctx.globalAlpha = alpha
           ctx.beginPath()
@@ -122,7 +134,7 @@ export default function DotMatrixCanvas({
       const offsetY = (height - (rows - 1) * spacing) / 2
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-          ctx.globalAlpha = 0.18
+          ctx.globalAlpha = alphaMin + (alphaMax - alphaMin) * 0.25
           ctx.beginPath()
           ctx.arc(
             offsetX + i * spacing,
@@ -137,7 +149,7 @@ export default function DotMatrixCanvas({
       ctx.globalAlpha = 1
     }
 
-    resolveInk()
+    resolveTheme()
     setSize()
 
     const resizeObserver = new ResizeObserver(() => {
@@ -164,7 +176,7 @@ export default function DotMatrixCanvas({
     io.observe(canvas)
 
     // Re-read ink color if theme flips.
-    const themeObserver = new MutationObserver(resolveInk)
+    const themeObserver = new MutationObserver(resolveTheme)
     themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],

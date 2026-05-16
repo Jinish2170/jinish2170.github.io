@@ -32,9 +32,30 @@ export const metadata: Metadata = {
   },
 }
 
+const SITE_URL = "https://jinish2170.github.io"
+
+// Homepage-specific WebPage schema, anchored to the root Person + WebSite
+// graph defined in layout.tsx. AEO engines use this to resolve "the
+// homepage of the person who wrote these blog posts" cleanly.
+const homePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  about: { "@id": `${SITE_URL}/#person` },
+  primaryImageOfPage: { "@type": "ImageObject", url: `${SITE_URL}/og-image.jpg` },
+  inLanguage: "en",
+}
+
 export default function Home() {
   return (
     <main id="main-content" className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homePageJsonLd) }}
+      />
       <section id="home">
         <Hero />
       </section>
