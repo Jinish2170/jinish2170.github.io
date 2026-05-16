@@ -4,7 +4,7 @@ import type { PersonalInfo, SocialLinks, NavLink } from '@/types';
 export const PERSONAL_INFO: PersonalInfo = {
   name: "Jinish Kathiriya",
   title: "Full Stack Developer | GenAI & Backend Systems", 
-  email: "jinishkathiriya2170@gmail.com",
+  email: "jinishkathiriya@gmail.com",
   location: "Surat, Gujarat, India",
   bio: "Aspiring Tech Founder, passionate about Cybersecurity & AI, and Software Engineer in Making. Currently pursuing Computer Engineering and serving as Technical Head at GDG CKPCET."
 };
@@ -13,7 +13,7 @@ export const PERSONAL_INFO: PersonalInfo = {
 export const SOCIAL_LINKS: SocialLinks = {
   github: "https://github.com/Jinish2170",
   linkedin: "https://linkedin.com/in/jinish-kathiriya", 
-  email: "mailto:jinishkathiriya2170@gmail.com"
+  email: "mailto:jinishkathiriya@gmail.com"
 };
 
 // Navigation Links

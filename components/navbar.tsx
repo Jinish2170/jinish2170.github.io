@@ -1,181 +1,160 @@
 "use client"
 
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { motion, AnimatePresence } from "framer-motion";
-
-// Constants and Utils
-import { NAV_LINKS } from "@/config/constants";
-import { useScrollDetection } from "@/hooks/useScrollDetection";
-import { handleNavigation, downloadFile } from "@/utils/navigation";
-import type { NavLink } from "@/types";
+import React, { useState } from "react"
+import Link from "next/link"
+import { Menu, X, ArrowDown } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { NAV_LINKS } from "@/config/constants"
+import { useScrollDetection } from "@/hooks/useScrollDetection"
+import { handleNavigation, downloadFile } from "@/utils/navigation"
+import type { NavLink } from "@/types"
 
 /**
- * Navigation Component
- * Responsive navigation bar with scroll detection and mobile menu
+ * Editorial navbar — mono numbered links, hairline divider on scroll.
+ * No motion entrance, no shadow drop, no gradient logo. Just type.
  */
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const isScrolled = useScrollDetection(20);
-  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false)
+  const isScrolled = useScrollDetection(20)
 
-  const onNavigation = (link: NavLink): void => {
-    setIsOpen(false);
-    handleNavigation(link.href, link.type);
-  };
-
-  const handleResumeDownload = (): void => {
-    downloadFile();
-  };
+  const onNavigation = (link: NavLink) => {
+    setIsOpen(false)
+    handleNavigation(link.href, link.type)
+  }
 
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-lg shadow-foreground/5' 
-          : 'bg-transparent'
+    <nav
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
+        isScrolled
+          ? "bg-[hsl(var(--background))]/72 backdrop-blur-md border-b border-[hsl(var(--hairline))]"
+          : "bg-transparent"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="section-container">
+      <div className="editorial-container">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - Premium version */}
-          <Link href="/" className="relative group">
-            <div className="font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 
-                          bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
-              JK
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-cyan-500/20 
-                          rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+          {/* Mark */}
+          <Link
+            href="/"
+            className="text-[18px] font-medium tracking-[-0.03em] text-[hsl(var(--ink))]"
+          >
+            Jinish<span className="text-[hsl(var(--accent))]">.</span>
           </Link>
 
-          {/* Desktop Navigation - Enhanced */}
-          <div className="hidden md:flex items-center space-x-1">
-            {NAV_LINKS.map((link) => (
-              link.type === "scroll" ? (
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((link, i) => {
+              const idx = String(i + 1).padStart(2, "0")
+              const inner = (
+                <span className="flex items-baseline gap-2">
+                  <span className="label mono tnum opacity-60 group-hover:opacity-100 transition-opacity">
+                    {idx}
+                  </span>
+                  <span className="text-[14px] text-[hsl(var(--ink-2))] group-hover:text-[hsl(var(--ink))] transition-colors">
+                    {link.name}
+                  </span>
+                </span>
+              )
+
+              return link.type === "scroll" ? (
                 <button
                   key={link.name}
                   onClick={() => onNavigation(link)}
-                  className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-all duration-300 
-                           rounded-lg group overflow-hidden"
+                  className="group px-3 py-2"
                 >
-                  <span className="relative z-10 font-medium">{link.name}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 
-                                transition-all duration-300 group-hover:w-4/5 transform -translate-x-1/2" />
+                  {inner}
                 </button>
               ) : (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-all duration-300 
-                           rounded-lg group overflow-hidden"
+                  className="group px-3 py-2"
                 >
-                  <span className="relative z-10 font-medium">{link.name}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 
-                                opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 
-                                transition-all duration-300 group-hover:w-4/5 transform -translate-x-1/2" />
+                  {inner}
                 </Link>
               )
-            ))}
+            })}
           </div>
 
-          {/* Resume Download & Theme Toggle & Mobile Menu */}
-          <div className="flex items-center space-x-2">
-            {/* Resume Download Button - Desktop */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleResumeDownload}
-              className="hidden md:flex items-center gap-2 border-border/60 hover:border-blue-500 hover:text-blue-600 transition-all duration-300"
+          {/* Right cluster */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => downloadFile()}
+              className="hidden md:inline-flex items-center gap-2 px-3 py-2 label-strong hover:text-[hsl(var(--ink))] transition-colors"
             >
-              <Download className="h-4 w-4" />
-              <span className="font-medium">Resume</span>
-            </Button>
-            
+              <span>Résumé</span>
+              <ArrowDown className="w-3 h-3" />
+            </button>
+
+            <div className="hidden md:block w-px h-5 bg-[hsl(var(--hairline))] mx-1" />
+
             <ThemeToggle />
-            
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden focus-ring"
+
+            <button
+              className="md:hidden p-2 text-[hsl(var(--ink))]"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
+            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden"
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="md:hidden overflow-hidden border-t border-[hsl(var(--hairline))]"
             >
-              <div className="py-4 space-y-2 border-t border-border/50">
-              {NAV_LINKS.map((link, index) => (
-                link.type === "scroll" ? (
-                  <motion.button
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    onClick={() => onNavigation(link)}
-                    className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
-                  >
-                    {link.name}
-                  </motion.button>
-                ) : (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
+              <div className="py-6 space-y-1">
+                {NAV_LINKS.map((link, i) => {
+                  const idx = String(i + 1).padStart(2, "0")
+                  const cls =
+                    "w-full text-left flex items-baseline gap-3 py-3 px-1 text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))]"
+                  return link.type === "scroll" ? (
+                    <button
+                      key={link.name}
+                      onClick={() => onNavigation(link)}
+                      className={cls}
+                    >
+                      <span className="label mono tnum">{idx}</span>
+                      <span className="text-[15px]">{link.name}</span>
+                    </button>
+                  ) : (
                     <Link
+                      key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
+                      className={cls}
                     >
-                      {link.name}
+                      <span className="label mono tnum">{idx}</span>
+                      <span className="text-[15px]">{link.name}</span>
                     </Link>
-                  </motion.div>
-                )
-              ))}
-              
-              {/* Resume Download Button - Mobile */}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: NAV_LINKS.length * 0.1 }}
-                onClick={() => {
-                  handleResumeDownload();
-                  setIsOpen(false);
-                }}
-                className="flex items-center gap-3 w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200"
-              >
-                <Download className="h-4 w-4" />
-                Download Resume
-              </motion.button>
-            </div>
+                  )
+                })}
+
+                <div className="pt-3 mt-3 border-t border-[hsl(var(--hairline))]">
+                  <button
+                    onClick={() => {
+                      downloadFile()
+                      setIsOpen(false)
+                    }}
+                    className="w-full text-left flex items-center gap-3 py-3 px-1 text-[hsl(var(--ink))]"
+                  >
+                    <ArrowDown className="w-4 h-4" />
+                    <span className="text-[15px]">Download résumé</span>
+                  </button>
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   )
 }
 
