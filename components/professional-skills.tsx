@@ -1,20 +1,27 @@
 "use client"
 
 import { useInView } from "react-intersection-observer"
+import { CapabilityMark } from "@/components/effects/capability-mark"
+import { RegistrationMark } from "@/components/effects/registration-mark"
+import { SectionIndex } from "@/components/effects/section-index"
 
 /**
  * Capability matrix — editorial numbered list.
  *
  * Replaces the grid of gradient-icon cards with a clean editorial layout.
- * Each domain: index, heading, narrative, stack chips. No colored boxes,
- * no hover scale, no shimmer. Reads as a senior engineer's competency map.
+ * Each domain: index, heading, narrative, stack chips. Each row now has a
+ * bespoke dotted-diagram mark that animates only on row hover — small
+ * visual interest in what was previously dead negative space.
  */
+type MarkVariant = "genai" | "backend" | "fullstack" | "ml"
+
 interface Capability {
   n: string
   domain: string
   body: string
   stack: string[]
   signals: string[]
+  mark: MarkVariant
 }
 
 const capabilities: Capability[] = [
@@ -36,6 +43,7 @@ const capabilities: Capability[] = [
       "Speech-to-text + LLM pipeline",
       "API response time reduced 20%",
     ],
+    mark: "genai",
   },
   {
     n: "02",
@@ -55,6 +63,7 @@ const capabilities: Capability[] = [
       "Multi-tenant auth & RBAC",
       "Secure student-activity portal",
     ],
+    mark: "backend",
   },
   {
     n: "03",
@@ -73,6 +82,7 @@ const capabilities: Capability[] = [
       "Type-safe API contracts",
       "Perf budgets &lt; 100ms TTI",
     ],
+    mark: "fullstack",
   },
   {
     n: "04",
@@ -91,6 +101,7 @@ const capabilities: Capability[] = [
       "Local RAG assistant — sub-second retrieval",
       "Computer-vision side projects",
     ],
+    mark: "ml",
   },
 ]
 
@@ -108,14 +119,14 @@ const ProfessionalSkills = () => {
     >
       <div className="editorial-container">
         {/* === Section index === */}
-        <div className="section-index">
-          <span className="label mono">03 / Capabilities</span>
-          <span className="hairline-y flex-1 max-w-[80px]" />
-          <span className="label">What I do, in detail</span>
-        </div>
+        <SectionIndex
+          index="03"
+          title="Capabilities"
+          caption="What I do, in detail"
+        />
 
-        {/* === Lead === */}
-        <div className="grid lg:grid-cols-12 gap-8 mb-20 md:mb-28">
+        {/* === Lead — registration mark fills the right empty col === */}
+        <div className="grid lg:grid-cols-12 gap-8 mb-20 md:mb-28 items-start">
           <div className="lg:col-span-9">
             <p className="display-lg text-[hsl(var(--ink))] text-balance">
               Four domains I'm useful in —{" "}
@@ -125,6 +136,9 @@ const ProfessionalSkills = () => {
               </span>
             </p>
           </div>
+          <div className="lg:col-span-3 hidden lg:flex justify-end items-start pt-3 opacity-80">
+            <RegistrationMark variant="compass" size={28} />
+          </div>
         </div>
 
         {/* === Capability list === */}
@@ -132,15 +146,19 @@ const ProfessionalSkills = () => {
           {capabilities.map((c) => (
             <article
               key={c.n}
-              className="group grid lg:grid-cols-12 gap-6 lg:gap-12 py-12 md:py-16 border-b border-[hsl(var(--hairline))]"
+              className="group/cap grid lg:grid-cols-12 gap-6 lg:gap-12 py-12 md:py-16 border-b border-[hsl(var(--hairline))]"
             >
-              {/* Index */}
+              {/* Index + bespoke dotted diagram (animates only on row hover) */}
               <div className="lg:col-span-2">
-                <div className="flex lg:flex-col items-baseline lg:items-start gap-4">
+                <div className="flex lg:flex-col items-baseline lg:items-start gap-4 lg:gap-6">
                   <span className="label mono tnum text-[hsl(var(--ink-3))]">
                     {c.n}
                   </span>
                   <span className="label-strong lg:hidden">{c.domain}</span>
+                  <CapabilityMark
+                    variant={c.mark}
+                    className="hidden lg:block opacity-70 group-hover/cap:opacity-100 transition-opacity duration-300"
+                  />
                 </div>
               </div>
 

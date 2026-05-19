@@ -4,6 +4,8 @@ import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { downloadFile } from "@/utils/navigation"
+import { RegistrationMark } from "@/components/effects/registration-mark"
+import { SectionIndex } from "@/components/effects/section-index"
 
 /**
  * About — editorial long-form.
@@ -47,12 +49,12 @@ const About = () => {
       style={{ opacity: inView ? 1 : 0, transition: "opacity 800ms cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <div className="editorial-container">
-        {/* === Section index === */}
-        <div className="section-index">
-          <span className="label mono">02 / About</span>
-          <span className="hairline-y flex-1 max-w-[80px]" />
-          <span className="label">Background &amp; approach</span>
-        </div>
+        {/* === Section index — active state on scroll === */}
+        <SectionIndex
+          index="02"
+          title="About"
+          caption="Background & approach"
+        />
 
         {/* === Lead statement — oversized opening === */}
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 mb-24 md:mb-32">
@@ -154,6 +156,12 @@ const About = () => {
                     linkedin.com/in/jinish-kathiriya
                   </a>
                 </div>
+              </div>
+
+              {/* Bottom-right corner registration mark — fills empty
+                  sidebar space without competing with the content. */}
+              <div className="flex justify-end pt-4 opacity-70">
+                <RegistrationMark variant="dotgrid" size={32} />
               </div>
             </div>
           </aside>

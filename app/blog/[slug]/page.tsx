@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ArrowUpRight } from "lucide-react"
 import { Prose } from "@/components/blog/prose"
+import { ReadingProgress } from "@/components/effects/reading-progress"
+import { RegistrationMark } from "@/components/effects/registration-mark"
 import { getAllSlugs, getPostBySlug, getRelated } from "@/content/blog"
 
 const SITE_URL = "https://jinish2170.github.io"
@@ -127,6 +129,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <main className="pt-32 pb-24">
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}

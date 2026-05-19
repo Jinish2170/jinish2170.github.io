@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer"
 import { ArrowUpRight, Star, GitFork } from "lucide-react"
 import { getPinnedRepositories } from "@/lib/github-service"
 import { ProcessedProject } from "@/lib/github-types"
+import { SectionIndex } from "@/components/effects/section-index"
 
 /**
  * Selected Work — editorial showcase.

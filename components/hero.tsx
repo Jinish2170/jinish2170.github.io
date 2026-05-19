@@ -107,6 +107,21 @@ const Hero = () => {
               <div className="absolute top-4 left-4 label-strong">
                 ./signal.tsx
               </div>
+
+              {/* Live-status indicator — one slow-pulse accent dot. Single
+                  intentional infinite animation on the page, serving as
+                  the "instrument is on" signal for the canvas. */}
+              <div className="absolute top-4 right-4 flex items-center gap-2 label tnum">
+                <span
+                  aria-hidden
+                  className="relative inline-flex w-1.5 h-1.5"
+                >
+                  <span className="absolute inset-0 rounded-full bg-[hsl(var(--accent))] opacity-60 animate-ping" />
+                  <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-[hsl(var(--accent))]" />
+                </span>
+                <span>LIVE</span>
+              </div>
+
               <div className="absolute bottom-4 right-4 label tnum">
                 v0.4 — interactive
               </div>

@@ -174,10 +174,23 @@ export default function RootLayout({
         <meta name="bingbot" content="index, follow" />
         <meta name="google-site-verification" content="your-google-verification-code" />
         
-        {/* Critical inline CSS — bare minimum to avoid FOUC on first paint */}
+        {/* Critical inline CSS — theme-aware first paint.
+            Default to light (warm paper); switch to dark only when:
+              (a) <html> has class="dark" (set by next-themes inline script
+                  before paint, no FOUC), OR
+              (b) user has prefers-color-scheme: dark AND next-themes
+                  hasn't explicitly forced light.
+            Without this scoping, body bg was being forced dark even when
+            light mode was active, producing dark-on-dark unreadable text. */}
         <style dangerouslySetInnerHTML={{ __html: `
-          html { background-color: #0a0a0a; }
-          body { background-color: hsl(0 0% 4%); color: hsl(0 0% 96%); }
+          html { background-color: hsl(36 18% 97%); color-scheme: light; }
+          body { background-color: hsl(36 18% 97%); color: hsl(30 10% 9%); }
+          html.dark { background-color: hsl(0 0% 4%); color-scheme: dark; }
+          html.dark body { background-color: hsl(0 0% 4%); color: hsl(0 0% 96%); }
+          @media (prefers-color-scheme: dark) {
+            html:not(.light) { background-color: hsl(0 0% 4%); color-scheme: dark; }
+            html:not(.light) body { background-color: hsl(0 0% 4%); color: hsl(0 0% 96%); }
+          }
         `}} />
         
         {/* Structured Data */}

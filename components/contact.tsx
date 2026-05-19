@@ -4,6 +4,8 @@ import { useState, type FormEvent, type ChangeEvent } from "react"
 import { useInView } from "react-intersection-observer"
 import emailjs from "@emailjs/browser"
 import { ArrowUpRight } from "lucide-react"
+import { SectionIndex } from "@/components/effects/section-index"
+import { RegistrationMark } from "@/components/effects/registration-mark"
 
 emailjs.init({ publicKey: "O7WKNqFq1uxb5D1N0" })
 
@@ -94,12 +96,12 @@ const Contact = () => {
       }}
     >
       <div className="editorial-container">
-        {/* === Section index === */}
-        <div className="section-index">
-          <span className="label mono">05 / Contact</span>
-          <span className="hairline-y flex-1 max-w-[80px]" />
-          <span className="label">Let's talk</span>
-        </div>
+        {/* === Section index — active state on scroll === */}
+        <SectionIndex
+          index="05"
+          title="Contact"
+          caption="Let's talk"
+        />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
           {/* === Statement === */}
