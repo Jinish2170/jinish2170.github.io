@@ -24,7 +24,7 @@ export async function GET() {
   out.push(`Site: ${SITE_URL}`)
   out.push(`Author entity: ${SITE_URL}/#person`)
   out.push(`Author: Jinish Kathiriya`)
-  out.push(`Role: Backend Systems & GenAI Engineer`)
+  out.push(`Role: Forward Deployed Engineer — GenAI & Backend Systems`)
   out.push(`Affiliation: Technical Head, Google Developer Group (GDG) CKPCET`)
   out.push(`Location: Surat, Gujarat, India`)
   out.push(`Email: jinishkathiriya@gmail.com`)

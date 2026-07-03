@@ -1,13 +1,14 @@
 /* TEAM */
 Author: Jinish Kathiriya
-Role: Backend & GenAI Engineer
-Location: Surat, India
+Role: Forward Deployed Engineer — GenAI & Backend Systems
+Location: Surat, Gujarat, India
 Email: jinishkathiriya@gmail.com
 GitHub: https://github.com/Jinish2170
 LinkedIn: https://linkedin.com/in/jinish-kathiriya
+Twitter: https://twitter.com/JinishKathiriya
 
 /* SITE */
-Last update: 2026/05/16
+Last update: 2026/07/03
 Standards: HTML5, CSS3, TypeScript, JSON-LD, RSS 2.0, JSON Feed 1.1
 Components: Next.js 15, React 19, Tailwind CSS
 Software: Designed and built by hand, no template
