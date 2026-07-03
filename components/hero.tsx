@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight, ArrowDown } from "lucide-react"
-import DotMatrixCanvas from "@/components/dot-matrix-canvas"
+import SignalPanel from "@/components/effects/signal-panel"
 import { SOCIAL_LINKS } from "@/config/constants"
 import { downloadFile } from "@/utils/navigation"
 
@@ -40,7 +40,7 @@ const Hero = () => {
         <div className="flex items-start justify-between mb-12 md:mb-16">
           <div className="label flex items-center gap-3">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-[hsl(var(--accent))]" />
-            <span>Available for select work</span>
+            <span>Open to forward-deployed roles</span>
           </div>
           <div className="hidden md:flex items-center gap-6 label tnum">
             <span>Surat, IN</span>
@@ -59,22 +59,19 @@ const Hero = () => {
               <span>Jinish Kathiriya</span>
             </div>
 
-            <h1 className="display-xl text-[hsl(var(--ink))]">
-              Backend systems
+            <h1 className="display-xl text-[hsl(var(--ink))] text-balance">
+              Forward deployed for
               <br />
-              <span className="text-[hsl(var(--ink-3))]">&amp;</span> GenAI for the
-              <br />
-              next wave of
-              <br />
-              intelligent products
+              the messy last mile
               <span className="text-[hsl(var(--accent))]">.</span>
             </h1>
 
             <p className="lead max-w-xl text-pretty">
-              I build production-grade backends and ship GenAI features that
-              hold up under real traffic. Currently leading technical work at
-              <span className="text-[hsl(var(--ink))]"> GDG&nbsp;CKPCET</span>{" "}
-              and reading for B.E. Computer Engineering.
+              I embed with teams and ship GenAI and backend systems into
+              production — under real traffic, real constraints, and real
+              deadlines. I own the work from kickoff to the release that
+              survives its second user, currently leading technical delivery
+              at <span className="text-[hsl(var(--ink))]">GDG&nbsp;CKPCET</span>.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -86,51 +83,15 @@ const Hero = () => {
                 <ArrowDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-y-0.5" />
               </button>
               <Link href="#contact" className="cta-secondary group">
-                <span>Get in touch</span>
+                <span>Start a conversation</span>
                 <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </div>
 
-          {/* Right — bespoke interactive canvas */}
+          {/* Right — bespoke kinetic signal instrument */}
           <div className="hidden lg:flex flex-col self-stretch min-h-[420px]">
-            <div className="relative flex-1 border border-[hsl(var(--hairline))] overflow-hidden">
-              {/* Corner tick marks — editorial framing */}
-              <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[hsl(var(--ink))]" />
-              <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[hsl(var(--ink))]" />
-              <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[hsl(var(--ink))]" />
-              <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[hsl(var(--ink))]" />
-
-              <DotMatrixCanvas className="absolute inset-0 w-full h-full" />
-
-              {/* Overlay caption — anchors the visual */}
-              <div className="absolute top-4 left-4 label-strong">
-                ./signal.tsx
-              </div>
-
-              {/* Live-status indicator — one slow-pulse accent dot. Single
-                  intentional infinite animation on the page, serving as
-                  the "instrument is on" signal for the canvas. */}
-              <div className="absolute top-4 right-4 flex items-center gap-2 label tnum">
-                <span
-                  aria-hidden
-                  className="relative inline-flex w-1.5 h-1.5"
-                >
-                  <span className="absolute inset-0 rounded-full bg-[hsl(var(--accent))] opacity-60 animate-ping" />
-                  <span className="relative inline-flex w-1.5 h-1.5 rounded-full bg-[hsl(var(--accent))]" />
-                </span>
-                <span>LIVE</span>
-              </div>
-
-              <div className="absolute bottom-4 right-4 label tnum">
-                v0.4 — interactive
-              </div>
-            </div>
-
-            <div className="mt-4 flex items-center justify-between label">
-              <span>Hand-coded · raf · 60fps</span>
-              <span className="text-[hsl(var(--ink-4))]">Move cursor →</span>
-            </div>
+            <SignalPanel className="flex-1" />
           </div>
         </div>
 

@@ -1,7 +1,6 @@
 import type React from "react"
 import "./globals.css"
-import "./enhanced-styles.css"
-import { Inter, Poppins } from "next/font/google"
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import ClientLayout from "@/components/client-layout"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer-premium"
@@ -9,18 +8,24 @@ import ScrollToTop from "@/components/scroll-to-top"
 import KeyboardNavigation from "@/components/keyboard-navigation"
 import SkipToContent from "@/components/skip-to-content"
 
-// Load fonts properly with Next.js
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 })
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700", "800"],
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-poppins",
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
 })
 
 export default function RootLayout({
@@ -199,17 +204,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
-        {/* Preconnect and preload critical resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Preload critical fonts */}
-        <link 
-          rel="preload" 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-          as="style"
-        />
-        
         {/* Preload critical images */}
         <link rel="preload" as="image" href="/placeholder.jpg" />
         
@@ -256,7 +250,7 @@ export default function RootLayout({
             Tells AI crawlers where the canonical machine-readable content is. */}
         <link rel="alternate" type="text/plain" href="/llms.txt" />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}>
         {/* Editorial backdrop — single fine grid + grain. No animation. */}
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
           <div className="absolute inset-0 grid-fine" />

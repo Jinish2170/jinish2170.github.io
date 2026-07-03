@@ -13,7 +13,7 @@ import { SectionIndex } from "@/components/effects/section-index"
  * bespoke dotted-diagram mark that animates only on row hover — small
  * visual interest in what was previously dead negative space.
  */
-type MarkVariant = "genai" | "backend" | "fullstack" | "ml"
+type MarkVariant = "compass" | "target3" | "dotgrid" | "scatter"
 
 interface Capability {
   n: string
@@ -27,8 +27,8 @@ interface Capability {
 const capabilities: Capability[] = [
   {
     n: "01",
-    domain: "Generative AI",
-    body: "Building production GenAI features end-to-end — retrieval pipelines, prompt design, evaluation harnesses, streaming UX, and the cost/latency tradeoffs that keep them shippable.",
+    domain: "Generative AI delivery",
+    body: "Standing up production GenAI features inside a customer's stack — retrieval pipelines, prompt design, evaluation harnesses, streaming UX, and the cost/latency tradeoffs that keep them shippable past the demo.",
     stack: [
       "OpenAI",
       "Gemini",
@@ -41,14 +41,14 @@ const capabilities: Capability[] = [
     signals: [
       "GenAI intern · production API",
       "Speech-to-text + LLM pipeline",
-      "API response time reduced 20%",
+      "Local RAG assistant — sub-second retrieval",
     ],
-    mark: "genai",
+    mark: "compass",
   },
   {
     n: "02",
     domain: "Backend systems",
-    body: "Designing and shipping the unglamorous middle layer — REST/RPC contracts, auth, schema, queues, retries, observability. The work that decides whether a product survives its second user.",
+    body: "The unglamorous middle layer that decides whether a deployment survives — REST/RPC contracts, auth, schema, queues, retries, observability. The work I'd rather over-invest in than ship a demo that falls over on user two.",
     stack: [
       "Node.js",
       "Express",
@@ -60,15 +60,15 @@ const capabilities: Capability[] = [
     ],
     signals: [
       "Real-time subscription backends",
-      "Multi-tenant auth & RBAC",
+      "Multi-tenant auth &amp; RBAC",
       "Secure student-activity portal",
     ],
-    mark: "backend",
+    mark: "target3",
   },
   {
     n: "03",
     domain: "Full-stack delivery",
-    body: "End-to-end product work — React/Next.js front-ends sitting on top of typed APIs, optimized for performance, accessibility, and the boring details that compound over a release cycle.",
+    body: "End-to-end product work embedded with the team — typed React/Next.js front-ends on top of typed APIs, optimized for the boring details that compound across a release cycle and a handoff.",
     stack: [
       "Next.js",
       "React",
@@ -82,26 +82,46 @@ const capabilities: Capability[] = [
       "Type-safe API contracts",
       "Perf budgets &lt; 100ms TTI",
     ],
-    mark: "fullstack",
+    mark: "dotgrid",
   },
   {
     n: "04",
-    domain: "Applied AI & ML",
-    body: "Practical ML — vector retrieval, fine-tuning, local inference, classical models where deep learning is overkill. Bias toward what ships, not what wins benchmarks.",
+    domain: "Security as a constraint",
+    body: "Auth, secrets, and least-privilege treated as part of the design from day one — not bolted on before launch. Cybersecurity is how I reason about systems, which matters most when I'm deployed in someone else's environment.",
     stack: [
-      "PyTorch",
-      "TensorFlow",
-      "scikit-learn",
-      "Ollama",
-      "HuggingFace",
-      "Vector search",
+      "Threat modeling",
+      "OAuth 2.0",
+      "RBAC",
+      "Secrets mgmt",
+      "Prompt injection",
     ],
     signals: [
+      "Prompt-injection defenses shipped",
+      "Least-privilege by default",
       "Stanford ML specialization",
-      "Local RAG assistant — sub-second retrieval",
-      "Computer-vision side projects",
     ],
-    mark: "ml",
+    mark: "scatter",
+  },
+]
+
+const OUTCOMES = [
+  {
+    num: "3",
+    suffix: " wks",
+    label: "Kickoff → first prod ship",
+    sub: "Typical time to a customer-facing release on a new engagement.",
+  },
+  {
+    num: "−42",
+    suffix: "%",
+    label: "P99 latency, inference path",
+    sub: "On a request path a downstream dashboard depends on.",
+  },
+  {
+    num: "25",
+    suffix: "+",
+    label: "Production-grade builds",
+    sub: "Across GenAI, backend, and full-stack engagements.",
   },
 ]
 
@@ -139,6 +159,38 @@ const ProfessionalSkills = () => {
           <div className="lg:col-span-3 hidden lg:flex justify-end items-start pt-3 opacity-80">
             <RegistrationMark variant="compass" size={28} />
           </div>
+        </div>
+
+        {/* === Outcomes band — illustrative placeholders, clearly marked === */}
+        <div className="grid sm:grid-cols-3 border border-[hsl(var(--hairline))] border-b-0 bg-[hsl(var(--card))]">
+          {OUTCOMES.map((o, i) => (
+            <div
+              key={o.label}
+              className={`p-8 md:p-10 ${i ? "border-t sm:border-t-0 sm:border-l border-[hsl(var(--hairline))]" : ""}`}
+            >
+              <span
+                className="mono tnum block"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 500,
+                  fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                  color: "hsl(var(--ink))",
+                }}
+              >
+                {o.num}
+                {o.suffix}
+              </span>
+              <div className="label mt-3.5">{o.label}</div>
+              <div className="mt-2 text-[13px] leading-relaxed text-[hsl(var(--ink-3))]">
+                {o.sub}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mono text-[10.5px] text-[hsl(var(--ink-4))] px-3.5 py-2.5 border border-[hsl(var(--hairline))] border-t-0 mb-20">
+          Placeholder figures — swap in verified numbers before this goes live.
         </div>
 
         {/* === Capability list === */}
