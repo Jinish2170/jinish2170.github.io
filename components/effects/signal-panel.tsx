@@ -17,6 +17,7 @@ export default function SignalPanel({ className }: { className?: string }) {
     let w = 0
     let h = 0
     let tick = 0
+    let visible = true
 
     function isDark() {
       return document.documentElement.classList.contains("dark") ||
@@ -81,7 +82,7 @@ export default function SignalPanel({ className }: { className?: string }) {
     function draw() {
       tick++
       if (!w || !h) {
-        raf = requestAnimationFrame(draw)
+        if (visible && !prefersReduced) raf = requestAnimationFrame(draw)
         return
       }
       ctx!.clearRect(0, 0, w, h)
@@ -210,7 +211,7 @@ export default function SignalPanel({ className }: { className?: string }) {
         }
       }
 
-      if (!prefersReduced) raf = requestAnimationFrame(draw)
+      if (!prefersReduced && visible) raf = requestAnimationFrame(draw)
     }
 
     build()
@@ -222,10 +223,23 @@ export default function SignalPanel({ className }: { className?: string }) {
     const themeObs = new MutationObserver(() => {})
     themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-theme"] })
 
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        if (visible && !prefersReduced) {
+          cancelAnimationFrame(raf)
+          raf = requestAnimationFrame(draw)
+        }
+      },
+      { threshold: 0 },
+    )
+    io.observe(canvas)
+
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
       themeObs.disconnect()
+      io.disconnect()
     }
   }, [])
 

@@ -71,10 +71,8 @@ export default function ProjectsPage() {
         <div className="grid lg:grid-cols-12 gap-8 mb-16 md:mb-20">
           <div className="lg:col-span-9">
             <div className="label mono mb-4">All projects</div>
-            <h1 className="display-xl text-[hsl(var(--ink))]">
-              Everything,
-              <br />
-              not just the highlights
+            <h1 className="display-xl text-[hsl(var(--ink))] text-balance">
+              Everything, not just the highlights
               <span className="text-[hsl(var(--accent))]">.</span>
             </h1>
             <p className="lead mt-8 max-w-xl">

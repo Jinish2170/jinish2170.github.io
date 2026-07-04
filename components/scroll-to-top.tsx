@@ -1,56 +1,36 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect, useCallback } from "react"
 import { ArrowUp } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false)
 
-  // Show button when page is scrolled down
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 500) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
-    }
-
-    window.addEventListener("scroll", toggleVisibility)
-    return () => window.removeEventListener("scroll", toggleVisibility)
+  const toggleVisibility = useCallback(() => {
+    setIsVisible(window.scrollY > 500)
   }, [])
 
-  // Scroll to top smoothly
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility, { passive: true })
+    return () => window.removeEventListener("scroll", toggleVisibility)
+  }, [toggleVisibility])
+
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          className="fixed bottom-8 right-8 z-50"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Button
-            onClick={scrollToTop}
-            size="icon"
-            className="rounded-full bg-techBlue hover:bg-techBlue/90 shadow-lg shadow-techBlue/20"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp className="h-5 w-5" />
-          </Button>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <button
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+      className={`fixed bottom-8 right-8 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-[hsl(var(--ink))] shadow-sm transition-all duration-300 hover:border-[hsl(var(--ink-3))] hover:shadow-md ${
+        isVisible
+          ? "opacity-100 translate-y-0 pointer-events-auto"
+          : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <ArrowUp className="w-4 h-4" />
+    </button>
   )
 }
 

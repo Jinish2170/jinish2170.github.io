@@ -68,6 +68,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={link.name}
                   href={link.href}
+                  prefetch={false}
                   className="group px-3 py-2"
                 >
                   {inner}

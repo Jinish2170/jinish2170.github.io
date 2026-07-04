@@ -3,7 +3,7 @@ import "./globals.css"
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import ClientLayout from "@/components/client-layout"
 import Navbar from "@/components/navbar"
-import Footer from "@/components/footer-premium"
+import Footer from "@/components/footer"
 import ScrollToTop from "@/components/scroll-to-top"
 import KeyboardNavigation from "@/components/keyboard-navigation"
 import SkipToContent from "@/components/skip-to-content"
@@ -232,9 +232,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        
-        {/* Preload critical resources */}
-        <link rel="preload" as="image" href="/og-image.png" />
         
         {/* Favicon and app icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />

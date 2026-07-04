@@ -140,6 +140,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -166,24 +167,27 @@
     font-family: var(--font-display), sans-serif;
     font-weight: 500;
     letter-spacing: -0.045em;
-    line-height: 0.92;
-    font-size: clamp(3.5rem, 9vw, 8.5rem);
+    line-height: 0.95;
+    font-size: clamp(2.75rem, 9vw, 8.5rem);
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .display-lg {
     font-family: var(--font-display), sans-serif;
     font-weight: 500;
     letter-spacing: -0.035em;
-    line-height: 0.98;
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.02;
+    font-size: clamp(1.75rem, 6vw, 5rem);
+    overflow-wrap: break-word;
   }
 
   .display-md {
     font-family: var(--font-display), sans-serif;
     font-weight: 500;
     letter-spacing: -0.025em;
-    line-height: 1.05;
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    line-height: 1.1;
+    font-size: clamp(1.35rem, 3.5vw, 2.75rem);
   }
 
   .label {
@@ -223,7 +227,11 @@
     width: 100%;
     max-width: 1280px;
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 480px) {
+    .editorial-container { padding-inline: 1.5rem; }
   }
 
   @media (min-width: 768px) {
@@ -235,7 +243,7 @@
   }
 
   .section-frame {
-    padding-block: clamp(6rem, 14vh, 10rem);
+    padding-block: clamp(4rem, 14vh, 10rem);
     position: relative;
   }
 
@@ -255,10 +263,18 @@
   .section-index {
     display: flex;
     align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-    padding-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid hsl(var(--hairline));
+  }
+
+  @media (min-width: 768px) {
+    .section-index {
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+    }
   }
 
   /* ===================================================
@@ -482,6 +498,19 @@
 
   .editorial-rise {
     animation: editorial-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Content-visibility for below-fold sections — lets the browser
+     skip layout/paint for off-screen content until it scrolls near. */
+  .section-frame {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+
+  /* GPU-promote the fixed navbar backdrop for smooth scroll perf */
+  .nav-blur,
+  .nav-premium {
+    will-change: backdrop-filter;
   }
 
   /* Fine grain layer — light uses multiply (reads as paper texture);

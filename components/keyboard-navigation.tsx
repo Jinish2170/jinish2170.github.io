@@ -5,8 +5,7 @@ import { useEffect } from "react"
 const KeyboardNavigation = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Skip to main content with "s" key
-      if (e.key === "s" && e.altKey) {
+      if (e.altKey && e.key === "s") {
         e.preventDefault()
         const mainContent = document.getElementById("main-content")
         if (mainContent) {
@@ -15,15 +14,13 @@ const KeyboardNavigation = () => {
         }
       }
 
-      // Navigate to sections with number keys
       if (e.altKey && !isNaN(Number.parseInt(e.key))) {
         e.preventDefault()
         const sectionIndex = Number.parseInt(e.key)
-        const sections = ["home", "about", "skills", "projects", "research", "contact"]
+        const sections = ["home", "about", "engagements", "skills", "projects", "contact"]
 
         if (sectionIndex >= 1 && sectionIndex <= sections.length) {
-          const sectionId = sections[sectionIndex - 1]
-          const section = document.getElementById(sectionId)
+          const section = document.getElementById(sections[sectionIndex - 1])
           if (section) {
             section.scrollIntoView({ behavior: "smooth" })
           }

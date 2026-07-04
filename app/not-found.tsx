@@ -24,7 +24,7 @@ export default function NotFound() {
             Home
           </Link>
           <Link href="/blog" className="cta-secondary">
-            Writing
+            Field notes
           </Link>
           <Link href="/projects" className="cta-secondary">
             Projects

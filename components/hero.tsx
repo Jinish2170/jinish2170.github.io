@@ -50,19 +50,17 @@ const Hero = () => {
         </div>
 
         {/* ============= MAIN GRID ============= */}
-        <div className="grid lg:grid-cols-[1fr_360px] gap-12 lg:gap-20 items-end flex-1">
+        <div className="grid lg:grid-cols-[1fr_360px] gap-8 md:gap-12 lg:gap-20 items-end flex-1">
           {/* Left — typography */}
-          <div className="space-y-10 editorial-rise">
-            <div className="flex items-baseline gap-4 label">
+          <div className="space-y-6 md:space-y-10 editorial-rise">
+            <div className="flex items-baseline gap-4 label flex-wrap">
               <span className="mono">01 / Index</span>
-              <span className="hairline-y flex-1 max-w-[120px]" />
+              <span className="hairline-y flex-1 max-w-[120px] hidden sm:block" />
               <span>Jinish Kathiriya</span>
             </div>
 
-            <h1 className="display-xl text-[hsl(var(--ink))] text-balance">
-              Forward deployed for
-              <br />
-              the messy last mile
+            <h1 className="display-xl text-[hsl(var(--ink))]">
+              Forward deployed for the messy last mile
               <span className="text-[hsl(var(--accent))]">.</span>
             </h1>
 

@@ -107,9 +107,7 @@ const Contact = () => {
           {/* === Statement === */}
           <div className="lg:col-span-7 space-y-10">
             <h2 className="display-xl text-[hsl(var(--ink))] text-balance">
-              Have a deployment
-              <br />
-              worth doing
+              Have a deployment worth doing
               <span className="text-[hsl(var(--accent))]">?</span>
             </h2>
 
@@ -124,7 +122,7 @@ const Contact = () => {
                 href="mailto:jinishkathiriya@gmail.com"
                 className="group inline-flex items-center gap-3"
               >
-                <span className="display-md text-[hsl(var(--ink))] link-redraw">
+                <span className="text-[clamp(1rem,3vw,1.75rem)] font-medium tracking-[-0.02em] text-[hsl(var(--ink))] link-redraw" style={{ fontFamily: "var(--font-display)" }}>
                   jinishkathiriya@gmail.com
                 </span>
                 <ArrowUpRight className="w-6 h-6 text-[hsl(var(--ink-3))] transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[hsl(var(--ink))]" />

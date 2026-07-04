@@ -6,12 +6,12 @@ import { posts, CATEGORIES } from "@/content/blog"
 const SITE_URL = "https://jinish2170.github.io"
 
 export const metadata: Metadata = {
-  title: "Writing — Backend Systems, GenAI Engineering, AI Security",
+  title: "Field Notes — Backend Systems, GenAI Engineering, AI Security",
   description:
     "Long-form technical writing on production GenAI engineering, backend systems, and AI security. Opinionated, code-backed, written for senior engineers.",
   alternates: { canonical: `${SITE_URL}/blog` },
   openGraph: {
-    title: "Writing — Jinish Kathiriya",
+    title: "Field Notes — Jinish Kathiriya",
     description:
       "Long-form technical writing on production GenAI, backend systems, and AI security.",
     url: `${SITE_URL}/blog`,
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Writing by Jinish Kathiriya",
+        alt: "Field notes by Jinish Kathiriya",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Writing — Jinish Kathiriya",
+    title: "Field Notes — Jinish Kathiriya",
     description:
       "Long-form technical writing on production GenAI, backend systems, and AI security.",
   },
@@ -40,7 +40,7 @@ export default function BlogIndexPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     "@id": `${SITE_URL}/blog#blog`,
-    name: "Jinish Kathiriya — Writing",
+    name: "Jinish Kathiriya — Field Notes",
     description:
       "Technical writing on backend systems, GenAI engineering, and AI security.",
     url: `${SITE_URL}/blog`,
@@ -71,7 +71,7 @@ export default function BlogIndexPage() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Writing",
+        name: "Field Notes",
         item: `${SITE_URL}/blog`,
       },
     ],
@@ -100,7 +100,7 @@ export default function BlogIndexPage() {
         {/* Header */}
         <div className="grid lg:grid-cols-12 gap-8 mb-16 md:mb-20">
           <div className="lg:col-span-9">
-            <div className="label mono mb-4">Writing</div>
+            <div className="label mono mb-4">Field notes</div>
             <h1 className="display-xl text-[hsl(var(--ink))] text-balance">
               Notes from production
               <span className="text-[hsl(var(--accent))]">.</span>

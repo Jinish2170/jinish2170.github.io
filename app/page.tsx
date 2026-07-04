@@ -2,13 +2,14 @@ import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import Hero from "@/components/hero"
 
-const About = dynamic(() => import("@/components/about"))
-const Engagements = dynamic(() => import("@/components/engagements"))
+const About = dynamic(() => import("@/components/about"), { ssr: true })
+const Engagements = dynamic(() => import("@/components/engagements"), { ssr: true })
 const ProfessionalSkills = dynamic(
   () => import("@/components/professional-skills"),
+  { ssr: true },
 )
-const Projects = dynamic(() => import("@/components/projects"))
-const Contact = dynamic(() => import("@/components/contact"))
+const Projects = dynamic(() => import("@/components/projects"), { ssr: true })
+const Contact = dynamic(() => import("@/components/contact"), { ssr: true })
 
 export const metadata: Metadata = {
   title:
