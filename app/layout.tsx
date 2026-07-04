@@ -1,7 +1,6 @@
 import type React from "react"
 import "./globals.css"
-import "./enhanced-styles.css"
-import { Inter, Poppins } from "next/font/google"
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import ClientLayout from "@/components/client-layout"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer-premium"
@@ -9,18 +8,24 @@ import ScrollToTop from "@/components/scroll-to-top"
 import KeyboardNavigation from "@/components/keyboard-navigation"
 import SkipToContent from "@/components/skip-to-content"
 
-// Load fonts properly with Next.js
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 })
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700", "800"],
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-poppins",
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
 })
 
 export default function RootLayout({
@@ -42,17 +47,17 @@ export default function RootLayout({
         name: "Jinish Kathiriya",
         givenName: "Jinish",
         familyName: "Kathiriya",
-        alternateName: ["Jinish Kathiriya", "Jinish2170"],
+        alternateName: ["Jinish Kathiriya", "Jinish2170", "jinish kathiriya"],
         jobTitle: [
+          "Forward Deployed Engineer",
           "Backend Systems Engineer",
-          "GenAI Developer",
+          "GenAI Engineer",
           "Full-Stack Developer",
-          "AI & ML Engineer",
         ],
         description:
-          "Backend systems and GenAI engineer. Technical Head at Google Developer Group (GDG) CKPCET. B.E. Computer Engineering, GTU.",
+          "Jinish Kathiriya is a forward-deployed engineer who embeds with teams to ship GenAI and backend systems into production. Technical Head at Google Developer Group (GDG) CKPCET. B.E. Computer Engineering, Gujarat Technological University (GTU), Surat, India.",
         url: SITE_URL,
-        image: `${SITE_URL}/og-image.jpg`,
+        image: `${SITE_URL}/og-image.png`,
         email: "jinishkathiriya@gmail.com",
         telephone: "+91-90991-77304",
         address: {
@@ -69,6 +74,16 @@ export default function RootLayout({
         ],
         worksFor: { "@id": `${SITE_URL}/#org-gdg-ckpcet` },
         alumniOf: { "@id": `${SITE_URL}/#org-ckpcet` },
+        hasOccupation: {
+          "@type": "Occupation",
+          name: "Forward Deployed Engineer",
+          description: "Embeds with client teams to ship GenAI features and backend systems into production under real constraints.",
+          skills: "Generative AI, RAG, Backend Systems, API Design, LLM Engineering, Full-Stack Development, AI Security",
+          occupationLocation: {
+            "@type": "City",
+            name: "Surat",
+          },
+        },
         knowsAbout: [
           "Generative AI",
           "Retrieval Augmented Generation",
@@ -98,6 +113,7 @@ export default function RootLayout({
           "TypeScript",
           "Node.js",
           "Python",
+          "Forward Deployed Engineering",
         ],
         knowsLanguage: ["English", "Hindi", "Gujarati"],
         contactPoint: {
@@ -140,11 +156,11 @@ export default function RootLayout({
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: "Jinish Kathiriya",
+        alternateName: "jinish kathiriya portfolio",
         description:
-          "Portfolio and writing of Jinish Kathiriya — backend systems and GenAI engineer.",
+          "Portfolio and writing of Jinish Kathiriya — forward-deployed engineer shipping GenAI and backend systems into production.",
         publisher: { "@id": `${SITE_URL}/#person` },
         inLanguage: "en",
-        // Site-search action — opens a path to retrieval-engine integrations
         potentialAction: {
           "@type": "SearchAction",
           target: {
@@ -158,8 +174,14 @@ export default function RootLayout({
         "@type": "ProfilePage",
         "@id": `${SITE_URL}/#profilepage`,
         url: SITE_URL,
+        name: "Jinish Kathiriya — Forward Deployed Engineer",
         mainEntity: { "@id": `${SITE_URL}/#person` },
+        dateCreated: "2024-01-01",
         dateModified: new Date().toISOString().slice(0, 10),
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: [".display-xl", ".lead", "h1", "h2"],
+        },
       },
     ],
   }
@@ -170,9 +192,21 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="Jinish Kathiriya" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow" />
+        <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <meta name="bingbot" content="index, follow" />
-        <meta name="google-site-verification" content="your-google-verification-code" />
+
+        {/* GEO tags — help regional search engines associate this site with Surat/Gujarat/India */}
+        <meta name="geo.region" content="IN-GJ" />
+        <meta name="geo.placename" content="Surat, Gujarat, India" />
+        <meta name="geo.position" content="21.1702;72.8311" />
+        <meta name="ICBM" content="21.1702, 72.8311" />
+
+        {/* Dublin Core — additional structured metadata for academic and AI crawlers */}
+        <meta name="DC.title" content="Jinish Kathiriya — Forward Deployed Engineer" />
+        <meta name="DC.creator" content="Jinish Kathiriya" />
+        <meta name="DC.subject" content="GenAI, Backend Systems, Forward Deployed Engineering, AI Security" />
+        <meta name="DC.description" content="Portfolio of Jinish Kathiriya — forward-deployed engineer shipping GenAI and backend systems into production." />
+        <meta name="DC.language" content="en" />
         
         {/* Critical inline CSS — theme-aware first paint.
             Default to light (warm paper); switch to dark only when:
@@ -199,19 +233,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
-        {/* Preconnect and preload critical resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Preload critical fonts */}
-        <link 
-          rel="preload" 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-          as="style"
-        />
-        
-        {/* Preload critical images */}
-        <link rel="preload" as="image" href="/placeholder.jpg" />
+        {/* Preload critical resources */}
+        <link rel="preload" as="image" href="/og-image.png" />
         
         {/* Favicon and app icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -256,7 +279,7 @@ export default function RootLayout({
             Tells AI crawlers where the canonical machine-readable content is. */}
         <link rel="alternate" type="text/plain" href="/llms.txt" />
       </head>
-      <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}>
         {/* Editorial backdrop — single fine grid + grain. No animation. */}
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
           <div className="absolute inset-0 grid-fine" />
@@ -278,33 +301,34 @@ export default function RootLayout({
 
 export const metadata = {
   title: {
-    default: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
-    template: "%s · Jinish Kathiriya",
+    default: "Jinish Kathiriya — Forward Deployed Engineer | GenAI & Backend Systems",
+    template: "%s | Jinish Kathiriya",
   },
   description:
-    "Backend systems and GenAI engineer. Technical Head at GDG CKPCET. Long-form writing on production RAG, vector search, AI security, and applied ML — written for senior engineers.",
+    "Jinish Kathiriya is a forward-deployed engineer who ships GenAI and backend systems into production. Technical Head at GDG CKPCET, Surat. Writing on production RAG, vector search, AI security, and applied ML.",
   keywords: [
     "Jinish Kathiriya",
-    "Backend Engineer",
+    "jinish kathiriya",
+    "Jinish Kathiriya portfolio",
+    "Jinish Kathiriya engineer",
+    "Jinish Kathiriya Surat",
+    "Jinish Kathiriya GDG",
+    "Jinish Kathiriya CKPCET",
+    "Jinish Kathiriya GTU",
+    "Forward Deployed Engineer",
     "GenAI Engineer",
+    "Backend Engineer",
+    "GenAI Engineer India",
     "Production RAG",
     "LLM Engineering",
     "Vector Search",
-    "pgvector",
     "AI Security",
-    "Prompt Injection Defense",
-    "Eval Harnesses",
     "Full-Stack Developer",
-    "Next.js Engineer",
-    "Google Developer Group",
-    "GDG CKPCET",
-    "Computer Engineering",
-    "CKPCET",
-    "GTU",
-    "Surat India",
+    "Google Developer Group CKPCET",
+    "Computer Engineering Surat",
     "AI Engineer India",
     "RAG Engineer",
-    "Hire backend engineer",
+    "Jinish2170",
   ],
   authors: [{ name: "Jinish Kathiriya", url: "https://jinish2170.github.io" }],
   creator: "Jinish Kathiriya",
@@ -322,27 +346,27 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     url: "https://jinish2170.github.io",
-    title: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
+    title: "Jinish Kathiriya — Forward Deployed Engineer | GenAI & Backend Systems",
     description:
-      "Backend systems and GenAI engineer. Writing on production RAG, vector search, AI security, applied ML.",
+      "Jinish Kathiriya is a forward-deployed engineer shipping GenAI and backend systems into production. Technical Head at GDG CKPCET, Surat, India.",
     siteName: "Jinish Kathiriya",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Jinish Kathiriya — Backend & GenAI Engineer",
+        alt: "Jinish Kathiriya — Forward Deployed Engineer, GenAI & Backend Systems",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jinish Kathiriya — Backend Systems & GenAI Engineer",
+    title: "Jinish Kathiriya — Forward Deployed Engineer",
     description:
-      "Backend & GenAI engineer. Writing on production RAG, vector search, and AI security.",
+      "Forward-deployed engineer shipping GenAI & backend systems into production. Technical Head at GDG CKPCET, Surat.",
     site: "@JinishKathiriya",
     creator: "@JinishKathiriya",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -355,20 +379,11 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  // Verification placeholders — replace with your real codes when you
-  // claim Google Search Console + Bing Webmaster Tools.
-  verification: {
-    google: "REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_CODE",
-    other: {
-      "msvalidate.01": "REPLACE_WITH_BING_VERIFICATION_CODE",
-    },
-  },
   generator: "Next.js",
   applicationName: "Jinish Kathiriya",
   referrer: "origin-when-cross-origin",
   category: "technology",
   other: {
-    // IndieAuth verification — rel=me on social profiles links back here
     "fediverse:creator": "@JinishKathiriya@twitter.com",
   },
 }

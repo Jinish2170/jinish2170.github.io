@@ -24,7 +24,7 @@ export async function GET() {
       {
         name: "Jinish Kathiriya",
         url: SITE_URL,
-        avatar: `${SITE_URL}/og-image.jpg`,
+        avatar: `${SITE_URL}/og-image.png`,
       },
     ],
     items: posts.map((p) => {

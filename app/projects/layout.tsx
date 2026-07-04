@@ -3,29 +3,29 @@ import type { Metadata } from "next"
 const SITE_URL = "https://jinish2170.github.io"
 
 export const metadata: Metadata = {
-  title: "Projects — Jinish Kathiriya",
+  title: "Projects by Jinish Kathiriya — GenAI, Backend & Security",
   description:
-    "Selected and open-source projects by Jinish Kathiriya — backend systems, GenAI features, AI/ML experiments, and security tooling.",
+    "Selected projects by Jinish Kathiriya — production GenAI features, backend systems, AI/ML experiments, and security tooling. Open-source and client work.",
   alternates: { canonical: `${SITE_URL}/projects` },
   openGraph: {
     type: "website",
-    title: "Projects — Jinish Kathiriya",
+    title: "Projects by Jinish Kathiriya — GenAI, Backend & Security",
     description:
-      "Selected and open-source projects across backend, GenAI, AI/ML, and security.",
+      "Production projects by Jinish Kathiriya across GenAI, backend systems, and AI security.",
     url: `${SITE_URL}/projects`,
     images: [
       {
-        url: `${SITE_URL}/og-image.jpg`,
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "Projects by Jinish Kathiriya",
+        alt: "Projects by Jinish Kathiriya — GenAI & Backend Systems",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects — Jinish Kathiriya",
-    description: "Selected and open-source work across backend, GenAI, and AI security.",
+    title: "Projects by Jinish Kathiriya",
+    description: "Production GenAI, backend, and security projects by Jinish Kathiriya.",
   },
 }
 

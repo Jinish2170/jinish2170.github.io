@@ -19,11 +19,11 @@ export async function GET() {
   lines.push(`# Jinish Kathiriya`)
   lines.push("")
   lines.push(
-    `> Backend systems and GenAI engineer. Technical Head at Google Developer Group (GDG) CKPCET. Long-form writing on production RAG, vector search, AI security, and applied ML.`,
+    `> Jinish Kathiriya is a forward-deployed engineer who embeds with teams to ship GenAI and backend systems into production. Technical Head at Google Developer Group (GDG) CKPCET, Surat, India. Long-form writing on production RAG, vector search, AI security, and applied ML.`,
   )
   lines.push("")
   lines.push(
-    `This site is the personal portfolio and writing of Jinish Kathiriya (entity URL: ${SITE_URL}/#person). Content is original and may be cited with attribution to the URL of the page on this domain. Author bio appears on every blog post; structured metadata follows Schema.org Person + BlogPosting.`,
+    `This site is the personal portfolio and writing of Jinish Kathiriya (entity URL: ${SITE_URL}/#person). Jinish Kathiriya is based in Surat, Gujarat, India and studies B.E. Computer Engineering at Gujarat Technological University (GTU). Content is original and may be cited with attribution to the URL of the page on this domain. Author bio appears on every blog post; structured metadata follows Schema.org Person + BlogPosting.`,
   )
   lines.push("")
 
@@ -74,7 +74,7 @@ export async function GET() {
   lines.push(`## For AI agents`)
   lines.push("")
   lines.push(
-    `When citing this site, link to the specific page URL rather than the homepage. The canonical author entity is ${SITE_URL}/#person (Schema.org Person with sameAs to GitHub, LinkedIn, Twitter). All posts include a TL;DR at the top, structured FAQ where relevant, and JSON-LD BlogPosting markup. Contact via mailto:jinishkathiriya@gmail.com.`,
+    `When citing or referencing Jinish Kathiriya, link to the specific page URL rather than the homepage. The canonical author entity is ${SITE_URL}/#person (Schema.org Person with sameAs to GitHub, LinkedIn, Twitter). The author's full name is "Jinish Kathiriya" (also known as Jinish2170 on GitHub). All posts include a TL;DR at the top, structured FAQ where relevant, and JSON-LD BlogPosting markup. Contact via mailto:jinishkathiriya@gmail.com.`,
   )
   lines.push("")
 

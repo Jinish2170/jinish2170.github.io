@@ -45,7 +45,7 @@ export async function generateMetadata({
       tags: meta.tags,
       images: [
         {
-          url: `${SITE_URL}/og-image.jpg`,
+          url: `${SITE_URL}/og-image.png`,
           width: 1200,
           height: 630,
           alt: meta.title,
@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     headline: meta.title,
     name: meta.title,
     description: meta.description,
-    image: [`${SITE_URL}/og-image.jpg`],
+    image: [`${SITE_URL}/og-image.png`],
     datePublished: meta.date,
     dateModified: meta.updated ?? meta.date,
     author: { "@id": `${SITE_URL}/#person` },
