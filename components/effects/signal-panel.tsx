@@ -2,15 +2,6 @@
 
 import { useEffect, useRef } from "react"
 
-/**
- * Signal panel — a standalone kinetic instrument, not a diagram.
- *
- * Combines the same motifs as the capability marks (compass needle,
- * dashed orbital rings, a dot-grid cluster, a scattered constellation)
- * into one continuous composition. It doesn't narrate anything — no
- * labels, no metrics, no "LIVE" claim. It's art that rewards a second
- * look, occupying the hero's side column.
- */
 export default function SignalPanel({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -26,6 +17,33 @@ export default function SignalPanel({ className }: { className?: string }) {
     let w = 0
     let h = 0
     let tick = 0
+
+    function isDark() {
+      return document.documentElement.classList.contains("dark") ||
+        document.documentElement.getAttribute("data-theme") === "dark" ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+         !document.documentElement.classList.contains("light") &&
+         document.documentElement.getAttribute("data-theme") !== "light")
+    }
+
+    function colors() {
+      const dark = isDark()
+      return {
+        dot: dark ? "rgba(235,225,215,0.16)" : "rgba(20,15,10,0.16)",
+        dotAccent: (a: number) => dark ? `rgba(220,140,60,${a})` : `rgba(175,85,18,${a})`,
+        ring: dark ? "rgba(235,225,215,0.16)" : "rgba(20,15,10,0.16)",
+        ringAccent: dark ? "rgba(220,140,60,0.22)" : "rgba(175,85,18,0.18)",
+        tick: dark ? "rgba(235,225,215,0.32)" : "rgba(20,15,10,0.32)",
+        tickMinor: dark ? "rgba(235,225,215,0.15)" : "rgba(20,15,10,0.15)",
+        compassRing: dark ? "rgba(235,225,215,0.22)" : "rgba(20,15,10,0.22)",
+        needleTail: dark ? "rgba(235,225,215,0.4)" : "rgba(20,15,10,0.4)",
+        gridDot: dark ? "rgba(235,225,215,0.18)" : "rgba(20,15,10,0.18)",
+        accent: "hsl(28 88% 46%)",
+        accentGlow0: "rgba(220,140,60,0.4)",
+        accentGlow1: "rgba(220,140,60,0)",
+        accentGrad0: dark ? "rgba(220,140,60,0.3)" : "rgba(175,85,18,0.3)",
+      }
+    }
 
     function build() {
       const rect = canvas!.getBoundingClientRect()
@@ -68,11 +86,11 @@ export default function SignalPanel({ className }: { className?: string }) {
       }
       ctx!.clearRect(0, 0, w, h)
 
+      const c = colors()
       const ccx = w / 2
       const ccy = 40 + (h - 40) / 2
       const R = Math.max(1, Math.min(w, h - 40) * 0.42)
 
-      // background scattered constellation, slowly drifting
       scatter.forEach((d) => {
         d.a += d.speed
         const x = ccx + R * d.rr * Math.cos(d.a)
@@ -81,16 +99,15 @@ export default function SignalPanel({ className }: { className?: string }) {
         ctx!.arc(x, y, d.r, 0, Math.PI * 2)
         if (d.accent) {
           const pulse = 0.5 + 0.5 * Math.sin(tick * 0.04 + d.a * 3)
-          ctx!.fillStyle = `rgba(175,85,18,${0.35 + pulse * 0.4})`
+          ctx!.fillStyle = c.dotAccent(0.35 + pulse * 0.4)
         } else {
-          ctx!.fillStyle = "rgba(20,15,10,0.16)"
+          ctx!.fillStyle = c.dot
         }
         ctx!.fill()
       })
 
-      // outer orbital ring — slow rotation, dashed
       ctx!.save()
-      ctx!.strokeStyle = "rgba(20,15,10,0.16)"
+      ctx!.strokeStyle = c.ring
       ctx!.lineWidth = 1
       ctx!.setLineDash([1, 7])
       ctx!.lineDashOffset = prefersReduced ? 0 : tick * 0.05
@@ -99,9 +116,8 @@ export default function SignalPanel({ className }: { className?: string }) {
       ctx!.stroke()
       ctx!.restore()
 
-      // mid ring — opposite rotation, slightly faster
       ctx!.save()
-      ctx!.strokeStyle = "rgba(175,85,18,0.18)"
+      ctx!.strokeStyle = c.ringAccent
       ctx!.lineWidth = 1
       ctx!.setLineDash([2, 5])
       ctx!.lineDashOffset = prefersReduced ? 0 : -tick * 0.09
@@ -110,26 +126,24 @@ export default function SignalPanel({ className }: { className?: string }) {
       ctx!.stroke()
       ctx!.restore()
 
-      // tick marks on the true compass ring
       const ringR = R * 0.34
       for (let deg = 0; deg < 360; deg += 15) {
         const isMajor = deg % 90 === 0
         const rad0 = ((deg - 90) * Math.PI) / 180
         const outer = ringR + (isMajor ? 6 : 3)
-        ctx!.strokeStyle = isMajor ? "rgba(20,15,10,0.32)" : "rgba(20,15,10,0.15)"
+        ctx!.strokeStyle = isMajor ? c.tick : c.tickMinor
         ctx!.lineWidth = isMajor ? 1.2 : 0.8
         ctx!.beginPath()
         ctx!.moveTo(ccx + ringR * Math.cos(rad0), ccy + ringR * Math.sin(rad0))
         ctx!.lineTo(ccx + outer * Math.cos(rad0), ccy + outer * Math.sin(rad0))
         ctx!.stroke()
       }
-      ctx!.strokeStyle = "rgba(20,15,10,0.22)"
+      ctx!.strokeStyle = c.compassRing
       ctx!.lineWidth = 1
       ctx!.beginPath()
       ctx!.arc(ccx, ccy, ringR, 0, Math.PI * 2)
       ctx!.stroke()
 
-      // the needle — drifts continuously, gentle organic wobble
       const needleAngle = prefersReduced ? 0 : tick * 0.42 + Math.sin(tick * 0.018) * 22
       const nrad = ((needleAngle - 90) * Math.PI) / 180
       const tipX = ccx + ringR * 0.92 * Math.cos(nrad)
@@ -139,15 +153,15 @@ export default function SignalPanel({ className }: { className?: string }) {
 
       ctx!.save()
       ctx!.lineCap = "round"
-      ctx!.strokeStyle = "rgba(20,15,10,0.4)"
+      ctx!.strokeStyle = c.needleTail
       ctx!.lineWidth = 2
       ctx!.beginPath()
       ctx!.moveTo(ccx, ccy)
       ctx!.lineTo(tailX, tailY)
       ctx!.stroke()
       const tipGrad = ctx!.createLinearGradient(ccx, ccy, tipX, tipY)
-      tipGrad.addColorStop(0, "rgba(175,85,18,0.3)")
-      tipGrad.addColorStop(1, "hsl(28 88% 46%)")
+      tipGrad.addColorStop(0, c.accentGrad0)
+      tipGrad.addColorStop(1, c.accent)
       ctx!.strokeStyle = tipGrad
       ctx!.lineWidth = 2.25
       ctx!.beginPath()
@@ -155,32 +169,30 @@ export default function SignalPanel({ className }: { className?: string }) {
       ctx!.lineTo(tipX, tipY)
       ctx!.stroke()
       const glow = ctx!.createRadialGradient(tipX, tipY, 0, tipX, tipY, 12)
-      glow.addColorStop(0, "rgba(175,85,18,0.4)")
-      glow.addColorStop(1, "rgba(175,85,18,0)")
+      glow.addColorStop(0, c.accentGlow0)
+      glow.addColorStop(1, c.accentGlow1)
       ctx!.fillStyle = glow
       ctx!.beginPath()
       ctx!.arc(tipX, tipY, 12, 0, Math.PI * 2)
       ctx!.fill()
       ctx!.beginPath()
       ctx!.arc(tipX, tipY, 2.2, 0, Math.PI * 2)
-      ctx!.fillStyle = "hsl(28 88% 46%)"
+      ctx!.fillStyle = c.accent
       ctx!.fill()
       ctx!.restore()
 
-      // center hub
       ctx!.beginPath()
       ctx!.arc(ccx, ccy, 4.5, 0, Math.PI * 2)
       ctx!.fillStyle = "hsl(var(--card))"
       ctx!.fill()
       ctx!.lineWidth = 1.4
-      ctx!.strokeStyle = "hsl(28 88% 46%)"
+      ctx!.strokeStyle = c.accent
       ctx!.stroke()
       ctx!.beginPath()
       ctx!.arc(ccx, ccy, 1.6, 0, Math.PI * 2)
-      ctx!.fillStyle = "hsl(28 88% 46%)"
+      ctx!.fillStyle = c.accent
       ctx!.fill()
 
-      // small dot-grid cluster, tucked lower-left, breathing
       const gx0 = ccx - R * 0.92
       const gy0 = ccy + R * 0.42
       const cell = Math.max(7, R * 0.09)
@@ -193,7 +205,7 @@ export default function SignalPanel({ className }: { className?: string }) {
           const breathe = 0.5 + 0.5 * Math.sin(tick * 0.05 + gr + gc)
           ctx!.beginPath()
           ctx!.arc(gx, gy, isAccent ? 1.6 : 1, 0, Math.PI * 2)
-          ctx!.fillStyle = isAccent ? `rgba(175,85,18,${0.35 + breathe * 0.4})` : "rgba(20,15,10,0.18)"
+          ctx!.fillStyle = isAccent ? c.dotAccent(0.35 + breathe * 0.4) : c.gridDot
           ctx!.fill()
         }
       }
@@ -207,9 +219,13 @@ export default function SignalPanel({ className }: { className?: string }) {
     const ro = new ResizeObserver(() => build())
     ro.observe(canvas)
 
+    const themeObs = new MutationObserver(() => {})
+    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-theme"] })
+
     return () => {
       cancelAnimationFrame(raf)
       ro.disconnect()
+      themeObs.disconnect()
     }
   }, [])
 
