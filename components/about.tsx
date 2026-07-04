@@ -1,46 +1,50 @@
 "use client"
 
 import { useInView } from "react-intersection-observer"
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
-import { downloadFile } from "@/utils/navigation"
+import { Linkedin, Github } from "lucide-react"
 import { RegistrationMark } from "@/components/effects/registration-mark"
 import { SectionIndex } from "@/components/effects/section-index"
+import { SOCIAL_LINKS } from "@/config/constants"
 
-/**
- * About — editorial long-form.
- *
- * Two-column: large body copy left, structured sidebar right (currently,
- * affiliations, signal). No icon-in-gradient-box, no stat tiles, no "core
- * values". The numbers that actually matter live in projects, not here.
- */
+const FACTS = [
+  {
+    label: "Education",
+    lines: ["B.E. Computer Engineering", "CKPCET, Surat — 2022–2026"],
+  },
+  {
+    label: "Current role",
+    lines: ["Technical Head", "GDG on Campus CKPCET"],
+  },
+  {
+    label: "Focus areas",
+    lines: ["Generative AI delivery", "Backend systems", "Applied security"],
+  },
+  {
+    label: "Based in",
+    lines: ["Surat, Gujarat, India", "IST — UTC+5:30"],
+  },
+]
+
+const BELIEFS = [
+  {
+    n: "01",
+    title: "Ship the boring middle",
+    body: "The model is rarely the bottleneck. Auth, retrieval quality, error handling, the deployment pipeline — that's the 80% that decides whether a production release survives week two.",
+  },
+  {
+    n: "02",
+    title: "Own the outcome, not the task",
+    body: "Forward deployed means I'm responsible for what the customer experiences — not just the code I merged. I'd rather push back on a spec than ship something that technically passes review and fails in the wild.",
+  },
+  {
+    n: "03",
+    title: "Instruments over intuition",
+    body: "Observability isn't a phase two problem. I wire in structured logging, traces, and eval harnesses before a feature ships — so there's real signal to act on, not silence and hope.",
+  },
+]
+
 const About = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 })
-
-  const currently = [
-    { label: "Role", value: "Technical Head, GDG CKPCET" },
-    { label: "Reading", value: "B.E. Computer Engineering, GTU" },
-    { label: "Focus", value: "Backend · GenAI · Applied ML" },
-    { label: "Based in", value: "Surat, India · GMT+5:30" },
-  ]
-
-  const principles = [
-    {
-      n: "01",
-      title: "Ship the boring middle.",
-      body: "The interesting work happens between the prototype and production — observability, retries, schema migrations, idempotency. That's where I focus.",
-    },
-    {
-      n: "02",
-      title: "GenAI is a system, not a prompt.",
-      body: "Models are a component. Real GenAI products live or die on retrieval quality, eval harnesses, cost controls and the boring scaffolding around the LLM call.",
-    },
-    {
-      n: "03",
-      title: "Security is a first-class constraint.",
-      body: "I treat auth, secrets, and least-privilege as part of the design from day one — not bolt-on. Cybersecurity is how I think about systems, not a separate hat.",
-    },
-  ]
 
   return (
     <section
@@ -49,148 +53,106 @@ const About = () => {
       style={{ opacity: inView ? 1 : 0, transition: "opacity 800ms cubic-bezier(0.16, 1, 0.3, 1)" }}
     >
       <div className="editorial-container">
-        {/* === Section index — active state on scroll === */}
-        <SectionIndex
-          index="02"
-          title="About"
-          caption="Background & approach"
-        />
+        <SectionIndex index="02" title="About" caption="The person behind the PR" />
 
-        {/* === Lead statement — oversized opening === */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 mb-24 md:mb-32">
-          <div className="lg:col-span-9">
-            <p className="display-lg text-[hsl(var(--ink))] text-balance">
-              An engineer in the making, building backend systems and GenAI
-              products that I'd want to ship myself —{" "}
+        {/* === Two-column: body + facts sidebar === */}
+        <div className="grid lg:grid-cols-[1fr_280px] gap-12 lg:gap-20 mb-20 md:mb-24">
+          <div className="space-y-7">
+            <h2 className="display-md text-[hsl(var(--ink))] text-balance">
+              Computer engineering student who'd rather ship than present —{" "}
               <span className="text-[hsl(var(--ink-3))]">
-                with the rigor, observability and security that a senior
-                review would expect.
+                and has the repos to prove it.
               </span>
+            </h2>
+            <p className="text-[hsl(var(--ink-2))] text-[17px] leading-[1.7] max-w-[620px]">
+              I'm Jinish Kathiriya — final-year CE student at CKPCET, Technical
+              Head at GDG on Campus, and the engineer you call when a GenAI pilot
+              needs to stop being a demo and start being a product. My instinct is
+              to understand a system end-to-end before changing any part of it, and
+              to write the code that handles the second customer, not just the first.
             </p>
-          </div>
-        </div>
-
-        {/* === Two-column: body + sidebar === */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 mb-24 md:mb-32">
-          {/* Body */}
-          <div className="lg:col-span-7 space-y-6 lead">
-            <p>
-              I'm <span className="text-[hsl(var(--ink))]">Jinish</span> — a
-              Computer Engineering student leading technical initiatives at
-              Google Developer Group CKPCET. My day-to-day moves between
-              building backend services, integrating LLM features into real
-              products, and helping a cohort of student developers go from
-              "first commit" to shipping work they're proud of.
+            <p className="text-[hsl(var(--ink-2))] text-[17px] leading-[1.7] max-w-[620px]">
+              I've led technical delivery across GenAI pipelines, multi-tenant
+              backends, and security-critical products — building with TypeScript,
+              Python, Node.js, Postgres, and the surrounding tooling that keeps
+              production running cleanly. GDG gave me the practice of owning a
+              technical outcome for a real audience, not just a project grade.
             </p>
-            <p>
-              I'm most useful where the surface looks like a thin React app
-              but the depth is in the API layer: auth flows, vector retrieval,
-              streaming responses, retry semantics, rate limits, and the
-              telemetry that tells you when something silently broke. I'd
-              rather spend two extra hours on the failure modes than ship a
-              demo that falls over on the second user.
-            </p>
-            <p>
-              Long-term, I'm building toward founding a product company at the
-              intersection of applied AI and secure infrastructure. Right now
-              I'm learning in public, contributing to the local dev
-              community, and looking for serious work — internships, contract
-              builds, or collaborators — where I can sharpen on real
-              constraints.
-            </p>
-
-            <div className="flex flex-wrap gap-3 pt-6">
-              <button onClick={() => downloadFile()} className="cta-primary">
-                <span>Download résumé</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
-              <Link href="#contact" className="cta-secondary">
-                <span>Reach out</span>
-              </Link>
+            <div className="flex gap-3 pt-2">
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-secondary group"
+              >
+                <Linkedin className="w-3.5 h-3.5" />
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href={SOCIAL_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-secondary group"
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>GitHub</span>
+              </a>
             </div>
           </div>
 
-          {/* Sidebar */}
-          <aside className="lg:col-span-5 lg:border-l lg:border-[hsl(var(--hairline))] lg:pl-12">
-            <div className="space-y-8">
-              <div>
-                <div className="label mb-4">Currently</div>
-                <dl className="space-y-3">
-                  {currently.map((row) => (
-                    <div
-                      key={row.label}
-                      className="grid grid-cols-[100px_1fr] gap-4 items-baseline pb-3 border-b border-[hsl(var(--hairline))]"
-                    >
-                      <dt className="label mono">{row.label}</dt>
-                      <dd className="text-[hsl(var(--ink))] text-[15px] leading-snug">
-                        {row.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-
-              <div>
-                <div className="label mb-4">Reachable</div>
-                <div className="space-y-1.5">
-                  <a
-                    href="mailto:jinishkathiriya@gmail.com"
-                    className="block link-redraw text-[hsl(var(--ink))] text-[15px]"
+          {/* Facts sidebar */}
+          <aside className="lg:border-l lg:border-[hsl(var(--hairline))] lg:pl-10">
+            {FACTS.map((f, i) => (
+              <div
+                key={f.label}
+                className={`py-6 ${i < FACTS.length - 1 ? "border-b border-[hsl(var(--hairline))]" : ""}`}
+              >
+                <div className="label mb-2.5">{f.label}</div>
+                {f.lines.map((l, j) => (
+                  <div
+                    key={j}
+                    className={`leading-snug ${
+                      j === 0
+                        ? "text-[15px] font-medium text-[hsl(var(--ink))]"
+                        : "text-[14px] text-[hsl(var(--ink-3))]"
+                    }`}
                   >
-                    jinishkathiriya@gmail.com
-                  </a>
-                  <a
-                    href="https://github.com/Jinish2170"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block link-redraw text-[hsl(var(--ink))] text-[15px]"
-                  >
-                    github.com/Jinish2170
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/jinish-kathiriya"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block link-redraw text-[hsl(var(--ink))] text-[15px]"
-                  >
-                    linkedin.com/in/jinish-kathiriya
-                  </a>
-                </div>
+                    {l}
+                  </div>
+                ))}
               </div>
-
-              {/* Bottom-right corner registration mark — fills empty
-                  sidebar space without competing with the content. */}
-              <div className="flex justify-end pt-4 opacity-70">
-                <RegistrationMark variant="dotgrid" size={32} />
-              </div>
+            ))}
+            <div className="flex justify-end pt-4 opacity-70">
+              <RegistrationMark variant="dotgrid" size={32} />
             </div>
           </aside>
         </div>
 
-        {/* === Principles — numbered editorial list === */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
-          <div className="lg:col-span-3">
-            <div className="label sticky top-28">Operating principles</div>
-          </div>
-          <div className="lg:col-span-9 space-y-0">
-            {principles.map((p, i) => (
+        {/* === Beliefs — three-column editorial grid === */}
+        <div className="border-t border-[hsl(var(--hairline))]">
+          <div className="label py-8">What I hold to be true, in production</div>
+          <div className="grid md:grid-cols-3 gap-0">
+            {BELIEFS.map((b, i) => (
               <div
-                key={p.n}
-                className={`grid grid-cols-[40px_1fr] gap-6 md:gap-8 py-10 ${
-                  i === 0 ? "border-t" : ""
-                } border-b border-[hsl(var(--hairline))]`}
+                key={b.n}
+                className={`pb-10 ${
+                  i > 0
+                    ? "md:border-l md:border-[hsl(var(--hairline))] md:pl-10 border-t md:border-t-0 border-[hsl(var(--hairline))] pt-8 md:pt-0"
+                    : ""
+                } ${i < BELIEFS.length - 1 ? "pr-10" : ""}`}
               >
-                <div className="label mono tnum text-[hsl(var(--ink-3))] pt-1">
-                  {p.n}
-                </div>
-                <div>
-                  <h3 className="display-md text-[hsl(var(--ink))] mb-3 text-balance">
-                    {p.title}
+                <div className="flex items-baseline gap-3 mb-4">
+                  <span className="label mono tnum text-[hsl(var(--ink-4))]">{b.n}</span>
+                  <h3
+                    className="text-[18px] font-medium text-[hsl(var(--ink))] tracking-[-0.02em]"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {b.title}
                   </h3>
-                  <p className="text-[hsl(var(--ink-2))] text-[16px] leading-relaxed max-w-2xl">
-                    {p.body}
-                  </p>
                 </div>
+                <p className="text-[hsl(var(--ink-2))] text-[14.5px] leading-[1.65]">
+                  {b.body}
+                </p>
               </div>
             ))}
           </div>

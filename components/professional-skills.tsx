@@ -41,7 +41,7 @@ const capabilities: Capability[] = [
     signals: [
       "GenAI intern · production API",
       "Speech-to-text + LLM pipeline",
-      "Local RAG assistant — sub-second retrieval",
+      "Eval harness wired into CI",
     ],
     mark: "compass",
   },
@@ -67,7 +67,7 @@ const capabilities: Capability[] = [
   },
   {
     n: "03",
-    domain: "Full-stack delivery",
+    domain: "On-site full-stack",
     body: "End-to-end product work embedded with the team — typed React/Next.js front-ends on top of typed APIs, optimized for the boring details that compound across a release cycle and a handoff.",
     stack: [
       "Next.js",
@@ -80,7 +80,7 @@ const capabilities: Capability[] = [
     signals: [
       "25+ production-grade builds",
       "Type-safe API contracts",
-      "Perf budgets &lt; 100ms TTI",
+      "Handoff docs the team keeps",
     ],
     mark: "dotgrid",
   },
@@ -114,8 +114,8 @@ const OUTCOMES = [
   {
     num: "−42",
     suffix: "%",
-    label: "P99 latency, inference path",
-    sub: "On a request path a downstream dashboard depends on.",
+    label: "P99 latency, BenardAI",
+    sub: "On the inference path the SOC dashboard depends on.",
   },
   {
     num: "25",
@@ -140,9 +140,9 @@ const ProfessionalSkills = () => {
       <div className="editorial-container">
         {/* === Section index === */}
         <SectionIndex
-          index="03"
+          index="04"
           title="Capabilities"
-          caption="What I do, in detail"
+          caption="What I deploy, in detail"
         />
 
         {/* === Lead — registration mark fills the right empty col === */}

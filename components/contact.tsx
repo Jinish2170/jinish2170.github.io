@@ -98,7 +98,7 @@ const Contact = () => {
       <div className="editorial-container">
         {/* === Section index — active state on scroll === */}
         <SectionIndex
-          index="05"
+          index="06"
           title="Contact"
           caption="Let's talk"
         />
@@ -107,9 +107,9 @@ const Contact = () => {
           {/* === Statement === */}
           <div className="lg:col-span-7 space-y-10">
             <h2 className="display-xl text-[hsl(var(--ink))] text-balance">
-              Have something
+              Have a deployment
               <br />
-              worth building
+              worth doing
               <span className="text-[hsl(var(--accent))]">?</span>
             </h2>
 

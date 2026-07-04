@@ -1,159 +1,83 @@
 "use client"
 
 import Link from "next/link"
-import { Github, Linkedin, Twitter, Mail, Heart, Phone, MapPin, ExternalLink, Download } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
+import { RegistrationMark } from "@/components/effects/registration-mark"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
-  const contactInfo = {
-    email: "jinishkathiriya@gmail.com",
-    phone: "+91 90991 77304",
-    location: "Surat, Gujarat 395007",
-  }
-
-  const socialLinks = [
-    {
-      icon: <Github className="h-5 w-5" />,
-      label: "GitHub",
-      link: "https://github.com/Jinish2170",
-    },
-    {
-      icon: <Linkedin className="h-5 w-5" />,
-      label: "LinkedIn",
-      link: "https://linkedin.com/in/jinish-kathiriya",
-    },
-    {
-      icon: <Twitter className="h-5 w-5" />,
-      label: "Twitter",
-      link: "https://twitter.com/JinishKathiriya",
-    },
-    {
-      icon: <Mail className="h-5 w-5" />,
-      label: "Email",
-      link: `mailto:${contactInfo.email}`,
-    },
-    {
-      icon: <Phone className="h-5 w-5" />,
-      label: "Phone",
-      link: `tel:${contactInfo.phone.replace(/\s/g, "")}`,
-    },
-  ]
-
-  const quickLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Projects", path: "/projects" },
-    { name: "Contact", path: "/#contact" },
-  ]
-
-  const resourceLinks = [
-    { 
-      name: "Resume",
-      path: "/resume/JinishKathiriya_fullstack.pdf",
-      download: "JinishKathiriya_fullstack.pdf",
-      target: "_blank",
-      rel: "noopener noreferrer",
-      icon: <Download className="h-4 w-4 ml-1" />,
-      className: "flex items-center hover:text-techBlue transition-colors"
-    },
-    {
-      name: "Certificates",
-      path: "https://drive.google.com/drive/folders/1D9jfqQjSJOml3BCKD-D6V79hVUFlVZXG?usp=sharing",
-      icon: <ExternalLink className="h-4 w-4 ml-1" />,
-    },
-  ]
-
   return (
-    <footer className="bg-black py-12 border-t border-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          <div className="md:col-span-2">
-            <Link href="/" className="text-2xl font-bold tech-gradient">
-              JK
+    <footer className="border-t border-[hsl(var(--hairline))]">
+      <div className="editorial-container py-16 md:py-20">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+          {/* Left — identity */}
+          <div className="lg:col-span-5">
+            <Link
+              href="/"
+              className="text-[22px] font-medium tracking-[-0.03em] text-[hsl(var(--ink))]"
+            >
+              Jinish<span className="text-[hsl(var(--accent))]">.</span>
             </Link>
-            <p className="mt-4 text-gray-400">
-              Computer Engineering Student at C.K. Pithawala College of Engineering & Technology. Google Developers
-              Group Technical & Cybersecurity Head focused on creating innovative and secure technology solutions.
+            <div className="label mt-2 text-[hsl(var(--ink-3))]">
+              Forward Deployed Engineer
+            </div>
+            <p className="mt-6 text-[15px] text-[hsl(var(--ink-3))] leading-relaxed max-w-[380px]">
+              Shipping GenAI and backend systems into production.
+              Based in Surat, India.
             </p>
-            <div className="mt-6 flex flex-col space-y-2">
-              <div className="flex items-center text-gray-400 hover:text-white transition-colors">
-                <Mail className="h-4 w-4 mr-2" />
-                <Link href={`mailto:${contactInfo.email}`}>{contactInfo.email}</Link>
-              </div>
-              <div className="flex items-center text-gray-400 hover:text-white transition-colors">
-                <Phone className="h-4 w-4 mr-2" />
-                <Link href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}>{contactInfo.phone}</Link>
-              </div>
-              <div className="flex items-center text-gray-400">
-                <MapPin className="h-4 w-4 mr-2" />
-                <span>{contactInfo.location}</span>
-              </div>
+          </div>
+
+          {/* Center — links */}
+          <div className="lg:col-span-4">
+            <div className="label mb-4">Navigation</div>
+            <div className="grid grid-cols-2 gap-y-3 gap-x-8">
+              <Link href="/" className="text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors">Home</Link>
+              <Link href="/about" className="text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors">About</Link>
+              <Link href="/projects" className="text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors">Projects</Link>
+              <Link href="/blog" className="text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors">Field notes</Link>
+              <Link href="/#contact" className="text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors">Contact</Link>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <Link href={link.path} className="text-gray-400 hover:text-white transition-colors flex items-center">
-                    <span className="h-1 w-1 bg-techBlue rounded-full mr-2"></span>
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-bold mb-4">Resources</h3>
-            <ul className="space-y-2">
-              {resourceLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link.path}
-                    className="text-gray-400 hover:text-white transition-colors flex items-center"
-                    target={link.icon.type === ExternalLink ? "_blank" : undefined}
-                    rel={link.icon.type === ExternalLink ? "noopener noreferrer" : undefined}
-                  >
-                    <span className="h-1 w-1 bg-techPurple rounded-full mr-2"></span>
-                    {link.name}
-                    {link.icon}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Right — elsewhere */}
+          <div className="lg:col-span-3 lg:border-l lg:border-[hsl(var(--hairline))] lg:pl-8">
+            <div className="label mb-4">Elsewhere</div>
+            <div className="space-y-3">
+              <a
+                href="https://github.com/Jinish2170"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors"
+              >
+                GitHub
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+              <a
+                href="https://linkedin.com/in/jinish-kathiriya"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors"
+              >
+                LinkedIn
+                <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+              <a
+                href="mailto:jinishkathiriya@gmail.com"
+                className="text-[14px] text-[hsl(var(--ink-2))] hover:text-[hsl(var(--ink))] transition-colors"
+              >
+                jinishkathiriya@gmail.com
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {currentYear} Jinish Kathiriya. All rights reserved.
-            </p>
-
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <Link
-                  key={index}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white transition-colors"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-400 text-sm flex items-center justify-center">
-              Designed and built with <Heart className="h-4 w-4 text-red-500 mx-1" /> by Jinish Kathiriya
-            </p>
-          </div>
+        {/* Bottom bar */}
+        <div className="flex items-center justify-between mt-16 pt-8 border-t border-[hsl(var(--hairline))]">
+          <span className="mono text-[12px] text-[hsl(var(--ink-4))]">
+            &copy; {currentYear} Jinish Kathiriya
+          </span>
+          <RegistrationMark variant="compass" size={20} />
         </div>
       </div>
     </footer>
