@@ -104,7 +104,7 @@ const Projects = () => {
       <div className="editorial-container">
         {/* === Section index === */}
         <div className="section-index">
-          <span className="label mono">04 / Selected work</span>
+          <span className="label mono">05 / Selected work</span>
           <span className="hairline-y flex-1 max-w-[80px]" />
           <span className="label flex items-center gap-2">
             {loading ? (

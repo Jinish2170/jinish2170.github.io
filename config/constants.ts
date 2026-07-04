@@ -18,10 +18,10 @@ export const SOCIAL_LINKS: SocialLinks = {
 
 // Navigation Links
 export const NAV_LINKS: NavLink[] = [
-  { name: "Home", href: "/", type: "link" },
   { name: "About", href: "/about", type: "link" },
-  { name: "Projects", href: "/projects", type: "link" },
-  { name: "Writing", href: "/blog", type: "link" },
+  { name: "Engagements", href: "/#engagements", type: "link" },
+  { name: "Capabilities", href: "/#skills", type: "link" },
+  { name: "Field notes", href: "/blog", type: "link" },
   { name: "Contact", href: "/#contact", type: "link" },
 ];
 

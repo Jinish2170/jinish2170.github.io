@@ -3,6 +3,7 @@ import dynamic from "next/dynamic"
 import Hero from "@/components/hero"
 
 const About = dynamic(() => import("@/components/about"))
+const Engagements = dynamic(() => import("@/components/engagements"))
 const ProfessionalSkills = dynamic(
   () => import("@/components/professional-skills"),
 )
@@ -72,6 +73,9 @@ export default function Home() {
       </section>
       <section id="about">
         <About />
+      </section>
+      <section id="engagements">
+        <Engagements />
       </section>
       <section id="skills">
         <ProfessionalSkills />
